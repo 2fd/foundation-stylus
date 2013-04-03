@@ -1,7 +1,7 @@
 //
 // Button Group Variables
 //
-$button-bar-margin-right ?= emCalc(10px);
+$button-bar-margin-opposite ?= emCalc(10px);
 
 //
 // Button Group Mixins
@@ -16,7 +16,7 @@ button-group-container($styles=true, $float=false) {
   }
   if $float {
     float: $default-float;
-    margin-{$default-opposite}: $button-bar-margin-right;
+    margin-{$opposite-direction}: $button-bar-margin-opposite;
     & div { overflow: hidden; }
   }
 }
@@ -40,14 +40,14 @@ button-group-style($radius=false, $even=false, $float=$default-float) {
       side-radius($default-float, $button-radius);
     }
     &:last-child, &:last-child > a, &:last-child > button {
-      side-radius($default-opposite, $button-radius);
+      side-radius($opposite-direction, $button-radius);
     }
   } else if $radius {
     &:first-child, &:first-child > a, &:first-child > button {
       side-radius($default-float, $radius);
     }
     &:last-child, &:last-child > a, &:last-child > button {
-      side-radius($default-opposite, $radius);
+      side-radius($opposite-direction, $radius);
     }
   }
 

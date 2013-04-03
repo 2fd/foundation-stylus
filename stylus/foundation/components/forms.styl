@@ -73,7 +73,9 @@ form-row-base() {
     }
   }
   input.column,
-  input.columns { padding-left: ($form-spacing / 2); }
+  input.columns {
+    padding-{$default-float}: ($form-spacing / 2);
+  }
 }
 
 // We use this mixin to give all basic form elements their style
@@ -150,7 +152,7 @@ prefix($bg=$input-prefix-bg,$is-button=false) {
     $bg-lightness = lightness($bg);
     background: $bg;
     border-color: darken($bg, 10%);
-    border-right: none;
+    border-{$opposite-direction}: none;
 
     // Control the font color based on background brightness
     if $bg-lightness > 70% or $bg is yellow {
@@ -162,7 +164,7 @@ prefix($bg=$input-prefix-bg,$is-button=false) {
 
   if $is-button {
     padding-{$default-float}: 0;
-    padding-{$default-opposite}: 0;
+    padding-{$opposite-direction}: 0;
     padding-top: 0;
     padding-bottom: 0;
     text-align: center;
@@ -178,7 +180,7 @@ postfix($bg=$input-prefix-bg, $is-button=false) {
     $bg-lightness = lightness($bg);
     background: $bg;
     border-color: darken($bg, 15%);
-    border-left: none;
+    border-{$default-float}: none;
 
     // Control the font color based on background brightness
     if $bg-lightness > 70%  or $bg is yellow {
@@ -190,7 +192,7 @@ postfix($bg=$input-prefix-bg, $is-button=false) {
 
   if $is-button {
     padding-{$default-float}: 0;
-    padding-{$default-opposite}: 0;
+    padding-{$opposite-direction}: 0;
     padding-top: 0;
     padding-bottom: 0;
     text-align: center;
@@ -286,28 +288,28 @@ if $include-html-form-classes {
     button-size(false,false,false); prefix(false,true);
   }
   .prefix.button.radius {
-    side-radius(left, $global-radius);
+    side-radius($default-float, $global-radius);
   }
   .postfix.button.radius {
-    side-radius(right, $global-radius);
+    side-radius($opposite-direction, $global-radius);
   }
   .prefix.button.round {
-    side-radius(left, 1000px);
+    side-radius($default-float, 1000px);
   }
   .postfix.button.round {
-    side-radius(right, 1000px);
+    side-radius($opposite-direction, 1000px);
   }
 
   /* Separate prefix and postfix styles when on span so buttons keep their own */
   span.prefix {
     prefix();
     &.radius {
-      side-radius(left, $global-radius);
+      side-radius($default-float, $global-radius);
     }
   }
   span.postfix { postfix();
     &.radius {
-      side-radius(right, $global-radius);
+      side-radius($opposite-direction, $global-radius);
     }
   }
 
@@ -315,18 +317,18 @@ if $include-html-form-classes {
   .input-group {
     &.radius {
       &>*:first-child,  &>*:first-child * {
-        side-radius(left, $global-radius);
+        side-radius($default-float, $global-radius);
       }
       &>*:last-child, &>*:last-child * {
-        side-radius(right, $global-radius);
+        side-radius($opposite-direction, $global-radius);
       }
     }
     &.round {
       &>*:first-child,  &>*:first-child * {
-        side-radius(left, $button-round);
+        side-radius($default-float, $button-round);
       }
       &>*:last-child, &>*:last-child * {
-        side-radius(right, $button-round);
+        side-radius($opposite-direction, $button-round);
       }
     }
   }

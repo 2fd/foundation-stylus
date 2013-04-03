@@ -6,7 +6,7 @@
   Foundation.libs.dropdown = {
     name : 'dropdown',
 
-    version : '4.0.9',
+    version : '4.1.0',
 
     settings : {
       activeClass: 'open'
@@ -14,7 +14,7 @@
 
     init : function (scope, method, options) {
       this.scope = scope || this.scope;
-      Foundation.inherit(this, 'throttle');
+      Foundation.inherit(this, 'throttle scrollLeft');
 
       if (typeof method === 'object') {
         $.extend(true, this.settings, method);
@@ -44,7 +44,7 @@
       $('*, html, body').on('click.fndtn.dropdown', function (e) {
         if (!$(e.target).data('dropdown')) {
           $('[data-dropdown-content]')
-            .css('left', '-99999px')
+            .css(Foundation.rtl ? 'right':'left', '-99999px')
             .removeClass(self.settings.activeClass);
         }
       });
@@ -59,11 +59,11 @@
     toggle : function (target, resize) {
       var dropdown = $('#' + target.data('dropdown'));
 
-      $('[data-dropdown-content]').not(dropdown).css('left', '-99999px').removeClass(this.settings.activeClass);
+      $('[data-dropdown-content]').not(dropdown).css(Foundation.rtl ? 'right':'left', '-99999px').removeClass(this.settings.activeClass);
 
       if (dropdown.hasClass(this.settings.activeClass)) {
         dropdown
-          .css('left', '-99999px')
+          .css(Foundation.rtl ? 'right':'left', '-99999px')
           .removeClass(this.settings.activeClass);
       } else {
         this
@@ -83,8 +83,8 @@
 
     css : function (dropdown, target) {
       var position = target.position();
-      position.top += target.offsetParent().scrollTop();
-      position.left += target.offsetParent().scrollLeft();
+      position.top += target.offsetParent().offset().top;
+      position.left += target.offsetParent().offset().left;
 
       if (this.small()) {
         dropdown.css({
@@ -95,7 +95,7 @@
           top: position.top + this.outerHeight(target)
         });
       } else {
-        if ($(window).width() > this.outerWidth(dropdown) + target.offset().left) {
+        if (!Foundation.rtl && $(window).width() > this.outerWidth(dropdown) + target.offset().left) {
           var left = position.left;
         } else {
           if (!dropdown.hasClass('right')) {
@@ -103,6 +103,7 @@
           }
           var left = position.left - (this.outerWidth(dropdown) - this.outerWidth(target));
         }
+
         dropdown.attr('style', '').css({
           position : 'absolute',
           top: position.top + this.outerHeight(target),

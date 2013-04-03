@@ -1,12 +1,18 @@
 {
   "name": "foundation",
-  "version": "4.0.0-wip",
+  "version": "4.1.1",
   "main": "stylus/foundation",
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-contrib-watch": "~0.1.0",
     "grunt-contrib-qunit": "~0.1.1"
   },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/zurb/foundation/blob/master/LICENSE"
+    }
+  ],
   "dependencies": {
     "stylus": "~0.32.1",
     "stylus-type-utils": "~0.0.3"

@@ -87,7 +87,7 @@
           if (self.is_phone()) {
             self.pos_phone();
           } else {
-            self.pos_default();
+            self.pos_default(false, true);
           }
         }
       }, 100));
@@ -374,7 +374,7 @@
       this.show('init');
     },
 
-    pos_default : function (init) {
+    pos_default : function (init, resizing) {
       var half_fold = Math.ceil($(window).height() / 2),
           tip_position = this.settings.$next_tip.offset(),
           $nub = this.settings.$next_tip.find('.joyride-nub'),
@@ -387,20 +387,28 @@
         this.settings.$next_tip.show();
       }
 
+      if (typeof resizing === 'undefined') resizing = false;
       if (!/body/i.test(this.settings.$target.selector)) {
 
           if (this.bottom()) {
+            var leftOffset = this.settings.$target.offset().left;
+            if (Foundation.rtl) {
+              leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
+            }
             this.settings.$next_tip.css({
               top: (this.settings.$target.offset().top + nub_height + this.outerHeight(this.settings.$target)),
-              left: this.settings.$target.offset().left});
+              left: leftOffset});
 
             this.nub_position($nub, this.settings.tipSettings.nubPosition, 'top');
 
           } else if (this.top()) {
-
+            var leftOffset = this.settings.$target.offset().left;
+            if (Foundation.rtl) {
+              leftOffset = this.settings.$target.offset().width - this.settings.$next_tip.width() + leftOffset;
+            }
             this.settings.$next_tip.css({
               top: (this.settings.$target.offset().top - this.outerHeight(this.settings.$next_tip) - nub_height),
-              left: this.settings.$target.offset().left});
+              left: leftOffset});
 
             this.nub_position($nub, this.settings.tipSettings.nubPosition, 'bottom');
 
@@ -433,7 +441,7 @@
 
             this.settings.attempts++;
 
-            this.pos_default(true);
+            this.pos_default();
 
           }
 

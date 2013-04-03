@@ -6,14 +6,14 @@
   Foundation.libs.clearing = {
     name : 'clearing',
 
-    version : '4.0.0',
+    version : '4.1.0',
 
     settings : {
       templates : {
         viewing : '<a href="#" class="clearing-close">&times;</a>' +
           '<div class="visible-img" style="display: none"><img src="//:0">' +
-          '<p class="clearing-caption"></p><a href="#" class="clearing-main-left"><span></span></a>' +
-          '<a href="#" class="clearing-main-right"><span></span></a></div>'
+          '<p class="clearing-caption"></p><a href="#" class="clearing-main-prev"><span></span></a>' +
+          '<a href="#" class="clearing-main-next"><span></span></a></div>'
       },
 
       // comma delimited list of selectors that, on click, will close clearing,
@@ -25,8 +25,7 @@
       locked : false
     },
 
-    init : function (scope, method, options) {
-      this.scope = this.scope || scope;
+    init : function (method, options) {
       Foundation.inherit(this, 'set_data get_data remove_data throttle');
 
       if (typeof method === 'object') {
@@ -80,9 +79,9 @@
             self.update_paddles(target);
           })
 
-        .on('click.fndtn.clearing', '.clearing-main-right',
+        .on('click.fndtn.clearing', '.clearing-main-next',
           function (e) { this.nav(e, 'next') }.bind(this))
-        .on('click.fndtn.clearing', '.clearing-main-left',
+        .on('click.fndtn.clearing', '.clearing-main-prev',
           function (e) { this.nav(e, 'prev') }.bind(this))
         .on('click.fndtn.clearing', this.settings.close_selectors,
           function (e) { Foundation.libs.clearing.close(e, this) })
@@ -269,20 +268,27 @@
 
       if (target.prev().length) {
         visible_image
-          .find('.clearing-main-left')
+          .find('.clearing-main-prev')
           .removeClass('disabled');
       } else {
         visible_image
-          .find('.clearing-main-left')
+          .find('.clearing-main-prev')
           .addClass('disabled');
       }
     },
 
     center : function (target) {
-      target.css({
-        marginLeft : -(this.outerWidth(target) / 2),
-        marginTop : -(this.outerHeight(target) / 2)
-      });
+      if (!this.rtl) {
+        target.css({
+          marginLeft : -(this.outerWidth(target) / 2),
+          marginTop : -(this.outerHeight(target) / 2)
+        });
+      } else {
+        target.css({
+          marginRight : -(this.outerWidth(target) / 2),
+          marginTop : -(this.outerHeight(target) / 2)
+        });
+      }
       return this;
     },
 
@@ -328,7 +334,7 @@
         return;
       }
 
-      if (this.complete || this.readyState === 4) {
+      if (image[0].complete || image[0].readyState === 4) {
         loaded();
       } else {
         bindLoad.call(image);

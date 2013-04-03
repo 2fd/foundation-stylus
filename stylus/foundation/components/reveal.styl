@@ -41,7 +41,7 @@ reveal-bg() {
   z-index: 98;
   display: none;
   top: 0;
-  left: 0;
+  {$default-float}: 0;
 }
 
 // We use this mixin to create the structure of a reveal modal
@@ -93,7 +93,7 @@ reveal-close($color=$reveal-close-color) {
   line-height: 1;
   position: absolute;
   top: $reveal-close-top;
-  {$default-opposite}: $reveal-close-side;
+  {$opposite-direction}: $reveal-close-side;
   color: $color;
   font-weight: $reveal-close-weight;
   cursor: pointer;

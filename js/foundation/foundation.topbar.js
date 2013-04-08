@@ -6,7 +6,7 @@
   Foundation.libs.topbar = {
     name : 'topbar',
 
-    version : '4.1.0',
+    version : '4.1.2',
 
     settings : {
       index : 0,
@@ -85,17 +85,18 @@
             }
             section.find('li.moved').removeClass('moved');
             topbar.data('index', 0);
-          }
 
-          if (topbar.parent().hasClass('fixed')) {
+            if (topbar.hasClass('fixed')) {
+              topbar.parent().addClass('fixed');
+              topbar.removeClass('fixed');
+              $('body').css('padding-top',offst);
+            }
+          } else if (topbar.parent().hasClass('fixed')) {
             topbar.parent().removeClass('fixed');
+            topbar.addClass('fixed');
             $('body').css('padding-top','0');
             window.scrollTo(0,0);
-          } else if (topbar.hasClass('fixed expanded')) {
-            topbar.parent().addClass('fixed');
-            $('body').css('padding-top',offst);
           }
-
         })
 
         .on('click.fndtn.topbar', '.top-bar .has-dropdown>a', function (e) {
@@ -126,7 +127,7 @@
             topbar
               .css('min-height', topbar.data('height') + self.outerHeight(titlebar, true) * 2)
           }
-      });
+        });
 
       $(window).on('resize.fndtn.topbar', function () {
         if (!self.breakpoint()) {

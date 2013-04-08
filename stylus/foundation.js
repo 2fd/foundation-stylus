@@ -1,3 +1,22 @@
+'use strict';
+
+
+/**
+ * Return the plugin callback for stylus.
+ *
+ * @return {Function}
+ * @api public
+ */
+exports = module.exports = function plugin() {
+  var libPath = this.path;
+  var dependencies = this.dependencies;
+  return function(stylus){
+    stylus.include(libPath);
+    dependencies.forEach(function(dep) {
+      stylus.use(dep());
+    });
+  };
+};
 
 /**
  * Library version.
@@ -11,17 +30,8 @@ exports.version = require('../package.json').version;
 exports.path = __dirname;
 
 /**
- * Return the plugin callback for stylus.
- *
- * @return {Function}
- * @api public
+ * Dependent modules
+ * 
+ * @type {Array}
  */
-
-function plugin() {
-  return function(style){
-    style.include(__dirname);
-    style.use(require('stylus-type-utils')());
-  };
-}
-
-exports = module.exports = plugin;
+exports.dependencies = [require('stylus-type-utils')];

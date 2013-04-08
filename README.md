@@ -1,6 +1,8 @@
 Welcome to Foundation
 =====================
 
+# This is the [Stylus](https://github.com/learnboost/stylus) port of the Zurb Foundation framework
+
 Foundation is the most advanced responsive front-end framework in the world. You can quickly prototype and build sites or apps that work on any kind of device with Foundation, which includes layout constructs (like a fully responsive grid), elements and best practices.
 
 Homepage:      http://foundation.zurb.com<br />

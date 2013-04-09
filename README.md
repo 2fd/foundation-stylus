@@ -1,12 +1,12 @@
-Welcome to Foundation
-=====================
 
 ## This is the [Stylus](https://github.com/learnboost/stylus) port of the Zurb Foundation framework
-You may want to checkout:
+You may also want to checkout:
 
 * [generator-foundation](https://github.com/blai/generator-foundation) for a quick way to generate custom Foundation themes.
 * [fashionista.js](https://github.com/blai/fashionista) for an easy way to decorate your express.js apps using your custom Foundation themes.
 
+Welcome to Foundation
+=====================
 
 Foundation is the most advanced responsive front-end framework in the world. You can quickly prototype and build sites or apps that work on any kind of device with Foundation, which includes layout constructs (like a fully responsive grid), elements and best practices.
 

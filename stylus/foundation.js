@@ -1,7 +1,6 @@
 'use strict';
 
-
-var version = require('../package.json').version;
+var packageInfo = require('../package.json');
 var libPath = __dirname;
 var dependencies = [require('stylus-type-utils')];
 
@@ -20,10 +19,16 @@ exports = module.exports = function plugin() {
   };
 };
 
+
+/**
+ * Theme name.
+ */
+exports.theme = packageInfo.name;
+
 /**
  * Library version.
  */
-exports.version = version;
+exports.version = packageInfo.version;
 
 /**
  * Stylus path.

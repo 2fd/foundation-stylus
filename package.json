@@ -16,5 +16,11 @@
   "dependencies": {
     "stylus": "~0.32.1",
     "stylus-type-utils": "~0.0.3"
-  }
+  },
+  "keywords": [
+    "zurb",
+    "foundation",
+    "stylus",
+    "express"
+  ]
 }

@@ -36,6 +36,7 @@ block-grid($per-row=false, $spacing=$block-grid-default-spacing, $base-style=tru
       width: (100%/$per-row);
       padding: 0 $spacing $spacing;
 
+      &:nth-of-type(n) { clear: none; }
       &:nth-of-type({$per-row}n+1) { clear: both; }
     }
   }
@@ -63,6 +64,5 @@ if $block-grid-media-queries {
         block-grid($i,$block-grid-default-spacing,false);
       }
     }
-    [class*="small-block-grid-"] > li { clear: none !important; }
   }
 }

@@ -87,10 +87,16 @@ button-size($padding=$button-med, $full-width=false, $is-input=false) {
 
   // We can set $full-width:true to remove side padding extend width.
   if $full-width {
-    padding-top: $padding if $padding;
-    padding-{$opposite-direction}: 0px;
-    padding-bottom: $padding + emCalc(1px) if $padding;
-    padding-{$default-float}: 0px;
+    // We still need to check if $padding is set.
+    if $padding {
+      padding-top: $padding;
+      padding-bottom: $padding + emCalc(1px);
+    } else {
+      padding-top:0;
+      padding-bottom:0;
+    }
+    padding-right: 0px;
+    padding-left: 0px;
     width: 100%;
   }
 
@@ -161,7 +167,7 @@ button($padding=$button-med, $bg=$primary-color, $radius=false, $full-width=fals
 //
 
 // Only include these classes if the variable is true, otherwise they'll be left out.
-if $include-html-button-classes {
+if $include-html-button-classes != false {
 
   // Default styles applied outside of media query
   button, .button {
@@ -176,7 +182,7 @@ if $include-html-button-classes {
     &.large  { button-size($padding:$button-lrg); }
     &.small  { button-size($padding:$button-sml); }
     &.tiny   { button-size($padding:$button-tny); }
-    &.expand { button-size(false,$full-width:true); }
+    &.expand { button-size($padding:false,$full-width:true); }
 
     &.left-align  { text-align: left; text-indent: emCalc(12px); }
     &.right-align { text-align: right; padding-right: emCalc(12px); }

@@ -199,7 +199,7 @@ section($section-type=accordion) {
 }
 
 
-if $include-html-section-classes {
+if $include-html-section-classes != false {
 
   /* Sections */
   .section-container, .section-container.auto {
@@ -214,8 +214,8 @@ if $include-html-section-classes {
   .section-container.tabs {
     section-container(false, tabs);
 
-    section,
-    .section {
+    &>section,
+    &>.section {
     	section(tabs); 
     }
   }
@@ -225,8 +225,8 @@ if $include-html-section-classes {
     .section-container.auto {
       section-container(false, tabs);
 
-      section,
-      .section {
+      &>section,
+      &>.section {
       	section(tabs); 
       }
     }

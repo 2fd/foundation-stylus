@@ -252,7 +252,7 @@ form-error-message($bg=$alert-color) {
 }
 
 // Only include these classes if the variable is true, otherwise they'll be left out.
-if $include-html-form-classes {
+if $include-html-form-classes != false {
   /* Standard Forms */
   form {
     margin: 0 0 $form-spacing;
@@ -288,28 +288,33 @@ if $include-html-form-classes {
     button-size(false,false,false); prefix(false,true);
   }
   .prefix.button.radius {
-    side-radius($default-float, $global-radius);
+    radius(0);
+    side-radius(left, $button-radius);
   }
   .postfix.button.radius {
-    side-radius($opposite-direction, $global-radius);
+    radius(0);
+    side-radius(right, $button-radius);
   }
   .prefix.button.round {
-    side-radius($default-float, 1000px);
+    radius(0);
+    side-radius(left, $button-radius);
   }
   .postfix.button.round {
-    side-radius($opposite-direction, 1000px);
+    side-radius(right, $button-radius);
   }
 
   /* Separate prefix and postfix styles when on span so buttons keep their own */
   span.prefix {
     prefix();
     &.radius {
-      side-radius($default-float, $global-radius);
+      radius(0);
+      side-radius(left, $global-radius);
     }
   }
   span.postfix { postfix();
     &.radius {
-      side-radius($opposite-direction, $global-radius);
+      radius(0);
+      side-radius(right, $global-radius);
     }
   }
 

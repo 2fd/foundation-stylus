@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var packageInfo = require('../package.json');
 var libPath = __dirname;
 var dependencies = [require('stylus-type-utils')];
@@ -41,3 +42,10 @@ exports.path = libPath;
  * @type {Array}
  */
 exports.dependencies = dependencies;
+
+/**
+ * Assets paths
+ * 
+ * @type {Array}
+ */
+exports.assetPaths = [path.join(__dirname, '..', 'js')];

@@ -122,12 +122,12 @@ $em-base ?= 16px;
 
 // Working in ems is annoying. Think in pixels by using this handy function, emCalc(#px)
 emCalc($pxWidth) {
-  return ($pxWidth / $em-base);
+  return ($pxWidth / $em-base) * 1em;
 }
 
 // Maybe you want to create rems and pixels
-// @function remCalc($pxWidth) {
-//   @return $pxWidth / $em-base * 1rem;
+// remCalc($pxWidth) {
+//   return ($pxWidth / $em-base) * 1rem;
 // }
 
 // We use these to control various global styles

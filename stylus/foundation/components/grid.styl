@@ -10,7 +10,7 @@ $total-columns ?= 12;
 //
 
 gridCalc($colNumber, $totalColumns) {
-  return percentage(($colNumber / $totalColumns));
+  return percent(($colNumber / $totalColumns * 100));
 }
 
 //

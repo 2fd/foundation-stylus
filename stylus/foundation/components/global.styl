@@ -94,11 +94,13 @@ css-triangle($triangle-size, $triangle-color, $triangle-direction) {
 // We use this to do clear floats
 clearfix() {
   *zoom:1;
-  &:before, &:after
+  &:before, &:after {
     content: " ";
     display: table;
-  &:after
+  }
+  &:after {
     clear: both;
+  }
 }
 
 
@@ -122,7 +124,7 @@ $em-base ?= 16px;
 
 // Working in ems is annoying. Think in pixels by using this handy function, emCalc(#px)
 emCalc($pxWidth) {
-  return ($pxWidth / $em-base) * 1em;
+  return 1em * ($pxWidth / $em-base);
 }
 
 // Maybe you want to create rems and pixels

@@ -1,18 +1,6 @@
 //
 // Section Variables
 //
-// ^([^ ?= \n]*)(\s?\:\s*)(.*)(;)(.*)$
-// $1 ?= $3;$5
-
-// ^([ \t]*)(.*\{) (.*();) \}(.*)$
-// $1$2\n$1\t$3 $4\n$1}
-
-// @mixin with no params need to add '()'
-
-// 0 will not work
-// if $radius {
-// 0 will work
-// if $radius is a 'unit' {
 
 // We use these to set padding and hover factor
 $section-padding ?= emCalc(15px);
@@ -32,6 +20,7 @@ $section-border-color ?= #ccc;
 // Control the color of the background and some size options
 $section-content-bg ?= #fff;
 $section-vertical-nav-min-width ?= emCalc(200px);
+$section-vertical-tabs-title-width ?= emCalc(200px);
 $section-bottom-margin ?= emCalc(20px);
 
 
@@ -56,6 +45,10 @@ section-container($base-style=true, $section-type=accordion) {
   } else if $section-type == tabs {
   // Tabs container border styles
     border: 0;
+    position: relative;
+  } else if $section-type == vertical-tabs {
+  // Vertical Tabs container border styles
+    border: $section-border-size $section-border-style $section-border-color;
     position: relative;
   } else if $section-type == vertical-nav {
   // Vertical Nav container border styles
@@ -105,8 +98,8 @@ section($section-type=accordion) {
     }
 
     &.active {
-      .content { display: block; }
-      .title { background: $section-title-bg-active; }
+      & > .content { display: block; }
+      & > .title { background: $section-title-bg-active; }
     }
 
   } else if $section-type == tabs {
@@ -138,12 +131,50 @@ section($section-type=accordion) {
 
     &.active {
 
-      .title {
+      & > .title {
         background-color: $section-title-bg-active-tabs;
         z-index: 11;
         border-bottom: 0;
       }
-      .content { position: relative; }
+      & > .content { position: relative; }
+    }
+  } else if $section-type == vertical-tabs {
+    padding-top: 0 !important;
+    border: 0;
+    position: static;
+    background-color: $section-title-bg;
+
+    .title {
+      position: absolute;
+      border-top: $section-border-size $section-border-style $section-border-color;
+      width: $section-vertical-tabs-title-width;
+    }
+
+    &:first-child .title { border-top: 0; }
+
+    .content {
+      // Display all content blocks to account for the scrollbar
+      // in the outerWidth measurements. JavaScript will toggle the active tabs.
+      display: block;
+
+      position: relative;
+      left: $section-vertical-tabs-title-width;
+      border-left: $section-border-size $section-border-style $section-border-color;
+      z-index: 10;
+    }
+
+    &.active {
+
+      & > .title {
+        background-color: $section-title-bg-active-tabs;
+        width: $section-vertical-tabs-title-width + emCalc(2px); // Cover the content's left border
+        border-right: 0;
+        z-index: 11; // Put active title on top of the content
+      }
+
+      &:last-child .title {
+        border-bottom: $section-border-size $section-border-style $section-border-color;
+      }
     }
   } else if $section-type == vertical-nav {
   // Vertical Nav Styles
@@ -155,7 +186,7 @@ section($section-type=accordion) {
     .content { display: none; }
 
     &.active {
-      .content {
+      & > .content {
         display: block;
         position: absolute;
         {$default-float}: 100%;
@@ -205,8 +236,8 @@ if $include-html-section-classes != false {
   .section-container, .section-container.auto {
     section-container();
 
-    section,
-    .section {
+    &>section,
+    &>.section {
       section();
     }
   }
@@ -234,11 +265,18 @@ if $include-html-section-classes != false {
       padding-top: 0 !important;
     }
 
+    .section-container.vertical-tabs {
+      section-container(false, vertical-tabs);
+
+      section,
+      .section { section(vertical-tabs); }
+    }
+
     .section-container.vertical-nav {
       section-container(false);
 
-      section,
-      .section {
+      &>section,
+      &>.section {
       	section(vertical-nav); 
       }
     }
@@ -246,8 +284,8 @@ if $include-html-section-classes != false {
     .section-container.horizontal-nav {
       section-container(false, horizontal-nav);
 
-      section,
-      .section {
+      &>section,
+      &>.section {
       	section(horizontal-nav); 
       }
     }

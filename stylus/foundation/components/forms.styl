@@ -6,11 +6,11 @@
 $form-spacing ?= emCalc(16px);
 
 // We use these to style the labels in different ways
-$label-pointer ?= pointer;
-$label-font-size ?= emCalc(14px);
-$label-font-weight ?= 500;
-$label-font-color ?= lighten(#000, 30%);
-$label-bottom-margin ?= emCalc(3px);
+$form-label-pointer ?= pointer;
+$form-label-font-size ?= emCalc(14px);
+$form-label-font-weight ?= 500;
+$form-label-font-color ?= lighten(#000, 30%);
+$form-label-bottom-margin ?= emCalc(3px);
 $input-font-family ?= inherit;
 $input-font-color ?= rgba(0,0,0,0.75);
 $input-font-size ?= emCalc(14px);
@@ -73,7 +73,9 @@ form-row-base() {
     }
   }
   input.column,
-  input.columns {
+  input.columns,
+  textarea.column,
+  textarea.columns {
     padding-{$default-float}: ($form-spacing / 2);
   }
 }
@@ -110,12 +112,12 @@ form-label($alignment=false, $base-style=true) {
 
   // Control whether or not the base styles come through.
   if $base-style {
-    font-size: $label-font-size;
-    color: $label-font-color;
-    cursor: $label-pointer;
+    font-size: $form-label-font-size;
+    color: $form-label-font-color;
+    cursor: $form-label-pointer;
     display: block;
-    font-weight: $label-font-weight;
-    margin-bottom: $label-bottom-margin;
+    font-weight: $form-label-font-weight;
+    margin-bottom: $form-label-bottom-margin;
   }
 
   // Alignment options
@@ -140,9 +142,9 @@ prefix-postfix-base() {
   border-style: $input-prefix-border-type;
   border-width: $input-prefix-border-size;
   overflow: $input-prefix-overflow;
-  font-size: $label-font-size;
-  height: ($label-font-size + ($form-spacing * 1.5) - emCalc(1px));
-  line-height: ($label-font-size + ($form-spacing * 1.5) - emCalc(1px));
+  font-size: $form-label-font-size;
+  height: ($form-label-font-size + ($form-spacing * 1.5) - emCalc(1px));
+  line-height: ($form-label-font-size + ($form-spacing * 1.5) - emCalc(1px));
 }
 
 // We use this mixin to create prefix label styles
@@ -355,6 +357,19 @@ if $include-html-form-classes != false {
   textarea {
     form-element();
     single-transition(all, 0.15s, linear);
+  }
+
+  /* Adjust margin for form elements below */
+  input[type="file"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    margin: 0 0 $form-spacing 0;
+  }
+  
+  /* Normalize file input width */
+  input[type="file"] {
+    width:100%;
   }
 
   /* We add basic fieldset styling */

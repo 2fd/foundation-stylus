@@ -58,7 +58,7 @@ grid-row($behavior = false) {
 
 
 // For creating columns - @include these inside a media query to control small vs. large grid layouts
-grid-column($columns=false, $last-column=false, $center=false, $offset=false, $push=false, $pull=false, $collapse=false, $float=$default-float) {
+grid-column($columns=false, $last-column=false, $center=false, $offset=false, $push=false, $pull=false, $collapse=false, $float=true) {
 
   position: relative;
 
@@ -104,6 +104,7 @@ grid-column($columns=false, $last-column=false, $center=false, $offset=false, $p
 
   if $float {
     if $float == left or $float == true {
+      left: left;
       float: $default-float;
     } else if $float == right {
       float: $opposite-direction;

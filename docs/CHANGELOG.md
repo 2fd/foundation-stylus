@@ -1,5 +1,4 @@
-<!--
-### 4.1.3 (In Progress)
+### 4.1.3- April 25, 2013
 
 * Added _variables.scss, which holds default variables and creates the settings file for the gem
 * Rearranged a few mixins in order to remove the confusing _foundation-globals.scss file
@@ -7,9 +6,11 @@
 * Added reference to $base-line-height variables for those using Compass vertical rhythm
 * Fixed issue with invalid css coming through into buttons
 * Various bug fixes
+* Adds support for infinite section nesting
+* Updated top bar styles
+* Support for data-options in Reveal
 
 You can compare the commits [here](https://github.com/zurb/foundation/compare/v4.1.2...v4.1.3).
- -->
 
 ### 4.1.2- April 10, 2013
 

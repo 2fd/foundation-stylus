@@ -189,7 +189,8 @@ $topbar-media-query ?= "only screen and (min-width:" + $topbar-breakpoint + ")";
     margin: 0;
   }
 
-  .divider {
+  .divider,
+  [role="separator"] {
     border-bottom: solid 1px lighten($topbar-dropdown-bg, 10%);
     border-top: solid 1px darken($topbar-dropdown-bg, 10%);
     clear: both;
@@ -207,7 +208,6 @@ $topbar-media-query ?= "only screen and (min-width:" + $topbar-breakpoint + ")";
       font-size: $topbar-link-font-size;
       font-weight: $topbar-link-weight;
       background: $topbar-dropdown-bg;
-      height: $topbar-height;
 
       &:hover { background: darken($topbar-dropdown-bg, 3%); }
 
@@ -358,7 +358,7 @@ $topbar-media-query ?= "only screen and (min-width:" + $topbar-breakpoint + ")";
         padding: 0 ($topbar-height / 3);
         line-height: $topbar-height;
         background: $topbar-bg;
-        &:hover { background: darken($topbar-dropdown-bg, 30%); }
+        &:hover { background: adjust-color($topbar-dropdown-bg, $lightness: $topbar-link-hover-lightness); }
       }
     }
 
@@ -388,7 +388,7 @@ $topbar-media-query ?= "only screen and (min-width:" + $topbar-breakpoint + ")";
           &:after {
             border: none;
             content: "\00bb";
-            margin-top: -7px;
+            margin-top: -15px;
             {$opposite-direction}: 5px;
           }
         }
@@ -424,7 +424,8 @@ $topbar-media-query ?= "only screen and (min-width:" + $topbar-breakpoint + ")";
       }
     }
 
-    & > ul > .divider {
+    & > ul > .divider,
+    & > ul > [role="separator"] {
       border-bottom: none;
       border-top: none;
       border-{$opposite-direction}: solid 1px lighten($topbar-bg, 10%);

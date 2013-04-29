@@ -1,3 +1,9 @@
+### 4.1.5- April 26, 2013
+* Add support for `indexOf` in legacy browsers
+
+### 4.1.4- April 26, 2013
+* Fixes invalid Rails generator path
+
 ### 4.1.3- April 25, 2013
 
 * Added _variables.scss, which holds default variables and creates the settings file for the gem

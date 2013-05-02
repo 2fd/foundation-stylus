@@ -91,7 +91,7 @@ button-size($padding=$button-med, $full-width=false, $is-input=false) {
     if $padding {
       padding-top: $padding;
       padding-bottom: $padding + emCalc(1px);
-    } else {
+    } else if $padding == false {
       padding-top:0;
       padding-bottom:0;
     }
@@ -182,7 +182,7 @@ if $include-html-button-classes != false {
     &.large  { button-size($padding:$button-lrg); }
     &.small  { button-size($padding:$button-sml); }
     &.tiny   { button-size($padding:$button-tny); }
-    &.expand { button-size($padding:false,$full-width:true); }
+    &.expand { button-size($padding:null,$full-width:true); }
 
     &.left-align  { text-align: left; text-indent: emCalc(12px); }
     &.right-align { text-align: right; padding-right: emCalc(12px); }

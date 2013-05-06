@@ -69,7 +69,7 @@ section-container($base-style=true, $section-type=accordion) {
 }
 
 // We use this mixin to create the styles for sections as accordions.
-section($section-type = accordion, $title-selector = ".title", $content-selector = ".content", $title-padding = $section-title-padding, $title-color = $section-title-color, $title-font-size = $section-font-size, $title-bg = $section-title-bg, $title-bg-hover = $section-title-bg-hover, $title-bg-active = $section-title-bg-active, $title-color-active = $section-title-color, $content-bg = $section-content-bg, $content-padding = $section-content-padding, $section-border-size = $section-border-size, $section-border-style = $section-border-style, $section-border-color = $section-border-color) {
+section($section-type = accordion, $title-selector = ".title", $content-selector = ".content", $title-padding = $section-title-padding, $title-color = $section-title-color, $title-font-size = $section-font-size, $title-bg = $section-title-bg, $title-bg-hover = $section-title-bg-hover, $title-bg-active = $section-title-bg-active, $title-color-active = $section-title-color, $content-bg = $section-content-bg, $content-padding = $section-content-padding, $border-size = $section-border-size, $border-style = $section-border-style, $border-color = $section-border-color) {
 
   // Default Styles
   > {$title-selector} {
@@ -113,7 +113,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
       top: 0;
       width: 100%;
       margin: 0;
-      border-top: $section-border-style $section-border-size $section-border-color;
+      border-top: $border-style $border-size $border-color;
 
       a { width: 100%; }
     }
@@ -125,7 +125,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
 
     > {$title-selector} {
       width: auto;
-      border: $section-border-style $section-border-size $section-border-color;
+      border: $border-style $border-size $border-color;
       border-{$opposite-direction}: 0;
       border-bottom: 0;
       position: absolute;
@@ -134,10 +134,12 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
 
       a { width: 100%; }
     }
-    &:last-child {$title-selector} { border-{$opposite-direction}: $section-border-style $section-border-size $section-border-color; }
+    &:last-child {$title-selector} {
+      border-{$opposite-direction}: $border-style $border-size $border-color;
+    }
 
     {$content-selector} {
-      border: $section-border-style $section-border-size $section-border-color;
+      border: $border-style $border-size $border-color;
       position: absolute;
       z-index: 10;
       display: none;
@@ -161,7 +163,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
 
     > {$title-selector} {
       position: absolute;
-      border-top: $section-border-style $section-border-size $section-border-color;
+      border-top: $border-style $border-size $border-color;
       width: $section-vertical-tabs-title-width;
     }
     &:first-child {$title-selector} { border-top: 0; }
@@ -172,7 +174,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
       display: block;
       position: relative;
       left: $section-vertical-tabs-title-width;
-      border-left: $section-border-style $section-border-size $section-border-color;
+      border-left: $border-style $border-size $border-color;
       z-index: 10;
     }
 
@@ -193,7 +195,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
 
     > {$title-selector} {
       border-top: none;
-      border: $section-border-style $section-border-size $section-border-color;
+      border: $border-style $border-size $border-color;
 
       a {
         display: block;
@@ -211,7 +213,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
         top: 0px;
         z-index: 999;
         min-width: $section-vertical-nav-min-width;
-        border: $section-border-style $section-border-size $section-border-color;
+        border: $border-style $border-size $border-color;
       }
     }
 
@@ -223,7 +225,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
 
     > {$title-selector} {
       width: auto;
-      border: $section-border-style $section-border-size $section-border-color;
+      border: $border-style $border-size $border-color;
       border-{$default-float}: 0;
       top: -1px;
       position: absolute;
@@ -242,7 +244,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
         {$default-float}: 0;
         top: -2px;
         min-width: $section-vertical-nav-min-width;
-        border: $section-border-style $section-border-size $section-border-color;
+        border: $border-style $border-size $border-color;
       }
     }
   }

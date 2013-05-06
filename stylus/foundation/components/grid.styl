@@ -167,12 +167,12 @@ if $include-html-grid-classes != false {
       .row .large-offset-{$i} { grid-column($offset:$i, $collapse:null,$float:false); }
     }
 
-    for $i in (2..$total-columns - 1) {
+    for $i in (1..$total-columns - 1) {
       .push-{$i} { grid-column($push:$i, $collapse:null, $float:false); }
       .pull-{$i} { grid-column($pull:$i, $collapse:null, $float:false); }
     }
 
-    for $i in (2..$total-columns - 1) {
+    for $i in (1..$total-columns - 1) {
       .small-push-{$i} {
         {$default-float}: inherit;
       }

@@ -299,19 +299,20 @@ if $include-html-form-classes != false {
     button-size(false,false,false); prefix(false,true);
   }
   .prefix.button.radius {
-    radius(0);
     side-radius(left, $button-radius);
+    radius(0);
   }
   .postfix.button.radius {
-    radius(0);
     side-radius(right, $button-radius);
+    radius(0);
   }
   .prefix.button.round {
+    side-radius(left, $button-round);
     radius(0);
-    side-radius(left, $button-radius);
   }
   .postfix.button.round {
-    side-radius(right, $button-radius);
+    side-radius(right, $button-round);
+    radius(0);
   }
 
   /* Separate prefix and postfix styles when on span so buttons keep their own */

@@ -1,6 +1,7 @@
 //
 // Split Button Variables
 //
+$include-html-button-classes ?= $include-html-classes;
 
 // We use these to control different shared styles for Split Buttons
 $split-button-function-factor ?= 15%;
@@ -143,7 +144,7 @@ split-button($padding=medium, $pip-color=$split-button-pip-color, $span-border=$
 }
 
 
-if $include-html-button-classes {
+if $include-html-button-classes != false {
 
   /* Split Buttons */
   .split.button {

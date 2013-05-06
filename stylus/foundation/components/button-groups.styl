@@ -1,6 +1,9 @@
 //
 // Button Group Variables
 //
+$include-html-button-classes ?= $include-html-classes !default;
+
+// Sets the margin for the right side by default, and the left margin if right-to-left direction is used
 $button-bar-margin-opposite ?= emCalc(10px);
 
 //
@@ -36,17 +39,29 @@ button-group-style($radius=false, $even=false, $float=$default-float) {
 
   // We use these to control left and right radius on first/last buttons in the group.
   if $radius == true {
-    &:first-child, &:first-child > a, &:first-child > button {
+    &:first-child,
+    &:first-child > a,
+    &:first-child > button,
+    &:first-child > .button {
       side-radius($default-float, $button-radius);
     }
-    &:last-child, &:last-child > a, &:last-child > button {
+    &:last-child,
+    &:last-child > a,
+    &:last-child > button,
+    &:last-child > .button {
       side-radius($opposite-direction, $button-radius);
     }
   } else if $radius {
-    &:first-child, &:first-child > a, &:first-child > button {
+    &:first-child,
+    &:first-child > a,
+    &:first-child > button,
+    &:first-child > .button {
       side-radius($default-float, $radius);
     }
-    &:last-child, &:last-child > a, &:last-child > button {
+    &:last-child,
+    &:last-child > a,
+    &:last-child > button,
+    &:last-child > .button {
       side-radius($opposite-direction, $radius);
     }
   }
@@ -54,7 +69,7 @@ button-group-style($radius=false, $even=false, $float=$default-float) {
   // We use this to make the buttons even width across their container
   if $even {
     width: percent((100/$even));
-    .button { width: 100%; }
+    button, .button { width: 100%; }
   }
 
 }

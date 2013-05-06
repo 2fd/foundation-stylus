@@ -23,6 +23,8 @@ emCalc($pxWidth) {
 
 // Various global styles
 
+// $default-float ?= left;
+
 // $body-bg ?= #fff;
 // $body-font-color ?= #222;
 // $body-font-family ?= "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
@@ -59,13 +61,19 @@ emCalc($pxWidth) {
 
 // $include-html-classes ?= true;
 // $include-print-styles ?= true;
+// $include-html-global-classes ?= $include-html-classes;
+// $include-html-type-classes ?= $include-html-classes;
 // $include-html-grid-classes ?= $include-html-classes;
 // $include-html-visibility-classes ?= $include-html-classes;
 // $include-html-button-classes ?= $include-html-classes;
 // $include-html-form-classes ?= $include-html-classes;
+// $include-html-custom-form-classes ?= $include-html-classes;
 // $include-html-media-classes ?= $include-html-classes;
 // $include-html-section-classes ?= $include-html-classes;
+// $include-html-orbit-classes ?= $include-html-classes;
 // $include-html-reveal-classes ?= $include-html-classes;
+// $include-html-joyride-classes ?= $include-html-classes;
+// $include-html-clearing-classes ?= $include-html-classes;
 // $include-html-alert-classes ?= $include-html-classes;
 // $include-html-nav-classes ?= $include-html-classes;
 // $include-html-label-classes ?= $include-html-classes;
@@ -73,6 +81,7 @@ emCalc($pxWidth) {
 // $include-html-pricing-classes ?= $include-html-classes;
 // $include-html-progress-classes ?= $include-html-classes;
 // $include-html-magellan-classes ?= $include-html-classes;
+// $include-html-tooltip-classes ?= $include-html-classes;
 
 // Media Queries
 
@@ -81,11 +90,11 @@ emCalc($pxWidth) {
 // $large-screen ?= emCalc(1440px);
 
 // $screen ?= "only screen";
-// $small ?= "only screen and (min-width = " + $small-screen +")";
-// $medium ?= "only screen and (min-width = " + $medium-screen + ")";
-// $large ?= "only screen and (min-width = " + $large-screen + ")";
-// $landscape ?= "only screen and (orientation = landscape)";
-// $portrait ?= "only screen and (orientation = portrait)";
+// $small ?= "only screen and (min-width: " + $small-screen + ")";
+// $medium ?= "only screen and (min-width: " + $medium-screen + ")";
+// $large ?= "only screen and (min-width: " + $large-screen + ")";
+// $landscape ?= "only screen and (orientation: landscape)";
+// $portrait ?= "only screen and (orientation: portrait)";
 
 //
 // Grid Variables
@@ -235,11 +244,11 @@ emCalc($pxWidth) {
 
 // Labels
 
-// $label-pointer ?= pointer;
-// $label-font-size ?= emCalc(14px);
-// $label-font-weight ?= 500;
-// $label-font-color ?= lighten(#000, 30%);
-// $label-bottom-margin ?= emCalc(3px);
+// $form-label-pointer ?= pointer;
+// $form-label-font-size ?= emCalc(14px);
+// $form-label-font-weight ?= 500;
+// $form-label-font-color ?= lighten(#000, 30%);
+// $form-label-bottom-margin ?= emCalc(3px);
 // $input-font-family ?= inherit;
 // $input-font-color ?= rgba(0,0,0,0.75);
 // $input-font-size ?= emCalc(14px);
@@ -524,9 +533,14 @@ emCalc($pxWidth) {
 // Basic form styles input styles
 
 // $custom-form-border-color ?= #ccc;
+// $custom-form-border-size ?= 1px;
 // $custom-form-bg ?= #fff;
 // $custom-form-bg-disabled ?= #ddd;
+// $custom-form-input-size ?= 16px;
 // $custom-form-check-color ?= #222;
+// $custom-form-check-size ?= 14px;
+// $custom-form-radio-size ?= 8px;
+// $custom-form-checkbox-radius ?= 0px;
 
 // Custom select form element.
 
@@ -1189,4 +1203,4 @@ emCalc($pxWidth) {
 
 // $topbar-transition-speed ?= 300ms;
 // $topbar-breakpoint ?= emCalc(940px); // Change to 9999px for always mobile layout
-// $topbar-media-query ?= "only screen and (min-width " + $topbar-breakpoint + ")";
+// $topbar-media-query ?= "only screen and (min-width: " + $topbar-breakpoint + ")";

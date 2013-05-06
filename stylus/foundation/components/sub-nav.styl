@@ -1,6 +1,7 @@
 //
 // Sub Nav Variables
 //
+$include-html-nav-classes ?= $include-html-classes;
 
 // We use these to control margin and padding
 $sub-nav-list-margin ?= emCalc(-4px) 0 emCalc(18px);
@@ -59,7 +60,7 @@ sub-nav($font-color=$sub-nav-font-color, $font-size=$sub-nav-font-size, $active-
 }
 
 
-if $include-html-nav-classes {
+if $include-html-nav-classes != false {
 
   /* Side Nav */
   .sub-nav {

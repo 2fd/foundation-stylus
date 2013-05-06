@@ -1,13 +1,11 @@
 //
 // Block Grid Variables
 //
+$include-html-grid-classes ?= $include-html-classes;
 
 // We use this to control the maximum number of block grid elements per row
 $block-grid-elements ?= 12;
 $block-grid-default-spacing ?= 10px;
-
-// Enables media queries for block-grid classes. Set to false if writing semantic HTML.
-$block-grid-media-queries ?= true;
 
 //
 // Block Grid Mixins
@@ -20,7 +18,7 @@ block-grid($per-row=false, $spacing=$block-grid-default-spacing, $base-style=tru
   if $base-style {
     display: block;
     padding: 0;
-    margin: 0 0-($spacing);
+    margin: 0 -($spacing);
     clearfix();
 
     &>li {
@@ -33,7 +31,7 @@ block-grid($per-row=false, $spacing=$block-grid-default-spacing, $base-style=tru
 
   if $per-row {
     &>li {
-      width: (100%/$per-row);
+      width: (100% / $per-row);
       padding: 0 $spacing $spacing;
 
       &:nth-of-type(n) { clear: none; }
@@ -43,7 +41,7 @@ block-grid($per-row=false, $spacing=$block-grid-default-spacing, $base-style=tru
 
 }
 
-if $block-grid-media-queries {
+if $include-html-grid-classes {
   /* Foundation Block Grids for below small breakpoint */
   @media only screen {
     [class*="block-grid-"] {
@@ -59,6 +57,10 @@ if $block-grid-media-queries {
 
   /* Foundation Block Grids for above small breakpoint */
   @media $small {
+    /* Remove small grid clearing */
+    for $i (1..$block-grid-elements) {
+      .small-block-grid-{$i} > li:nth-of-type(#{$i}n+1) { clear: none; }
+    }
     for $i in (1..$block-grid-elements) {
       .large-block-grid-{$i} {
         block-grid($i,$block-grid-default-spacing,false);

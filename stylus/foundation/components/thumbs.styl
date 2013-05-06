@@ -1,6 +1,7 @@
 //
 // Image Thumbnail Variables
 //
+$include-html-media-classes ?= $include-html-classes;
 
 // We use these to control border styles
 $thumb-border-style ?= solid;
@@ -19,6 +20,7 @@ $thumb-transition-speed ?= 200ms;
 
 // We use this to create image thumbnail styles.
 thumb($border-width=$thumb-border-width, $box-shadow=$thumb-box-shadow, $box-shadow-hover=$thumb-box-shadow-hover) {
+  line-height: 0;
   display: inline-block;
   border: $thumb-border-style $border-width $thumb-border-color;
   -webkit-box-shadow: $box-shadow;
@@ -30,7 +32,7 @@ thumb($border-width=$thumb-border-width, $box-shadow=$thumb-box-shadow, $box-sha
 
 
 // If html classes are turned on we'll include these classes.
-if $include-html-media-classes {
+if $include-html-media-classes != false {
 
   /* Image Thumbnails */
   .th {

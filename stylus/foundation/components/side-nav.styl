@@ -1,6 +1,7 @@
 //
 // Side Nav Variables
 //
+$include-html-nav-classes ?= $include-html-classes;
 
 // We use this to control padding.
 $side-nav-padding ?= emCalc(14px) 0;
@@ -44,7 +45,7 @@ side-nav($divider-color=$side-nav-divider-color, $font-size=$side-nav-font-size,
       color: $link-color;
     }
 
-    &.active a {
+    &.active > a:first-child {
       color: $side-nav-link-color-active;
       font-weight: $side-nav-font-weight;
     }

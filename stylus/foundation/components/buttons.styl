@@ -1,6 +1,7 @@
 //
 // Button Variables
 //
+$include-html-button-classes ?= $include-html-classes;
 
 // We use these to build padding for buttons.
 $button-med ?= emCalc(12px);
@@ -195,8 +196,7 @@ if $include-html-button-classes != false {
 
   }
 
-  input.button,
-  button.button {
+  button, .button {
     button-size($padding:false, $is-input:$button-med);
     &.tiny { button-size($padding:false, $is-input:$button-tny); }
     &.small { button-size($padding:false, $is-input:$button-sml); }
@@ -206,7 +206,7 @@ if $include-html-button-classes != false {
   // Styles for any browser or device that support media queries
   @media only screen {
 
-    .button {
+    button, .button {
       inset-shadow();
       single-transition(background-color);
 
@@ -222,7 +222,7 @@ if $include-html-button-classes != false {
 
   // Additional styles for screens larger than 768px
   @media $small {
-    .button {
+    button, .button {
       button-base($style:false, $display:inline-block);
       button-size($padding:false, $full-width:false);
     }

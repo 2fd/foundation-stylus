@@ -1,6 +1,7 @@
 //
 // Switch Variables
 //
+$include-html-form-classes ?= $include-html-classes;
 
 // Controlling border styles and background colors for the switch container
 $switch-border-color ?= darken(#fff, 20%);
@@ -78,6 +79,7 @@ switch-base($transition-speed=$switch-paddle-transition-speed, $transition-ease=
     opacity: 0;
     width: 100%;
     height: 100%;
+    -moz-appearance: none;
 
     // Hover and focus styles for the paddle
     &:hover,

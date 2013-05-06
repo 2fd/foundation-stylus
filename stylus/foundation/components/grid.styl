@@ -1,6 +1,8 @@
 //
 // Grid Variables
 //
+$include-html-grid-classes ?= $include-html-classes;
+
 $row-width ?= emCalc(1000px);
 $column-gutter ?= emCalc(30px);
 $total-columns ?= 12;
@@ -104,7 +106,6 @@ grid-column($columns=false, $last-column=false, $center=false, $offset=false, $p
 
   if $float {
     if $float == left or $float == true {
-      left: left;
       float: $default-float;
     } else if $float == right {
       float: $opposite-direction;
@@ -116,9 +117,9 @@ grid-column($columns=false, $last-column=false, $center=false, $offset=false, $p
 }
 
 
-/* Grid HTML Classes */
-if $include-html-grid-classes != false {
 
+if $include-html-grid-classes != false {
+  /* Grid HTML Classes */
   .row {
     grid-row();
 
@@ -180,15 +181,17 @@ if $include-html-grid-classes != false {
       }
     }
 
-    .column.small-centered,
-    .columns.small-centered {
-      margin-{$default-float}: 0;
-      margin-{$opposite-direction}: 0;
-      float: none !important;
+    .column.large-centered,
+    .columns.large-centered {
+      grid-column($center:true, $collapse:null, $float:false);
     }
 
-    .column.large-centered,
-    .columns.large-centered { grid-column($center:true, $collapse:null, $float:false); }
+    .column.large-uncentered,
+    .columns.large-uncentered, {
+      margin-{$default-float}: 0;
+      margin-{$opposite-direction}: 0;
+      float: none;
+    }
 
   }
 

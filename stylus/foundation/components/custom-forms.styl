@@ -66,18 +66,21 @@ if $include-html-button-classes != false {
       width: $custom-form-input-size;
       height: $custom-form-input-size;
 
-      & + label > span {
-        display:inline-block;
-        box-sizing: border-box;
-        width: $custom-form-input-size;
-        height: $custom-form-input-size;
-        line-height: $custom-form-input-size - ($custom-form-border-size * 2);
-        background: $custom-form-bg;
-        border: $custom-form-border-size solid $custom-form-border-color;
-        vertical-align: middle;
-        text-align: center;
-        cursor: pointer;
-        margin-{$opposite-direction}: $custom-form-input-gap;
+      & + label {
+        line-height: $custom-form-input-size;
+        & > span {
+          display:inline-block;
+          box-sizing: border-box;
+          width: $custom-form-input-size;
+          height: $custom-form-input-size;
+          line-height: $custom-form-input-size - ($custom-form-border-size * 2);
+          background: $custom-form-bg;
+          border: $custom-form-border-size solid $custom-form-border-color;
+          vertical-align: middle;
+          text-align: center;
+          cursor: pointer;
+          margin-{$opposite-direction}: $custom-form-input-gap;
+        }
       }
     }
 

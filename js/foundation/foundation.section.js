@@ -6,7 +6,7 @@
   Foundation.libs.section = {
     name: 'section',
 
-    version : '4.1.3',
+    version : '4.1.7',
 
     settings : {
       deep_linking: false,
@@ -44,10 +44,12 @@
       $(this.scope)
         .on('click.fndtn.section', '[data-section] .title, [data-section] [data-section-title]', function (e) {
           var $this = $(this),
-              section = $this.closest(self.settings.section_selector);
+              section = $this.closest(self.settings.region_selector);
 
-          self.toggle_active.call(this, e, self);
-          self.reflow();
+          if (section.children(self.settings.content_selector).length > 0) {
+            self.toggle_active.call(this, e, self);
+            self.reflow();
+          }
         });
 
       $(window)
@@ -229,7 +231,6 @@
       var hash = window.location.hash.substring(1),
           sections = $('[data-section]'),
           self = this;
-
       sections.each(function () {
         var section = $(this),
             settings = $.extend({}, self.settings, self.data_options(section));
@@ -239,12 +240,21 @@
             .children(self.settings.region_selector)
             .attr('style', '')
             .removeClass('active');
-          regions
-            .map(function () {
-              return $(this).children('.content[data-slug="' + hash + '"], [data-section-content][data-slug="' + hash + '"]');
-            })
-            .parent()
-            .addClass('active');
+
+          var hash_regions = regions.map(function () {
+              var content = $(self.settings.content_selector, this),
+                  content_slug = content.data('slug');
+
+              if (new RegExp(content_slug, 'i').test(hash)) 
+                return content;
+            });
+
+
+          var count = hash_regions.length;
+
+          for (var i = count - 1; i >= 0; i--) {
+            $(hash_regions[i]).parent().addClass('active');
+          }
         }
       });
     },
@@ -356,9 +366,9 @@
 
           // temporary work around for Zepto outerheight calculation issues.
           if (typeof Zepto === 'function') {
-            section.height(this.outerHeight(titles.first()));
+            section.height(this.outerHeight($(titles[0])));
           } else {
-            section.height(this.outerHeight(titles.first()) - 2);
+            section.height(this.outerHeight($(titles[0])) - 2);
           }
         }
       }

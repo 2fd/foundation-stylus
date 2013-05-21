@@ -3,7 +3,6 @@ $include-html-orbit-classes ?= $include-html-classes;
 
 // We use these to control the caption styles
 $orbit-container-bg ?= #f5f5f5;
-$orbit-caption-bg-old-browser ?= #000;
 $orbit-caption-bg-old ?= rgb(0,0,0);
 $orbit-caption-bg ?= rgba(0,0,0,0.6);
 $orbit-caption-font-color ?= #fff;
@@ -25,10 +24,91 @@ $orbit-slide-number-bg ?= rgba(0,0,0,0);
 $orbit-slide-number-font-color ?= #fff;
 $orbit-slide-number-padding ?= emCalc(5px);
 
-// Margin for when Orbit is stacked on small screens
-$stack-on-small-margin-bottom ?= emCalc(20px);
+// Graceful Loading Wrapper and preloader
+$wrapper-class ?= "slideshow-wrapper";
+$preloader-class ?= "preloader";
+
 
 if $include-html-orbit-classes != false {
+
+  if $experimental {
+    @-webkit-keyframes rotate {
+      from { -webkit-transform: rotate(0deg); }
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @-moz-keyframes rotate {
+      from { -webkit-transform: rotate(0deg); }
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @-o-keyframes rotate {
+      from { -webkit-transform: rotate(0deg); }
+      to { -webkit-transform: rotate(360deg); }
+    }
+  }
+  @keyframes rotate {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+  }
+
+  /* Orbit Graceful Loading */
+  .{$wrapper-class} {
+    position: relative;
+
+    ul {
+      // Prevent bullets showing before .orbit-container is loaded
+      list-style-type: none;
+      margin: 0;
+
+      // Hide all list items
+      li,
+      li .orbit-caption { display: none; }
+
+      // ...except for the first one
+      li:first-child { display: block; }
+    }
+
+    .orbit-container { background-color: transparent;
+
+      // Show images when .orbit-container is loaded
+      li { display: block;
+
+        .orbit-caption { display: block; }
+      }
+    }
+  }
+
+  // Orbit preloader
+  .{$preloader-class} {
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    border: solid 3px;
+    border-color: #555 #fff;
+    radius(1000px);
+    if $experimental {
+      -webkit-animation-name: rotate;
+      -webkit-animation-duration: 1.5s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      -moz-animation-name: rotate;
+      -moz-animation-duration: 1.5s;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: linear;
+      -o-animation-name: rotate;
+      -o-animation-duration: 1.5s;
+      -o-animation-iteration-count: infinite;
+      -o-animation-timing-function: linear;
+    }
+    animation-name: rotate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
 
   .orbit-container {
     overflow: hidden;
@@ -47,19 +127,17 @@ if $include-html-orbit-classes != false {
       &>* {
         position: relative;
         float: $default-float;
-        height: 100%;
+        height: auto;
 
         .orbit-caption {
           position: absolute;
           bottom: 0;
           background-color: $orbit-caption-bg-old;
           background-color: $orbit-caption-bg;
-          color: #fff;
+          color: $orbit-caption-font-color;
           width: 100%;
           padding: 10px 14px;
           font-size: emCalc(14px);
-
-          * { color: $orbit-caption-font-color; }
         }
       }
     }
@@ -201,7 +279,7 @@ if $include-html-orbit-classes != false {
   }
 
 
-  @media $small {
+  @media {$small} {
 
     .touch {
       .orbit-container {
@@ -213,4 +291,5 @@ if $include-html-orbit-classes != false {
     }
 
   }
+
 }

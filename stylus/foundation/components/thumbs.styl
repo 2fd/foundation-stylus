@@ -23,11 +23,12 @@ thumb($border-width=$thumb-border-width, $box-shadow=$thumb-box-shadow, $box-sha
   line-height: 0;
   display: inline-block;
   border: $thumb-border-style $border-width $thumb-border-color;
-  -webkit-box-shadow: $box-shadow;
   box-shadow: $box-shadow;
 
   &:hover,
-  &:focus { -webkit-box-shadow: $box-shadow-hover; box-shadow: $box-shadow-hover; }
+  &:focus {
+    box-shadow: $box-shadow-hover;
+  }
 }
 
 

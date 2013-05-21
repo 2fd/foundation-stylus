@@ -145,7 +145,7 @@ if $include-html-grid-classes != false {
       .small-{$i} { grid-column($columns:$i,$collapse:null,$float:false); }
     }
 
-    for $i in (1..$total-columns - 2) {
+    for $i in (0..$total-columns - 2) {
       .small-offset-{$i} { grid-column($offset:$i, $collapse:null,$float:false); }
     }
 
@@ -163,22 +163,13 @@ if $include-html-grid-classes != false {
       .large-{$i} { grid-column($columns:$i,$collapse:null,$float:false); }
     }
 
-    for $i in (1..$total-columns - 1) {
+    for $i in (0..$total-columns - 1) {
       .row .large-offset-{$i} { grid-column($offset:$i, $collapse:null,$float:false); }
     }
 
     for $i in (1..$total-columns - 1) {
       .push-{$i} { grid-column($push:$i, $collapse:null, $float:false); }
       .pull-{$i} { grid-column($pull:$i, $collapse:null, $float:false); }
-    }
-
-    for $i in (1..$total-columns - 1) {
-      .small-push-{$i} {
-        {$default-float}: inherit;
-      }
-      .small-pull-{$i} {
-        {$opposite-direction}: inherit;
-      }
     }
 
     .column.large-centered,
@@ -190,7 +181,12 @@ if $include-html-grid-classes != false {
     .columns.large-uncentered, {
       margin-{$default-float}: 0;
       margin-{$opposite-direction}: 0;
-      float: none;
+      float: $default-float;
+    }
+
+    .column.large-uncentered.opposite,
+    .columns.large-uncentered.opposite {
+      float: $opposite-direction !important;
     }
 
   }

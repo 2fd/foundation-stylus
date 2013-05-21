@@ -149,9 +149,6 @@ if $include-html-clearing-classes {
     .clearing-main-prev.disabled,
     .clearing-main-next.disabled { opacity: 0.5; }
 
-    // If you want to show a lightbox, but only have a single image come through as the thumbnail
-    .clearing-feature ~ li { display: none; }
-
     .clearing-assembled .clearing-container {
 
       .carousel {
@@ -177,7 +174,7 @@ if $include-html-clearing-classes {
             overflow: hidden;
             margin-{$opposite-direction}: 1px;
             position: relative;
-            cursor: pointer;
+            cursor: $cursor-pointer-value;
             opacity: 0.4;
 
             &.fix-height {
@@ -190,13 +187,12 @@ if $include-html-clearing-classes {
 
             a.th {
               border: none;
-              -webkit-box-shadow: none;
-                      box-shadow: none;
+              box-shadow: none;
               display: block;
             }
 
             img {
-              cursor: pointer !important;
+              cursor: $cursor-pointer-value !important;
               min-width: 100% !important;
             }
 

@@ -107,8 +107,8 @@ dropdown-container($content=list, $triangle=true, $max-width=$f-dropdown-max-wid
 // We use this to style the list elements or content inside the dropdown.
 dropdown-style() {
   font-size: $f-dropdown-font-size;
-  cursor: pointer;
-  
+  cursor: $cursor-pointer-value;
+
   line-height: $f-dropdown-line-height;
   margin: 0;
 
@@ -123,7 +123,7 @@ dropdown-style() {
 }
 
 
-if $include-html-nav-classes != false {
+if $include-html-button-classes != false {
 
   @media only screen and (max-width: 767px) {
     .f-dropdown {
@@ -134,7 +134,7 @@ if $include-html-nav-classes != false {
 
   /* Foundation Dropdowns */
   .f-dropdown {
-    dropdown-container(content);
+    dropdown-container(list);
     // max-width: none;
 
     li {

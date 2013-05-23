@@ -11,7 +11,7 @@ $dropdown-button-pip-color-alt ?= #333;
 $dropdown-button-padding-tny ?= $button-tny * 5;
 $dropdown-button-pip-size-tny ?= $button-tny;
 $dropdown-button-pip-opposite-tny ?= $button-tny * 2;
-$dropdown-button-pip-top-tny ?= -($button-tny / 2) + emCalc(1px);
+$dropdown-button-pip-top-tny ?= -($button-tny) / 2 + emCalc(1px);
 
 // We use these to style small dropdown buttons
 $dropdown-button-padding-sml ?= $button-sml * 5;
@@ -102,7 +102,7 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true) {
 }
 
 
-if $include-html-button-classes != false {
+if $include-html-button-classes {
 
   /* Dropdown Button */
   .dropdown.button {

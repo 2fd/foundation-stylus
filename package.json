@@ -1,6 +1,6 @@
 {
   "name": "foundation",
-  "version": "4.1.6-3",
+  "version": "4.1.6-4",
   "main": "stylus/foundation",
   "devDependencies": {
     "grunt": "~0.4.0",

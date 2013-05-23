@@ -141,7 +141,9 @@ switch-base($transition-speed=$switch-paddle-transition-speed, $transition-ease=
 
   // Bugfix for older Webkit, including mobile Webkit. Adapted from:
   // http://css-tricks.com/webkit-sibling-bug/
-  if $experimental { -webkit-animation: webkitSiblingBugfix infinite 1s; }
+  if $experimental {
+    -webkit-animation: webkitSiblingBugfix infinite 1s;
+  }
 
 }
 
@@ -188,6 +190,9 @@ switch-style($paddle-bg=$switch-paddle-bg, $positive-color=$switch-positive-colo
       background: linear-gradient(to bottom, $paddle-bg 0%, darken($paddle-bg, 5%) 100%);
 
       // Building the alternating colored sides of the switch
+      if $experimental {
+        -webkit-box-shadow: 2px 0 10px 0 rgba(0,0,0,0.07), 1000px 0 0 1000px $positive-color, -2px 0 10px 0 rgba(0,0,0,0.07), -1000px 0 0 1000px $negative-color;
+      }
       box-shadow: 2px 0 10px 0 rgba(0,0,0,0.07), 1000px 0 0 980px $positive-color, -2px 0 10px 0 rgba(0,0,0,0.07), -1000px 0 0 1000px $negative-color;
     }
 

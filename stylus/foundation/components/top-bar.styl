@@ -165,6 +165,9 @@ if $include-html-top-bar-classes != false {
             width: 16px;
             height: 0;
             // Shh, don't tell, but box-shadows create the menu icon :)
+            if $experimental {
+              -webkit-box-shadow: 0 10px 0 1px $topbar-menu-icon-color, 0 16px 0 1px $topbar-menu-icon-color, 0 22px 0 1px $topbar-menu-icon-color;
+            }
             box-shadow: 0 10px 0 1px $topbar-menu-icon-color, 0 16px 0 1px $topbar-menu-icon-color, 0 22px 0 1px $topbar-menu-icon-color;
           }
         }
@@ -183,6 +186,9 @@ if $include-html-top-bar-classes != false {
           color: $topbar-menu-link-color-toggled;
           span {
             // Shh, don't tell, but box-shadows create the menu icon :)
+            if $experimental {
+              -webkit-box-shadow: 0 10px 0 1px $topbar-menu-icon-color-toggled, 0 16px 0 1px $topbar-menu-icon-color-toggled, 0 22px 0 1px $topbar-menu-icon-color-toggled;
+            }
             box-shadow: 0 10px 0 1px $topbar-menu-icon-color-toggled, 0 16px 0 1px $topbar-menu-icon-color-toggled, 0 22px 0 1px $topbar-menu-icon-color-toggled;
           }
         }
@@ -222,7 +228,7 @@ if $include-html-top-bar-classes != false {
         width: 100%;
         color: $topbar-link-color;
         padding: 12px 0 12px 0;
-        padding-{$default-float}: $topbar-height / 3;
+        padding-{$default-float}: ($topbar-height / 3);
         font-size: $topbar-link-font-size;
         font-weight: $topbar-link-weight;
         background: $topbar-dropdown-bg;
@@ -269,7 +275,7 @@ if $include-html-top-bar-classes != false {
     }
 
     // Add some extra padding for list items contains buttons
-    .has-form { padding: $topbar-height / 3; }
+    .has-form { padding: ($topbar-height / 3); }
 
     // Styling for list items that have a dropdown within them.
     .has-dropdown {
@@ -278,7 +284,7 @@ if $include-html-top-bar-classes != false {
       & > a {
         &:after {
           css-triangle($topbar-dropdown-toggle-size, rgba($topbar-dropdown-toggle-color, $topbar-dropdown-toggle-alpha), $default-float);
-          margin-{$opposite-direction}: $topbar-height / 3;
+          margin-{$opposite-direction}: ($topbar-height / 3);
           margin-top: -($topbar-dropdown-toggle-size / 2) - 2;
           position: absolute;
           top: 50%;
@@ -304,20 +310,20 @@ if $include-html-top-bar-classes != false {
       li { width: 100%;
         a {
           font-weight: normal;
-          padding: 8px $topbar-height / 3;
+          padding: 8px ($topbar-height / 3);
         }
 
         &.title h5 { margin-bottom: 0;
           a {
             color: $topbar-link-color;
-            line-height: $topbar-height / 2;
+            line-height: ($topbar-height / 2);
             display: block;
           }
         }
       }
 
       label {
-        padding: 8px $topbar-height / 3 2px;
+        padding: 8px ($topbar-height / 3) 2px;
         margin-bottom: 0;
         text-transform: $topbar-dropdown-label-text-transform;
         color: $topbar-dropdown-label-color;
@@ -336,7 +342,7 @@ if $include-html-top-bar-classes != false {
 
 
   // Top Bar styles intended for screen sizes above the breakpoint.
-  @media {$topbar-media-query} {
+  @media $topbar-media-query {
     .top-bar {
       background: $topbar-bg;
       clearfix();
@@ -382,21 +388,21 @@ if $include-html-top-bar-classes != false {
 
       li {
         a:not(.button) {
-          padding: 0 $topbar-height / 3;
+          padding: 0 ($topbar-height / 3);
           line-height: $topbar-height;
           background: $topbar-bg;
-          &:hover { background: adjust-color($topbar-dropdown-bg, $lightness: $topbar-link-hover-lightness); }
+          &:hover { background: lighten($topbar-dropdown-bg, $topbar-link-hover-lightness); }
         }
       }
 
       .has-dropdown {
         & > a {
-          padding-{$opposite-direction}: $topbar-height / 3 + 20 !important;
+          padding-{$opposite-direction}: ($topbar-height / 3) + 20 !important;
 
           &:after {
             css-triangle($topbar-dropdown-toggle-size, rgba($topbar-dropdown-toggle-color, $topbar-dropdown-toggle-alpha), top);
             margin-top: -($topbar-dropdown-toggle-size / 2);
-            top: $topbar-height / 2;
+            top: ($topbar-height / 2);
           }
         }
 
@@ -435,7 +441,7 @@ if $include-html-top-bar-classes != false {
             color: $topbar-dropdown-link-color;
             line-height: 1;
             white-space: nowrap;
-            padding: 7px $topbar-height / 3;
+            padding: 7px ($topbar-height / 3);
             background: $topbar-dropdown-link-bg;
           }
 
@@ -465,7 +471,7 @@ if $include-html-top-bar-classes != false {
 
       .has-form {
         background: $topbar-bg;
-        padding: 0 $topbar-height / 3;
+        padding: 0 ($topbar-height / 3);
         height: $topbar-height;
       }
 

@@ -27,7 +27,6 @@ $clearing-carousel-height ?= 150px;
 $clearing-carousel-thumb-width ?= 175px;
 $clearing-carousel-thumb-active-border ?= 4px solid rgb(255,255,255);
 
-
 if $include-html-clearing-classes {
   // We decided to not create a mixin for Clearing because it relies
   // on predefined classes and structure to work properly.
@@ -105,13 +104,17 @@ if $include-html-clearing-classes {
     &:focus { color: #ccc; }
   }
 
-  .clearing-assembled .clearing-container {
-    height: 100%;
-    .carousel > ul {
-      display: none;
-    }
+  .clearing-assembled .clearing-container { height: 100%;
+    .carousel > ul { display: none; }
   }
 
+  // If you want to show a lightbox, but only have a single image come through as the thumbnail
+  .clearing-feature li {
+    display: none;
+    &.clearing-featured-img {
+      display: block;
+    }
+  }
 
   // Large screen overrides
   @media $small {
@@ -187,12 +190,15 @@ if $include-html-clearing-classes {
 
             a.th {
               border: none;
-              box-shadow: none;
+              if $experimental {
+                -webkit-box-shadow: none;
+              }
+                      box-shadow: none;
               display: block;
             }
 
             img {
-              cursor: $cursor-pointer-value !important;
+            cursor: $cursor-pointer-value !important;
               min-width: 100% !important;
             }
 
@@ -216,4 +222,5 @@ if $include-html-clearing-classes {
       padding-top: 0;
     }
   }
+
 }

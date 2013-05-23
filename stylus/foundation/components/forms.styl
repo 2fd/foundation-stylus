@@ -58,14 +58,14 @@ $input-error-message-font-color-alt ?= #333;
 $glowing-effect-fade-time ?= 0.45s;
 $glowing-effect-color ?= $input-focus-border-color;
 
-
 //
 // Form Mixins
 //
 
 // We use this mixin to give us form styles for rows inside of forms
 form-row-base() {
-  .row { margin: 0 (-($form-spacing / 2));
+  .row {
+    margin: 0 (-($form-spacing) / 2);
 
     .column,
     .columns { padding: 0 ($form-spacing / 2); }
@@ -106,7 +106,6 @@ form-element() {
   if $input-include-glowing-effect {
       block-glowing-effect(focus, $glowing-effect-fade-time, $glowing-effect-color);
   }
-
   // Basic focus styles
   &:focus {
     background: $input-focus-bg-color;
@@ -132,10 +131,10 @@ form-label($alignment=false, $base-style=true) {
   }
 
   // Alignment options
-  if $alignment is right {
+  if $alignment == right {
     float: none;
     text-align: right;
-  } else if $alignment is inline {
+  } else if $alignment == inline {
     margin: 0 0 $form-spacing 0;
     padding: ($form-spacing / 2) + emCalc($input-border-width * 2) 0;
   }
@@ -168,7 +167,7 @@ prefix($bg=$input-prefix-bg,$is-button=false) {
     border-{$opposite-direction}: none;
 
     // Control the font color based on background brightness
-    if $bg-lightness > 70% or $bg is yellow {
+    if $bg-lightness > 70% or $bg == yellow {
       color: $input-prefix-font-color;
     } else {
       color: $input-prefix-font-color-alt;
@@ -196,7 +195,7 @@ postfix($bg=$input-prefix-bg, $is-button=false) {
     border-{$default-float}: none;
 
     // Control the font color based on background brightness
-    if $bg-lightness > 70%  or $bg is yellow {
+    if $bg-lightness > 70%  or $bg == yellow {
       color: $input-prefix-font-color;
     } else {
       color: $input-prefix-font-color-alt;
@@ -243,7 +242,9 @@ form-error-color($color=$alert-color) {
 }
 
 // We use this simple mixin to style labels for error inputs
-form-label-error-color($color=$alert-color) { color: $color; }
+form-label-error-color($color=$alert-color) {
+  color: $color;
+}
 
 // We use this mixin to create error message styles
 form-error-message($bg=$alert-color) {
@@ -257,7 +258,7 @@ form-error-message($bg=$alert-color) {
   // We can control the text color based on the brightness of the background.
   $bg-lightness = lightness($bg);
   background: $bg;
-  if $bg-lightness < 70% or $bg is yellow {
+  if $bg-lightness < 70% or $bg == yellow {
     color: $input-error-message-font-color;
   } else {
     color: $input-error-message-font-color-alt;
@@ -267,9 +268,7 @@ form-error-message($bg=$alert-color) {
 // Only include these classes if the variable is true, otherwise they'll be left out.
 if $include-html-form-classes != false {
   /* Standard Forms */
-  form {
-    margin: 0 0 $form-spacing;
-  }
+  form { margin: 0 0 $form-spacing; }
 
   /* Using forms within rows, we need to set some defaults */
   form .row {
@@ -295,26 +294,29 @@ if $include-html-form-classes != false {
 
   /* Adjust padding, alignment and radius if pre/post element is a button */
   .postfix.button {
-    button-size(false,false,false); postfix(false,true);
+    button-size(false,false,false);
+    postfix(false,true);
   }
   .prefix.button {
-    button-size(false,false,false); prefix(false,true);
+    button-size(false,false,false);
+    prefix(false,true);
   }
+
   .prefix.button.radius {
-    side-radius(left, $button-radius);
     radius(0);
+    side-radius(left, $button-radius);
   }
   .postfix.button.radius {
-    side-radius(right, $button-radius);
     radius(0);
+    side-radius(right, $button-radius);
   }
   .prefix.button.round {
-    side-radius(left, $button-round);
     radius(0);
+    side-radius(left, $button-round);
   }
   .postfix.button.round {
-    side-radius(right, $button-round);
     radius(0);
+    side-radius(right, $button-round);
   }
 
   /* Separate prefix and postfix styles when on span so buttons keep their own */
@@ -325,7 +327,8 @@ if $include-html-form-classes != false {
       side-radius(left, $global-radius);
     }
   }
-  span.postfix { postfix();
+  span.postfix {
+    postfix();
     &.radius {
       radius(0);
       side-radius(right, $global-radius);
@@ -380,7 +383,7 @@ if $include-html-form-classes != false {
   select {
     margin: 0 0 $form-spacing 0;
   }
-  
+
   /* Normalize file input width */
   input[type="file"] {
     width:100%;

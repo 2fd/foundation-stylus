@@ -206,7 +206,7 @@ section($section-type = accordion, $title-selector = ".title", $content-selector
       }
     }
     {$content-selector} { display: none; }
-    &:first-child #{$title-selector} { border-bottom: none; }
+    &:first-child {$title-selector} { border-bottom: none; }
 
     &.active {
       & > {$content-selector} {

@@ -84,6 +84,9 @@ reveal-modal-style($bg=$reveal-modal-bg, $padding=$reveal-modal-padding, $border
 
   // We can choose whether or not to include the default box-shadow.
   if $box-shadow {
+    if $experimental {
+      -webkit-box-shadow: $reveal-box-shadow;
+    }
     box-shadow: $reveal-box-shadow;
   }
 
@@ -108,11 +111,11 @@ if $include-html-reveal-classes != false {
   	reveal-bg(); 
   }
 
-  .reveal-modal {
+  .{$reveal-modal-class} {
     reveal-modal-base();
     reveal-modal-style();
 
-    .close-reveal-modal {
+    .{$close-reveal-modal-class} {
     	reveal-close(); 
     }
   }

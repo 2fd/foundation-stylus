@@ -6,7 +6,7 @@
   Foundation.libs.topbar = {
     name : 'topbar',
 
-    version : '4.1.7',
+    version : '4.2.0',
 
     settings : {
       index : 0,
@@ -64,6 +64,7 @@
       var self = this;
       var offst = this.outerHeight($('.top-bar, [data-topbar]'));
       $(this.scope)
+        .off('.fndtn.topbar')
         .on('click.fndtn.topbar', '.top-bar .toggle-topbar, [data-topbar] .toggle-topbar', function (e) {
           var topbar = $(this).closest('.top-bar, [data-topbar]'),
               section = topbar.find('section, .section'),
@@ -289,6 +290,8 @@
     off : function () {
       $(this.scope).off('.fndtn.topbar');
       $(window).off('.fndtn.topbar');
-    }
+    },
+
+    reflow : function () {}
   };
 }(Foundation.zj, this, this.document));

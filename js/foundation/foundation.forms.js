@@ -4,7 +4,7 @@
   Foundation.libs.forms = {
     name: 'forms',
 
-    version: '4.1.6',
+    version: '4.2.1',
 
     cache: {},
 
@@ -357,7 +357,8 @@
           var _self = this;
 
           // Set all hidden parent elements, including this element.
-          _self.hidden = $child.parents().addBack().filter(":hidden");
+          _self.hidden = $child.parents();
+          _self.hidden = _self.hidden.add($child).filter(":hidden");
 
           // Loop through all hidden elements.
           _self.hidden.each(function () {
@@ -411,7 +412,9 @@
 
     off: function () {
       $(this.scope).off('.fndtn.forms');
-    }
+    },
+
+    reflow : function () {}
   };
 
   var getFirstPrevSibling = function($el, selector) {

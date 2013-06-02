@@ -162,7 +162,7 @@
 
     close : function (modal) {
 
-      var modal = modal || $(this.scope),
+      var modal = modal && modal.length ? modal : $(this.scope),
           open_modals = $('.reveal-modal.open');
 
       if (open_modals.length > 0) {
@@ -323,6 +323,8 @@
 
     off : function () {
       $(this.scope).off('.fndtn.reveal');
-    }
+    },
+
+    reflow : function () {}
   };
 }(Foundation.zj, this, this.document));

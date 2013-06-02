@@ -6,12 +6,12 @@ $include-html-type-classes ?= $include-html-classes;
 // We use these to control header font styles
 $header-font-family ?= "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 $header-font-weight ?= bold;
-$header-font-style ?=normal;
-$header-font-color ?=#222;
+$header-font-style ?= normal;
+$header-font-color ?= #222;
 $header-line-height ?= 1.4;
-$header-top-margin ?=.2em;
+$header-top-margin ?= .2em;
 $header-bottom-margin ?= .5em;
-$header-text-rendering ?=optimizeLegibility;
+$header-text-rendering ?= optimizeLegibility;
 
 // We use these to control header font sizes
 $h1-font-size ?= emCalc(44px);
@@ -22,24 +22,24 @@ $h5-font-size ?= emCalc(18px);
 $h6-font-size ?= 1em;
 
 // These control how subheaders are styled.
-$subheader-line-height ?=1.4;
+$subheader-line-height ?= 1.4;
 $subheader-font-color ?= lighten($header-font-color, 30%);
 $subheader-font-weight ?=300;
 $subheader-top-margin ?= .2em;
-$subheader-bottom-margin ?=.5em;
+$subheader-bottom-margin ?= .5em;
 
 // A general <small> styling
-$small-font-size ?=60%;
+$small-font-size ?= 60%;
 $small-font-color ?= lighten($header-font-color, 30%);
 
 // We use these to style paragraphs
 $paragraph-font-family ?=inherit;
-$paragraph-font-weight ?=normal;
-$paragraph-font-size ?=1em;
-$paragraph-line-height ?=1.6;
-$paragraph-margin-bottom ?=emCalc(20px);
-$paragraph-aside-font-size ?=emCalc(14px);
-$paragraph-aside-line-height ?=1.35;
+$paragraph-font-weight ?= normal;
+$paragraph-font-size ?= 1em;
+$paragraph-line-height ?= 1.6;
+$paragraph-margin-bottom ?= emCalc(20px);
+$paragraph-aside-font-size ?= emCalc(14px);
+$paragraph-aside-line-height ?= 1.35;
 $paragraph-aside-font-style ?= italic;
 $paragraph-text-rendering ?= optimizeLegibility;
 
@@ -50,21 +50,22 @@ $code-font-weight ?= bold;
 
 // We use these to style anchors
 $anchor-text-decoration ?= none;
-$anchor-font-color ?=$primary-color;
-$anchor-font-color-hover ?=darken($primary-color, 5%);
+$anchor-font-color ?= $primary-color;
+$anchor-font-color-hover ?= darken($primary-color, 5%);
 
 // We use these to style the <hr> element
-$hr-border-width ?=1px;
-$hr-border-style ?=solid;
-$hr-border-color ?=#ddd;
-$hr-margin ?=emCalc(20px);
+$hr-border-width ?= 1px;
+$hr-border-style ?= solid;
+$hr-border-color ?= #ddd;
+$hr-margin ?= emCalc(20px);
 
 // We use these to style lists
-$list-style-position ?=outside;
+$list-style-position ?= outside;
 $list-side-margin ?= emCalc(20px);
-$definition-list-header-weight ?=bold;
+$list-nested-margin ?= emCalc(20px);
+$definition-list-header-weight ?= bold;
 $definition-list-header-margin-bottom ?= .3em;
-$definition-list-margin-bottom ?=emCalc(12px);
+$definition-list-margin-bottom ?= emCalc(12px);
 
 // We use these to style blockquotes
 $blockquote-font-color ?=lighten($header-font-color, 30%);
@@ -250,12 +251,16 @@ if $include-html-type-classes != false {
     font-family: $paragraph-font-family;
   }
 
+  ul, ol {
+    margin-{$default-float}: $list-side-margin;
+  }
+
   /* Unordered Lists */
   ul {
     li {
       ul,
       ol {
-        margin-{$default-float}: $list-side-margin;
+        margin-{$default-float}: $list-nested-margin;
         margin-bottom: 0;
         font-size: 1em; /* Override nested font-size change */
       }
@@ -277,7 +282,7 @@ if $include-html-type-classes != false {
     li {
       ul,
       ol {
-        margin-{$default-float}: $list-side-margin;
+        margin-{$default-float}: $list-nested-margin;
         margin-bottom: 0;
       }
     }

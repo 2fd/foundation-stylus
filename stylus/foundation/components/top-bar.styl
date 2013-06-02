@@ -104,7 +104,10 @@ if $include-html-top-bar-classes != false {
     .button { padding-top: .5em; padding-bottom: .5em; margin-bottom: 0; }
 
     // Title Area
-    .title-area { position: relative; }
+    .title-area {
+      position: relative;
+      margin: 0;
+    }
 
     .name {
       height: $topbar-height;
@@ -307,7 +310,10 @@ if $include-html-top-bar-classes != false {
       visibility: hidden;
       z-index: 99;
 
-      li { width: 100%;
+      li {
+        width: 100%;
+        height: auto;
+        
         a {
           font-weight: normal;
           padding: 8px ($topbar-height / 3);

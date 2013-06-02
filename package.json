@@ -1,6 +1,6 @@
 {
   "name": "foundation",
-  "version": "4.1.6-5",
+  "version": "4.2.1",
   "main": "stylus/foundation",
   "repository" : {
     "type" : "git",

@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-# Specify your gem's dependencies in foundation.gemspec
-gemspec
+gem "compass", "0.12.2"

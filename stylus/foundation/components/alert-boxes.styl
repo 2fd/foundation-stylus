@@ -2,9 +2,13 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
+@import "global";
+
 //
 // @Variables
+// Alert Box Variables
 //
+
 $include-html-alert-classes ?=  $include-html-classes
 
 // We use this to control alert padding.
@@ -45,6 +49,7 @@ $alert-transition-ease ?=  ease-out
 
 //
 // @Mixins
+// Alert Box Mixins
 //
 
 // We use this mixin to create a default alert base.
@@ -104,6 +109,7 @@ alert($bg = $primary-color, $radius = false)
 
 //
 // @Block
+// Alert Box Block
 //
 
 if $include-html-alert-classes

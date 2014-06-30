@@ -106,17 +106,17 @@ if $include-html-block-grid-classes
 
     if $block-grid-media-queries
         @media {$small-up}
-            block-grid-html-classes(small,false)
+            block-grid-html-classes($size:small,$include-spacing:false)
 
         @media {$medium-up}
-            block-grid-html-classes(medium,false)
+            block-grid-html-classes($size:medium,$include-spacing:false)
 
         @media #{$large-up}
-            block-grid-html-classes(large,false)
+            block-grid-html-classes($size:large,$include-spacing:false)
 
         if $include-xl-html-block-grid-classes
             @media {$xlarge-up}
-                block-grid-html-classes(xlarge,false)
+                block-grid-html-classes($size:xlarge,$include-spacing:false)
 
             @media {$xxlarge-up}
-                block-grid-html-classes(xxlarge,false)
+                block-grid-html-classes($size:xxlarge,$include-spacing:false)

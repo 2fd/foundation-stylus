@@ -104,16 +104,16 @@ if $include-html-button-classes
             button-group-style()
 
         &.radius > *
-            button-group-style($button-radius, false, null)
+            button-group-style($radius:$button-radius, $float:null)
 
         &.round > *
-            button-group-style($button-round, false, null)
+            button-group-style($radius:$button-round, $float:null)
 
         for $i in (2..8)
             &.even-{$i} li
-                button-group-style(false, $i, null)
+                button-group-style($even:$i, $float:null)
 
     .button-bar
         clearfix()
         .button-group
-            button-group-container(false,true)
+            button-group-container($styles:false,$float:true)

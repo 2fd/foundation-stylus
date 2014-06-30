@@ -1,119 +1,138 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
 //
-// Alert Variables
+// @Variables
 //
-$include-html-alert-classes ?= $include-html-classes;
+$include-html-alert-classes ?=  $include-html-classes
 
 // We use this to control alert padding.
-$alert-padding-top ?= emCalc(11px);
-$alert-padding-default-float ?= $alert-padding-top;
-$alert-padding-opposite-direction ?= $alert-padding-top + emCalc(10px);
-$alert-padding-bottom ?= $alert-padding-top + emCalc(1px);
+$alert-padding-top ?=  $rem-calc(14)
+$alert-padding-default-float ?=  $alert-padding-top
+$alert-padding-opposite-direction ?=  $alert-padding-top + $rem-calc(10)
+$alert-padding-bottom ?=  $alert-padding-top
 
 // We use these to control text style.
-$alert-font-weight ?= bold;
-$alert-font-size ?= emCalc(14px);
-$alert-font-color ?= #fff;
-$alert-font-color-alt ?= darken($secondary-color, 60%);
+$alert-font-weight ?=  $font-weight-normal
+$alert-font-size ?=  $rem-calc(13)
+$alert-font-color ?=  #fff
+$alert-font-color-alt ?=  lighten($secondary-color,  -66%)
 
 // We use this for close hover effect.
-$alert-function-factor ?= 10%;
+$alert-function-factor ?=  -14%
 
 // We use these to control border styles.
-$alert-border-style ?= solid;
-$alert-border-width ?= 1px;
-$alert-border-color ?= darken($primary-color, $alert-function-factor);
-$alert-bottom-margin ?= emCalc(20px);
+$alert-border-style ?=  solid
+$alert-border-width ?=  1px
+$alert-border-color ?=  lighten($primary-color,  $alert-function-factor)
+$alert-bottom-margin ?=  $rem-calc(20)
 
 // We use these to style the close buttons
-$alert-close-color ?= #333;
-$alert-close-position ?= emCalc(5px);
-$alert-close-font-size ?= emCalc(22px);
-$alert-close-opacity ?= 0.3;
-$alert-close-opacity-hover ?= 0.5;
-$alert-close-padding ?= 5px 4px 4px;
+$alert-close-color ?=  #333
+$alert-close-top ?=  50%
+$alert-close-position ?=  $rem-calc(4)
+$alert-close-font-size ?=  $rem-calc(22)
+$alert-close-opacity ?=  0.3
+$alert-close-opacity-hover ?=  0.5
+$alert-close-padding ?=  9px 6px 4px
 
 // We use this to control border radius
-$alert-radius ?= $global-radius;
+$alert-radius ?=  $global-radius
+
+$alert-transition-speed ?=  300ms
+$alert-transition-ease ?=  ease-out
 
 //
-// Alert Mixins
+// @Mixins
 //
 
 // We use this mixin to create a default alert base.
-alert-base() {
-  border-style: $alert-border-style;
-  border-width: $alert-border-width;
-  display: block;
-  font-weight: $alert-font-weight;
-  margin-bottom: $alert-bottom-margin;
-  position: relative;
-  padding: $alert-padding-top $alert-padding-opposite-direction $alert-padding-bottom $alert-padding-default-float;
-  font-size: $alert-font-size;
-}
+alert-base()
+    border-style $alert-border-style
+    border-width $alert-border-width
+    display block
+    font-weight $alert-font-weight
+    margin-bottom $alert-bottom-margin
+    position relative
+    padding $alert-padding-top $alert-padding-opposite-direction $alert-padding-bottom $alert-padding-default-float
+    font-size $alert-font-size
+    transition opacity $alert-transition-speed $alert-transition-ease
 
 // We use this mixin to add alert styles
-alert-style($bg=$primary-color) {
+//
+// $bg - The background of the alert. Default: $primary-color.
+alert-style($bg = $primary-color)
 
-  // This find the lightness percentage of the background color.
-  $bg-lightness = lightness($bg);
+    // This finds the lightness percentage of the background color.
+    $bg-lightness: lightness($bg);
 
-  // We control which background color and border come through.
-  background-color: $bg;
-  border-color: darken($bg, $alert-function-factor);
+    // We control which background color and border come through.
+    background-color: $bg;
+    border-color: lighten($bg, $alert-function-factor);
 
-  // We control the text color for you based on the background color.
-  if $bg-lightness > 70% {
-    color $alert-font-color-alt;
-  } else {
-    color $alert-font-color;
-  }
-}
+    // We control the text color for you based on the background color.
+    if $bg-lightness > 70%
+        color $alert-font-color-alt
+    else
+        color $alert-font-color
 
 // We use this to create the close button.
-alert-close() {
-  font-size: $alert-close-font-size;
-  padding: $alert-close-padding;
-  line-height: 0;
-  position: absolute;
-  top: $alert-close-position + emCalc(2px);
-  {$opposite-direction}: $alert-close-position;
-  color: $alert-close-color;
-  opacity: $alert-close-opacity;
-  &:hover,
-  &:focus { opacity: $alert-close-opacity-hover; }
-}
+alert-close()
+    font-size $alert-close-font-size
+    padding $alert-close-padding
+    line-height 0
+    position absolute
+    top $alert-close-top
+    margin-top -($alert-close-font-size / 2)
+    {$opposite-direction} $alert-close-position
+    color $alert-close-color
+    opacity $alert-close-opacity
+
+    &:hover,
+    &:focus
+        opacity: $alert-close-opacity-hover
 
 // We use this to quickly create alerts with a single mixin.
-alert($bg=$primary-color, $radius=false) {
-  alert-base();
-  alert-style($bg);
-  radius($radius);
-}
+//
+// $bg - Background of alert. Default: $primary-color.
+// $radius - Radius of alert box. Default: false.
+alert($bg = $primary-color, $radius = false)
+    alert-base()
+    alert-style($bg)
+    radius($radius)
 
-if $include-html-alert-classes != false {
-  /* Foundation Alerts */
-  .alert-box {
-    alert();
+//
+// @Block
+//
 
-    .close {
-      alert-close();
-    }
+if $include-html-alert-classes
+    .alert-box
+        alert()
 
-    &.radius {
-      radius($alert-radius);
-    }
-    &.round {
-      radius($global-rounded);
-    }
+        .close
+            alert-close()
 
-    &.success {
-      alert-style($success-color);
-    }
-    &.alert {
-      alert-style($alert-color);
-    }
-    &.secondary {
-      alert-style($secondary-color);
-    }
-  }
-}
+        &.radius
+            radius($alert-radius)
+
+        &.round
+            radius($global-rounded)
+
+        &.success
+            alert-style($success-color)
+
+        &.alert
+            alert-style($alert-color)
+
+        &.secondary
+            alert-style($secondary-color)
+
+        &.warning
+            alert-style($warning-color)
+
+        &.info
+            alert-style($info-color)
+
+        &.alert-close
+            opacity 0

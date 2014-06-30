@@ -1,109 +1,119 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global"
+@import "buttons"
+
 //
+// @Variables
 // Button Group Variables
 //
-$include-html-button-classes ?= $include-html-classes !default;
+$include-html-button-classes ?= $include-html-classes
 
 // Sets the margin for the right side by default, and the left margin if right-to-left direction is used
-$button-bar-margin-opposite ?= emCalc(10px);
+$button-bar-margin-opposite ?= $rem-calc(10)
+$button-group-border-width ?= 1px
 
 //
+// @Mixins
 // Button Group Mixins
 //
 
 // We use this to add styles for a button group container
-button-group-container($styles=true, $float=false) {
-  if $styles {
-    list-style: none;
-    margin: 0;
-    clearfix();
-  }
-  if $float {
-    float: $default-float;
-    margin-{$opposite-direction}: $button-bar-margin-opposite;
-    & div { overflow: hidden; }
-  }
-}
+button-group-container($styles=true, $float=false)
+    if $styles
+        list-style none
+        margin 0
+        {$default-float} 0
+        clearfix()
+
+    if $float
+        float {$default-float}
+        margin-{$opposite-direction} $button-bar-margin-opposite
+
+        & div
+            overflow hidden
 
 // We use this to control styles for button groups
-button-group-style($radius=false, $even=false, $float=$default-float) {
+button-group-style($radius=false, $even=false, $float=$default-float)
 
-  // We use this to control the flow, or remove those styles completely.
-  if $float {
-    margin: 0 0 0 -1px;
-    float: $float;
-    // Make sure the first child doesn't get the negative margin.
-    &:first-child {
-      margin-{$default-float}: 0;
-    }
-  }
+    if $radius is true
+        $use-radius = $button-radius
 
-  // We use these to control left and right radius on first/last buttons in the group.
-  if $radius == true {
-    &:first-child,
-    &:first-child > a,
-    &:first-child > button,
-    &:first-child > .button {
-      side-radius($default-float, $button-radius);
-    }
-    &:last-child,
-    &:last-child > a,
-    &:last-child > button,
-    &:last-child > .button {
-      side-radius($opposite-direction, $button-radius);
-    }
-  } else if $radius {
-    &:first-child,
-    &:first-child > a,
-    &:first-child > button,
-    &:first-child > .button {
-      side-radius($default-float, $radius);
-    }
-    &:last-child,
-    &:last-child > a,
-    &:last-child > button,
-    &:last-child > .button {
-      side-radius($opposite-direction, $radius);
-    }
-  }
+    else if $radius
+        $use-radius = $radius
 
-  // We use this to make the buttons even width across their container
-  if $even {
-    width: percent((100/$even));
-    button, .button { width: 100%; }
-  }
+    > button
+    .button
+        border-{$default-float} $button-group-border-width solid
+        border-color rgba(255, 255, 255, 0.5)
 
-}
+    &:first-child
+        button
+        .button
+          border-{$default-float} 0
 
-// Only include these CSS classes if $include-html-classes: true
-if $include-html-button-classes != false {
+    // We use this to control the flow, or remove those styles completely.
+    if $float
+        margin 0
+        float $float
 
-  /* Button Groups */
-  .button-group {
-    button-group-container();
+        // Make sure the first child doesn't get the negative margin.
+        &:first-child
+            margin-{$default-float} 0
 
-    &> * {
-      button-group-style();
-    }
+    // We use these to control left and right radius on first/last buttons in the group.
+    if $radius
+        &
+        & > a
+        & > button
+        & > .button
+            radius(0)
 
-    &.radius > * {
-      button-group-style($radius:$button-radius, $float:null);
-    }
-    &.round > * {
-      button-group-style($radius:$button-round, $float:null);
-    }
+        &:first-child
+        &:first-child > a
+        &:first-child > button
+        &:first-child > .button
+            side-radius($default-float, $use-radius)
 
-    for $i in (2..8) {
-      &.even-{$i} li {
-        button-group-style($even:$i, $float:null);
-      }
-    }
-  }
+        &:last-child
+        &:last-child > a
+        &:last-child > button
+        &:last-child > .button
+            side-radius($opposite-direction, $use-radius)
 
-  .button-bar {
-    clearfix();
-    .button-group {
-      button-group-container($styles:false,$float:true);
-    }
-  }
+    // We use this to make the buttons even width across their container
+    if $even
+        width unit((100/$even), '%')
 
-}
+        button
+        .button
+            width 100%
+
+//
+// @Block
+// Button Group Block
+//
+if $include-html-button-classes
+
+    .button-group
+        button-group-container()
+
+        & > li
+            button-group-style()
+
+        &.radius > *
+            button-group-style($button-radius, false, null)
+
+        &.round > *
+            button-group-style($button-round, false, null)
+
+        for $i in (2..8)
+            &.even-{$i} li
+                button-group-style(false, $i, null)
+
+    .button-bar
+        clearfix()
+        .button-group
+            button-group-container(false,true)

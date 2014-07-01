@@ -121,31 +121,33 @@ accordion-content($bg= $accordion-content-active-bg-color, $padding= $accordion-
 //
 
 if $include-html-accordion-classes
-	.accordion
-		accordion-container()
 
-	.accordion-navigation
-	dd
-		display block
-		margin-bottom 0 !important
+	$module.accordion ?=
+		.accordion
+			accordion-container()
 
-		&.active > a
-			background $accordion-navigation-active-bg-color
-		> a
-			background $accordion-navigation-bg-color
-			color $accordion-navigation-font-color
-			padding $accordion-navigation-padding
+		.accordion-navigation
+		dd
 			display block
-			font-family $accordion-navigation-font-family
-			font-size $accordion-navigation-font-size
+			margin-bottom 0 !important
 
-		&hover
-			background $accordion-navigation-hover-bg-color
-
-		> .content
-			display none
-			padding $accordion-content-padding
-
-			&.active
+			&.active > a
+				background $accordion-navigation-active-bg-color
+			> a
+				background $accordion-navigation-bg-color
+				color $accordion-navigation-font-color
+				padding $accordion-navigation-padding
 				display block
-				background $accordion-content-active-bg-color
+				font-family $accordion-navigation-font-family
+				font-size $accordion-navigation-font-size
+
+			&hover
+				background $accordion-navigation-hover-bg-color
+
+			> .content
+				display none
+				padding $accordion-content-padding
+
+				&.active
+					display block
+					background $accordion-content-active-bg-color

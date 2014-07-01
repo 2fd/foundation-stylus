@@ -97,23 +97,24 @@ button-group-style($radius=false, $even=false, $float=$default-float)
 //
 if $include-html-button-classes
 
-    .button-group
-        button-group-container()
-
-        & > li
-            button-group-style()
-
-        &.radius > *
-            button-group-style($button-radius, false, null)
-
-        &.round > *
-            button-group-style($button-round, false, null)
-
-        for $i in (2..8)
-            &.even-{$i} li
-                button-group-style(false, $i, null)
-
-    .button-bar
-        clearfix()
+    $module.button-group ?=
         .button-group
-            button-group-container(false,true)
+            button-group-container()
+
+            & > li
+                button-group-style()
+
+            &.radius > *
+                button-group-style($button-radius, false, null)
+
+            &.round > *
+                button-group-style($button-round, false, null)
+
+            for $i in (2..8)
+                &.even-{$i} li
+                    button-group-style(false, $i, null)
+
+        .button-bar
+            clearfix()
+            .button-group
+                button-group-container(false,true)

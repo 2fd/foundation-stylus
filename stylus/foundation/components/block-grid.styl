@@ -101,22 +101,23 @@ block-grid-html-classes($size,$include-spacing)
 
 if $include-html-block-grid-classes
 
-    [class*="block-grid-"]
-        block-grid()
+    $module.block-grid ?=
+        [class*="block-grid-"]
+            block-grid()
 
-    if $block-grid-media-queries
-        @media {$small-up}
-            block-grid-html-classes(small,false)
+        if $block-grid-media-queries
+            @media {$small-up}
+                block-grid-html-classes(small,false)
 
-        @media {$medium-up}
-            block-grid-html-classes(medium,false)
+            @media {$medium-up}
+                block-grid-html-classes(medium,false)
 
-        @media #{$large-up}
-            block-grid-html-classes(large,false)
+            @media #{$large-up}
+                block-grid-html-classes(large,false)
 
-        if $include-xl-html-block-grid-classes
-            @media {$xlarge-up}
-                block-grid-html-classes(xlarge,false)
+            if $include-xl-html-block-grid-classes
+                @media {$xlarge-up}
+                    block-grid-html-classes(xlarge,false)
 
-            @media {$xxlarge-up}
-                block-grid-html-classes(xxlarge,false)
+                @media {$xxlarge-up}
+                    block-grid-html-classes(xxlarge,false)

@@ -54,58 +54,58 @@ $alert-transition-ease ?=  ease-out
 
 // We use this mixin to create a default alert base.
 alert-base()
-    border-style $alert-border-style
-    border-width $alert-border-width
-    display block
-    font-weight $alert-font-weight
-    margin-bottom $alert-bottom-margin
-    position relative
-    padding $alert-padding-top $alert-padding-opposite-direction $alert-padding-bottom $alert-padding-default-float
-    font-size $alert-font-size
-    transition opacity $alert-transition-speed $alert-transition-ease
+	border-style $alert-border-style
+	border-width $alert-border-width
+	display block
+	font-weight $alert-font-weight
+	margin-bottom $alert-bottom-margin
+	position relative
+	padding $alert-padding-top $alert-padding-opposite-direction $alert-padding-bottom $alert-padding-default-float
+	font-size $alert-font-size
+	transition opacity $alert-transition-speed $alert-transition-ease
 
 // We use this mixin to add alert styles
 //
 // $bg - The background of the alert. Default: $primary-color.
 alert-style($bg = $primary-color)
 
-    // This finds the lightness percentage of the background color.
-    $bg-lightness: lightness($bg);
+	// This finds the lightness percentage of the background color.
+	$bg-lightness: lightness($bg);
 
-    // We control which background color and border come through.
-    background-color: $bg;
-    border-color: lighten($bg, $alert-function-factor);
+	// We control which background color and border come through.
+	background-color: $bg;
+	border-color: lighten($bg, $alert-function-factor);
 
-    // We control the text color for you based on the background color.
-    if $bg-lightness > 70%
-        color $alert-font-color-alt
-    else
-        color $alert-font-color
+	// We control the text color for you based on the background color.
+	if $bg-lightness > 70%
+		color $alert-font-color-alt
+	else
+		color $alert-font-color
 
 // We use this to create the close button.
 alert-close()
-    font-size $alert-close-font-size
-    padding $alert-close-padding
-    line-height 0
-    position absolute
-    top $alert-close-top
-    margin-top -($alert-close-font-size / 2)
-    {$opposite-direction} $alert-close-position
-    color $alert-close-color
-    opacity $alert-close-opacity
+	font-size $alert-close-font-size
+	padding $alert-close-padding
+	line-height 0
+	position absolute
+	top $alert-close-top
+	margin-top -($alert-close-font-size / 2)
+	{$opposite-direction} $alert-close-position
+	color $alert-close-color
+	opacity $alert-close-opacity
 
-    &:hover,
-    &:focus
-        opacity: $alert-close-opacity-hover
+	&:hover
+	&:focus
+		opacity: $alert-close-opacity-hover
 
 // We use this to quickly create alerts with a single mixin.
 //
 // $bg - Background of alert. Default: $primary-color.
 // $radius - Radius of alert box. Default: false.
 alert($bg = $primary-color, $radius = false)
-    alert-base()
-    alert-style($bg)
-    radius($radius)
+	alert-base()
+	alert-style($bg)
+	radius($radius)
 
 //
 // @Block
@@ -113,33 +113,33 @@ alert($bg = $primary-color, $radius = false)
 //
 
 if $include-html-alert-classes
-    $module.alert-box ?=
-        .alert-box
-            alert()
+	$module.alert-box ?=
+		.alert-box
+			alert()
 
-            .close
-                alert-close()
+			.close
+				alert-close()
 
-            &.radius
-                radius($alert-radius)
+			&.radius
+				radius($alert-radius)
 
-            &.round
-                radius($global-rounded)
+			&.round
+				radius($global-rounded)
 
-            &.success
-                alert-style($success-color)
+			&.success
+				alert-style($success-color)
 
-            &.alert
-                alert-style($alert-color)
+			&.alert
+				alert-style($alert-color)
 
-            &.secondary
-                alert-style($secondary-color)
+			&.secondary
+				alert-style($secondary-color)
 
-            &.warning
-                alert-style($warning-color)
+			&.warning
+				alert-style($warning-color)
 
-            &.info
-                alert-style($info-color)
+			&.info
+				alert-style($info-color)
 
-            &.alert-close
-                opacity 0
+			&.alert-close
+				opacity 0

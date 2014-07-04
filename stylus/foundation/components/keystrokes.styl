@@ -1,60 +1,68 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global"
+
 //
+// @Variables
 // Keystroke Variables
 //
-$include-html-type-classes ?= $include-html-classes;
+$include-html-keystroke-classes ?= $include-html-classes
 
 // We use these to control text styles.
-$keystroke-font ?= "Consolas", "Menlo", "Courier", monospace;
-$keystroke-font-size ?= emCalc(14px);
-$keystroke-font-color ?= #222;
-$keystroke-font-color-alt ?= #fff;
-$keystroke-function-factor ?= 7%;
+$keystroke-font ?= "Consolas", "Menlo", "Courier", monospace
+$keystroke-font-size ?= inherit
+$keystroke-font-color ?= #222
+$keystroke-font-color-alt ?= #fff
+$keystroke-function-factor ?= -7%
 
 // We use this to control keystroke padding.
-$keystroke-padding ?= emCalc(2px) emCalc(4px) emCalc(0px);
+$keystroke-padding ?= $rem-calc(2 4 0)
 
 // We use these to control background and border styles.
-$keystroke-bg ?= darken(#fff, $keystroke-function-factor);
-$keystroke-border-style ?= solid;
-$keystroke-border-width ?= 1px;
-$keystroke-border-color ?= darken($keystroke-bg, $keystroke-function-factor);
-$keystroke-radius ?= $global-radius;
+$keystroke-bg ?= lighten(#fff, $keystroke-function-factor)
+$keystroke-border-style ?= solid
+$keystroke-border-width ?= 1px
+$keystroke-border-color ?= lighten($keystroke-bg, $keystroke-function-factor)
+$keystroke-radius ?= $global-radius
 
 //
+// @Mixins
 // Keystroke Mixins
 //
 
 // We use this mixin to create keystroke styles.
-keystroke($bg=$keystroke-bg) {
-  // This find the lightness percentage of the background color.
-  $bg-lightness= lightness($bg);
+// $bg - Default ?= $keystroke-bg || scale-color(#fff, $lightness: $keystroke-function-factor)
+keystroke($bg=$keystroke-bg)
+	// This find the lightness percentage of the background color.
+	$bg-lightness = lightness($bg)
 
-  background-color: $bg;
-  border-color: darken($bg, $keystroke-function-factor);
+	background-color $bg
+	border-color lighten($bg, $keystroke-function-factor)
 
-  // We adjust the font color based on the brightness of the background.
-  if $bg-lightness > 70% {
-    color: $keystroke-font-color;
-  } else {
-    color: $keystroke-font-color-alt;
-  }
+	// We adjust the font color based on the brightness of the background.
+	if $bg-lightness > 70%
+        color $keystroke-font-color
 
-  border-style: $keystroke-border-style;
-  border-width: $keystroke-border-width;
-  margin: 0;
-  font-family: $keystroke-font;
-  font-size: $keystroke-font-size;
-  padding: $keystroke-padding;
-}
+	else
+        color $keystroke-font-color-alt
 
+	border-style $keystroke-border-style
+	border-width $keystroke-border-width
+	margin 0
+	font-family $keystroke-font
+	font-size $keystroke-font-size
+	padding $keystroke-padding
 
-if $include-html-media-classes != false {
+//
+// @Block
+// Flex Video Block
+//
 
-  /* Keystroke Characters */
-  .keystroke,
-  kbd {
-    keystroke();
-    radius($keystroke-radius);
-  }
-
-}
+if $include-html-keystroke-classes
+    $module.keystroke ?=
+		.keystroke,
+		kbd
+			keystroke()
+			radius($keystroke-radius)

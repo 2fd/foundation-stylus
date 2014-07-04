@@ -160,7 +160,7 @@ dropdown-container($content=list, $triangle=true, $max-width=$f-dropdown-max-wid
 			z-index 98
 
 
-	@if $triangle is top
+	if $triangle is top
 		margin-top -($f-dropdown-margin-bottom)
 		margin-left 0
 
@@ -251,5 +251,3 @@ if $include-html-dropdown-classes
 
 			&.large
 				max-width: 800px
-
-

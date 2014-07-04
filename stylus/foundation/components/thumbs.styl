@@ -1,57 +1,65 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global"
+
 //
-// Image Thumbnail Variables
+// @Variables
+// Thumbs Variables
 //
-$include-html-media-classes ?= $include-html-classes;
+$include-html-media-classes ?= $include-html-classes
 
 // We use these to control border styles
-$thumb-border-style ?= solid;
-$thumb-border-width ?= 4px;
-$thumb-border-color ?= #fff;
-$thumb-box-shadow ?= 0 0 0 1px rgba(#000,.2);
-$thumb-box-shadow-hover ?= 0 0 6px 1px rgba($primary-color,0.5);
+$thumb-border-style ?= solid
+$thumb-border-width ?= 4px
+$thumb-border-color ?= #fff
+$thumb-box-shadow ?= 0 0 0 1px rgba(#000,.2)
+$thumb-box-shadow-hover ?= 0 0 6px 1px rgba($primary-color,0.5)
 
 // Radius and transition speed for thumbs
-$thumb-radius ?= $global-radius;
-$thumb-transition-speed ?= 200ms;
+$thumb-radius ?= $global-radius
+$thumb-transition-speed ?= 200ms
 
 //
-// Image Thumbnail Mixins
+// @Mixins
+// Thumbs Mixins
 //
 
 // We use this to create image thumbnail styles.
-thumb($border-width=$thumb-border-width, $box-shadow=$thumb-box-shadow, $box-shadow-hover=$thumb-box-shadow-hover) {
-  line-height: 0;
-  display: inline-block;
-  border: $thumb-border-style $border-width $thumb-border-color;
-  if $experimental {
-    -webkit-box-shadow: $box-shadow;
-  }
-  box-shadow: $box-shadow;
+//
+// $border-width - Width of border around thumbnail. Default: $thumb-border-width.
+// $box-shadow - Box shadow to apply to thumbnail. Default: $thumb-box-shadow.
+// $box-shadow-hover - Box shadow to apply on hover. Default: $thumb-box-shadow-hover.
+thumb(
+	$border-width=$thumb-border-width,
+	$box-shadow=$thumb-box-shadow,
+	$box-shadow-hover=$thumb-box-shadow-hover
+)
+	line-height 0
+	display inline-block
+	border $thumb-border-style $border-width $thumb-border-color
+	max-width 100%
+	box-shadow $box-shadow
 
-  &:hover,
-  &:focus {
-    if $experimental {
-      -webkit-box-shadow: $box-shadow-hover;
-    }
-    box-shadow: $box-shadow-hover;
-  }
-}
+	&:hover
+	&:focus
+		box-shadow $box-shadow-hover
 
+//
+// @Block
+// Thumbs Block
+//
 
-// If html classes are turned on we'll include these classes.
-if $include-html-media-classes != false {
+if $include-html-media-classes
+	$module.thumb ?=
 
-  /* Image Thumbnails */
-  .th {
-    thumb();
-    single-transition(all,$thumb-transition-speed,ease-out);
+		/* Image Thumbnails */
+		.th
+			thumb()
+			transition all $thumb-transition-speed ease-out
 
-    &.radius {
-      radius($thumb-radius);
-    }
-  }
-  a.th { display: block; }
-
-}
+			&.radius
+				radius($thumb-radius)
 
 

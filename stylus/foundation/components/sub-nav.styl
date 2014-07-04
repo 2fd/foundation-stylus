@@ -1,70 +1,120 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global"
+
 //
+// @Variables
 // Sub Nav Variables
 //
-$include-html-nav-classes ?= $include-html-classes;
+$include-html-nav-classes ?= $include-html-classes
 
 // We use these to control margin and padding
-$sub-nav-list-margin ?= emCalc(-4px) 0 emCalc(18px);
-$sub-nav-list-padding-top ?= emCalc(4px);
+$sub-nav-list-margin ?= $rem-calc(-4 0 18)
+$sub-nav-list-padding-top ?= $rem-calc(4)
 
 // We use this to control the definition
-$sub-nav-font-size ?= emCalc(14px);
-$sub-nav-font-color ?= #999;
-$sub-nav-font-weight ?= normal;
-$sub-nav-text-decoration ?= none;
-$sub-nav-border-radius ?= 1000px;
+$sub-nav-font-family ?= $body-font-family
+$sub-nav-font-size ?= $rem-calc(14)
+$sub-nav-font-color ?= #999
+$sub-nav-font-weight ?= $font-weight-normal
+$sub-nav-text-decoration ?= none
+$sub-nav-padding ?= $rem-calc(3 16)
+$sub-nav-border-radius ?= 3px
+$sub-nav-font-color-hover ?= lighten($sub-nav-font-color,-25%)
+
 
 // We use these to control the active item styles
-$sub-nav-active-font-weight ?= bold;
-$sub-nav-active-bg ?= $primary-color;
-$sub-nav-active-color ?= #fff;
-$sub-nav-active-padding ?= emCalc(3px) emCalc(9px);
-$sub-nav-active-cursor ?= default;
+
+$sub-nav-active-font-weight ?= $font-weight-normal
+$sub-nav-active-bg ?= $primary-color
+$sub-nav-active-bg-hover ?= lighten($sub-nav-active-bg,-14%)
+$sub-nav-active-color ?= #fff
+$sub-nav-active-padding ?= $sub-nav-padding
+$sub-nav-active-cursor ?= default
+
+$sub-nav-item-divider ?= ""
+$sub-nav-item-divider-margin ?= $rem-calc(12)
 
 //
+// @Mixins
 // Sub Nav Mixins
 //
 
-sub-nav($font-color=$sub-nav-font-color, $font-size=$sub-nav-font-size, $active-bg=$sub-nav-active-bg) {
-  display: block;
-  width: auto;
-  overflow: hidden;
-  margin: $sub-nav-list-margin;
-  padding-top: $sub-nav-list-padding-top;
-  margin-{$opposite-direction}: 0;
-  margin-{$default-float}: emCalc(-9px);
+// Create a sub-nav item
+//
+// $font-color - Font color. Default: $sub-nav-font-color.
+// $font-size - Font size. Default: $sub-nav-font-size.
+// $active-bg - Background of active nav item. Default: $sub-nav-active-bg.
+// $active-bg-hover - Background of active nav item, when hovered. Default: $sub-nav-active-bg-hover.
+sub-nav(
+	$font-color: $sub-nav-font-color,
+	$font-size: $sub-nav-font-size,
+	$active-bg: $sub-nav-active-bg,
+	$active-bg-hover: $sub-nav-active-bg-hover
+)
+	display block
+	width auto
+	overflow hidden
+	margin $sub-nav-list-margin
+	padding-top $sub-nav-list-padding-top
+	margin-{$opposite-direction} 0
+	margin-{$default-float} $rem-calc(-12)
 
-  dt,
-  dd {
-    float: $default-float;
-    display: inline;
-    margin-{$default-float}: emCalc(9px);
-    margin-bottom: emCalc(10px);
-    font-weight: $sub-nav-font-weight;
-    font-size: $font-size;
-
-    a {
-      color: $font-color;
-      text-decoration: $sub-nav-text-decoration; }
-
-    &.active a {
-      radius($sub-nav-border-radius);
-      font-weight: $sub-nav-active-font-weight;
-      background: $active-bg;
-      padding: $sub-nav-active-padding;
-      cursor: $sub-nav-active-cursor;
-      color: $sub-nav-active-color;
-    }
-  }
-
-}
+	dt
+		text-transform: uppercase;
 
 
-if $include-html-nav-classes != false {
+	dt
+	dd
+	li
+		float $default-float
+		display inline
+		margin-{$default-float} $rem-calc(16)
+		margin-bottom $rem-calc(10)
+		font-family $sub-nav-font-family
+		font-weight $sub-nav-font-weight
+		font-size $font-size
+		color $font-color
 
-  /* Side Nav */
-  .sub-nav {
-    sub-nav();
-  }
+		a
+			text-decoration $sub-nav-text-decoration
+			color $sub-nav-font-color
+			padding $sub-nav-padding
 
-}
+			&:hover
+				color $sub-nav-font-color-hover
+
+		&.active a
+			radius($sub-nav-border-radius)
+			font-weight $sub-nav-active-font-weight
+			background $active-bg
+			padding $sub-nav-active-padding
+			cursor $sub-nav-active-cursor
+			color $sub-nav-active-color
+
+			&:hover
+				background $active-bg-hover
+
+		if $sub-nav-item-divider isnt ""
+			margin-{$default-float} 0
+
+			&:before
+				content $sub-nav-item-divider
+				margin 0 $sub-nav-item-divider-margin
+
+			&:first-child:before
+				content ""
+				margin 0
+
+//
+// @Block
+// Sub Nav Block
+//
+
+if $include-html-nav-classes
+	$module.sub-nav ?=
+		.sub-nav
+			sub-nav()
+

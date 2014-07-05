@@ -1,23 +1,36 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global";
+
 //
+// @Variables
 // Magellan Variables
 //
-$include-html-magellan-classes ?= $include-html-classes;
+$include-html-magellan-classes ?= $include-html-classes
 
-$magellan-bg ?= #fff;
-$magellan-padding ?= 10px;
+$magellan-bg ?= #fff
+$magellan-padding ?= 10px
 
-if $include-html-magellan-classes != false {
+//
+// @Block
+// Magellan Block
+//
 
-  [data-magellan-expedition] {
-    background: $magellan-bg;
-    z-index: 50;
-    min-width: 100%;
-    padding: $magellan-padding;
+if $include-html-magellan-classes
+	$module.magellan ?=
 
-    .sub-nav {
-      margin-bottom: 0;
-      dd { margin-bottom: 0; }
-    }
-  }
+		data('magellan-expedition')
+        data('magellan-expedition-clone')
+			background $magellan-bg
+			z-index 50
+			min-width 100%
+			padding $magellan-padding
 
-}
+			.sub-nav
+				margin-bottom 0
+				dd
+                    margin-bottom 0
+				a
+					line-height 1.8em

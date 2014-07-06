@@ -49,10 +49,10 @@ $sub-nav-item-divider-margin ?= $rem-calc(12)
 // $active-bg - Background of active nav item. Default: $sub-nav-active-bg.
 // $active-bg-hover - Background of active nav item, when hovered. Default: $sub-nav-active-bg-hover.
 sub-nav(
-	$font-color: $sub-nav-font-color,
-	$font-size: $sub-nav-font-size,
-	$active-bg: $sub-nav-active-bg,
-	$active-bg-hover: $sub-nav-active-bg-hover
+	$font-color = $sub-nav-font-color,
+	$font-size = $sub-nav-font-size,
+	$active-bg = $sub-nav-active-bg,
+	$active-bg-hover = $sub-nav-active-bg-hover
 )
 	display block
 	width auto
@@ -113,8 +113,8 @@ sub-nav(
 // Sub Nav Block
 //
 
-if $include-html-nav-classes
-	$module.sub-nav ?=
+if $include-html-nav-classes and !$module.sub-nav
+
+	$module.sub-nav =
 		.sub-nav
 			sub-nav()
-

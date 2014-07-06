@@ -214,8 +214,8 @@ dropdown-style()
 // Dropdown Block
 //
 
-if $include-html-dropdown-classes
-	$module.dropdown ?=
+if $include-html-dropdown-classes and !$module.dropdown
+	$module.dropdown =
 
 		/* Foundation Dropdowns */
 		.f-dropdown

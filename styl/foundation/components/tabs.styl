@@ -32,8 +32,9 @@ $tabs-vertical-navigation-margin-bottom ?= 1.25rem
 // Progress Bars Block
 //
 
-if $include-html-tabs-classes
-	$modules.tabs ?=
+if $include-html-tabs-classes and !$module.tabs
+
+	$module.tabs =
 		.tabs
 			clearfix()
 			margin-bottom 0 !important
@@ -45,6 +46,7 @@ if $include-html-tabs-classes
 				margin-bottom 0 !important
 				list-style none
 				float $default-float
+
 				> a
 					display block
 					background $tabs-navigation-bg-color

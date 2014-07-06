@@ -22,99 +22,99 @@ $button-group-border-width ?= 1px
 
 // We use this to add styles for a button group container
 button-group-container($styles=true, $float=false)
-    if $styles
-        list-style none
-        margin 0
-        {$default-float} 0
-        clearfix()
+  if $styles
+    list-style none
+    margin 0
+    {$default-float} 0
+    clearfix()
 
-    if $float
-        float {$default-float}
-        margin-{$opposite-direction} $button-bar-margin-opposite
+  if $float
+    float {$default-float}
+    margin-{$opposite-direction} $button-bar-margin-opposite
 
-        & div
-            overflow hidden
+    & div
+      overflow hidden
 
 // We use this to control styles for button groups
 button-group-style($radius=false, $even=false, $float=$default-float)
 
-    if $radius is true
-        $use-radius = $button-radius
+  if $radius is true
+    $use-radius = $button-radius
 
-    else if $radius
-        $use-radius = $radius
+  else if $radius
+    $use-radius = $radius
 
-    > button
+  > button
+  .button
+    border-{$default-float} $button-group-border-width solid
+    border-color rgba(255, 255, 255, 0.5)
+
+  &:first-child
+    button
     .button
-        border-{$default-float} $button-group-border-width solid
-        border-color rgba(255, 255, 255, 0.5)
+      border-{$default-float} 0
+
+  // We use this to control the flow, or remove those styles completely.
+  if $float
+    margin 0
+    float $float
+
+    // Make sure the first child doesn't get the negative margin.
+    &:first-child
+      margin-{$default-float} 0
+
+  // We use these to control left and right radius on first/last buttons in the group.
+  if $radius
+    &
+    & > a
+    & > button
+    & > .button
+      radius(0)
 
     &:first-child
-        button
-        .button
-          border-{$default-float} 0
+    &:first-child > a
+    &:first-child > button
+    &:first-child > .button
+      side-radius($default-float, $use-radius)
 
-    // We use this to control the flow, or remove those styles completely.
-    if $float
-        margin 0
-        float $float
+    &:last-child
+    &:last-child > a
+    &:last-child > button
+    &:last-child > .button
+      side-radius($opposite-direction, $use-radius)
 
-        // Make sure the first child doesn't get the negative margin.
-        &:first-child
-            margin-{$default-float} 0
+  // We use this to make the buttons even width across their container
+  if $even
+    width unit((100/$even), '%')
 
-    // We use these to control left and right radius on first/last buttons in the group.
-    if $radius
-        &
-        & > a
-        & > button
-        & > .button
-            radius(0)
-
-        &:first-child
-        &:first-child > a
-        &:first-child > button
-        &:first-child > .button
-            side-radius($default-float, $use-radius)
-
-        &:last-child
-        &:last-child > a
-        &:last-child > button
-        &:last-child > .button
-            side-radius($opposite-direction, $use-radius)
-
-    // We use this to make the buttons even width across their container
-    if $even
-        width unit((100/$even), '%')
-
-        button
-        .button
-            width 100%
+    button
+    .button
+      width 100%
 
 //
 // @Block
 // Button Group Block
 //
-if $include-html-button-classes
+if $include-html-button-classes and !$module.button-group
 
-    $module.button-group ?=
-        .button-group
-            button-group-container()
+  $module.button-group =
+    .button-group
+      button-group-container()
 
-            & > li
-                button-group-style()
+      & > li
+        button-group-style()
 
-            &.radius > *
-                button-group-style($radius:$button-radius, $float:null)
+      &.radius > *
+        button-group-style($radius:$button-radius, $float:null)
 
-            &.round > *
-                button-group-style($radius:$button-round, $float:null)
+      &.round > *
+        button-group-style($radius:$button-round, $float:null)
 
-            for $i in (2..8)
-                &.even-{$i} li
-                    button-group-style($even:$i, $float:null)
+      for $i in (2..8)
+        &.even-{$i} li
+          button-group-style($even:$i, $float:null)
 
-        .button-bar
-            clearfix()
-            .button-group
-                button-group-container($styles:false,$float:true)
+    .button-bar
+      clearfix()
+      .button-group
+        button-group-container($styles:false,$float:true)

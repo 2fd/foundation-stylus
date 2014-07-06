@@ -120,9 +120,9 @@ accordion-content($bg= $accordion-content-active-bg-color, $padding= $accordion-
 // Accordion Block
 //
 
-if $include-html-accordion-classes
+if $include-html-accordion-classes and !$module.accordion
 
-	$module.accordion ?=
+	$module.accordion =
 		.accordion
 			accordion-container()
 

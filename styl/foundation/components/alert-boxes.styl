@@ -112,8 +112,8 @@ alert($bg = $primary-color, $radius = false)
 // Alert Box Block
 //
 
-if $include-html-alert-classes
-	$module.alert-box ?=
+if $include-html-alert-classes and !$module.alert-box
+	$module.alert-box =
 		.alert-box
 			alert()
 

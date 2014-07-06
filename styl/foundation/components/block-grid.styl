@@ -99,9 +99,9 @@ block-grid-html-classes($size,$include-spacing)
 // Block Grid Block
 //
 
-if $include-html-block-grid-classes
+if $include-html-block-grid-classes and !$module.block-grid
 
-	$module.block-grid ?=
+	$module.block-grid =
 		[class*="block-grid-"]
 			block-grid()
 

@@ -32,10 +32,10 @@ flex-video-container()
 	overflow hidden
 
 	&.widescreen
-        padding-bottom $flex-video-widescreen-padding-bottom
+		padding-bottom $flex-video-widescreen-padding-bottom
 
 	&.vimeo
-        padding-top 0
+		padding-top 0
 
 	iframe,
 	object,
@@ -43,16 +43,16 @@ flex-video-container()
 	video
 		position absolute
 		top 0
-		{$default-float} 0
+		$default-float 0
 		width 100%
 		height 100%
-		
+
 //
 // @Block
 // Flex Video Block
 //
 
-if $include-html-media-classes
-    $module.flex-video ?=
+if $include-html-media-classes and !$module.flex-video
+	$module.flex-video =
 		.flex-video
-            flex-video-container()
+			flex-video-container()

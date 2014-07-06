@@ -195,74 +195,75 @@ button($padding=$button-med, $bg=$button-bg, $radius=false, $full-width=false, $
 // Buttons Block
 //
 
-if $include-html-button-classes
+if $include-html-button-classes and !$module.buttons
 
-	// Default styles applied outside of media query
-	button
-	.button
-		button-base()
-		button-size()
-		button-style()
-
-		transition background-color
-
-		&.secondary
-			button-style($bg:$secondary-color)
-
-		&.success
-			button-style($bg:$success-color)
-
-		&.alert
-			button-style($bg:$alert-color)
-
-
-		&.large
-			button-size($padding:$button-lrg)
-
-		&.small
-			button-size($padding:$button-sml)
-
-		&.tiny
-			button-size($padding:$button-tny)
-
-		&.expand
-			button-size($padding:null,$full-width:true)
-
-
-		&.left-align
-			text-align left
-			text-indent $rem-calc(12)
-
-		&.right-align
-			text-align right
-			padding-right: $rem-calc(12)
-
-		&.radius
-			button-style($bg:false, $radius:true)
-
-		&.round
-			button-style($bg:false, $radius:$button-round)
-
-		&.disabled
-		&[disabled]
-			button-style($bg:$button-bg, $disabled:true)
-
-			&.secondary
-				button-style($bg:$secondary-color, $disabled:true)
-
-			&.success
-				button-style($bg:$success-color, $disabled:true)
-
-			&.alert
-				button-style($bg:$alert-color, $disabled:true)
-
-	//firefox 2px fix
-	button::-moz-focus-inner
-		border 0
-		padding 0
-
-	@media $medium-up
+	$module.buttons =
+		// Default styles applied outside of media query
 		button
 		.button
-			button-base($style:false, $display:inline-block)
-			button-size($padding:false, $full-width:false)
+			button-base()
+			button-size()
+			button-style()
+
+			transition background-color
+
+			&.secondary
+				button-style($bg:$secondary-color)
+
+			&.success
+				button-style($bg:$success-color)
+
+			&.alert
+				button-style($bg:$alert-color)
+
+
+			&.large
+				button-size($padding:$button-lrg)
+
+			&.small
+				button-size($padding:$button-sml)
+
+			&.tiny
+				button-size($padding:$button-tny)
+
+			&.expand
+				button-size($padding:null,$full-width:true)
+
+
+			&.left-align
+				text-align left
+				text-indent $rem-calc(12)
+
+			&.right-align
+				text-align right
+				padding-right: $rem-calc(12)
+
+			&.radius
+				button-style($bg:false, $radius:true)
+
+			&.round
+				button-style($bg:false, $radius:$button-round)
+
+			&.disabled
+			&[disabled]
+				button-style($bg:$button-bg, $disabled:true)
+
+				&.secondary
+					button-style($bg:$secondary-color, $disabled:true)
+
+				&.success
+					button-style($bg:$success-color, $disabled:true)
+
+				&.alert
+					button-style($bg:$alert-color, $disabled:true)
+
+		//firefox 2px fix
+		button::-moz-focus-inner
+			border 0
+			padding 0
+
+		@media $medium-up
+			button
+			.button
+				button-base($style:false, $display:inline-block)
+				button-size($padding:false, $full-width:false)

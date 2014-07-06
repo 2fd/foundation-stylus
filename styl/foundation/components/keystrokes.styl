@@ -43,10 +43,10 @@ keystroke($bg=$keystroke-bg)
 
 	// We adjust the font color based on the brightness of the background.
 	if $bg-lightness > 70%
-        color $keystroke-font-color
+		color $keystroke-font-color
 
 	else
-        color $keystroke-font-color-alt
+		color $keystroke-font-color-alt
 
 	border-style $keystroke-border-style
 	border-width $keystroke-border-width
@@ -60,9 +60,10 @@ keystroke($bg=$keystroke-bg)
 // Flex Video Block
 //
 
-if $include-html-keystroke-classes
-    $module.keystroke ?=
-		.keystroke,
+if $include-html-keystroke-classes and !$module.keystroke
+
+	$module.keystroke =
+		.keystroke
 		kbd
 			keystroke()
 			radius($keystroke-radius)

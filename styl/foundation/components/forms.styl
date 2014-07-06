@@ -9,7 +9,7 @@
 // @Variables
 // Forms Variables
 //
-$include-html-form-classes
+$include-html-form-classes ?= $include-html-classes
 
 // We use this to set the base for lots of form spacing and positioning styles
 $form-spacing ?= $rem-calc(16)
@@ -82,19 +82,20 @@ $select-hover-bg-color ?= lighten($select-bg-color,-3%)
 // We use this mixin to give us form styles for rows inside of forms
 form-row-base()
 	.row
-        margin: 0 (-($form-spacing/2))
+		margin: 0 (-($form-spacing/2))
 
 		.column
 		.columns
-            padding: 0 ($form-spacing/2)
+			padding: 0 ($form-spacing/2)
 
 		// Use this to collapse the margins of a form row
 		&.collapse
-            margin 0
+			margin 0
 
 			.column
 			.columns
-                padding 0
+				padding 0
+
 			input
 				side-radius($opposite-direction,0)
 
@@ -102,7 +103,7 @@ form-row-base()
 	input.columns
 	textarea.column
 	textarea.columns
-        padding-{$default-float} ($form-spacing/2)
+		padding-{$default-float} ($form-spacing/2)
 
 // @MIXIN
 //
@@ -119,7 +120,7 @@ form-element()
 	padding ($form-spacing/2)
 	height ($input-font-size + ($form-spacing * 1.5) - $rem-calc(1))
 	width 100%
-    box-sizing(border-box)
+	box-sizing(border-box)
 
 	if $input-include-glowing-effect
 		block-glowing-effect(focus, $glowing-effect-fade-time, $glowing-effect-color)
@@ -132,9 +133,9 @@ form-element()
 
 	// Disabled background input background color
 	&[disabled]
-    &[readonly]
-    fieldset[disabled] &
-        background-color $input-disabled-bg
+	&[readonly]
+	fieldset[disabled] &
+		background-color $input-disabled-bg
 
 // @MIXIN
 //
@@ -142,7 +143,7 @@ form-element()
 //
 // $alignment - Alignment options. Default: false. Options: [right, inline, false]
 // $base-style - Control whether or not the base styles come through. Default: true.
-form-label($alignment:false, $base-style:true)
+form-label($alignment=false, $base-style=true)
 
 	// Control whether or not the base styles come through.
 	if $base-style
@@ -195,10 +196,10 @@ prefix($bg=$input-prefix-bg, $border=$input-prefix-border-color, $is-button=fals
 
 		// Control the font color based on background brightness
 		if $bg-lightness > 70% or $bg is yellow
-            color $input-prefix-font-color
+			color $input-prefix-font-color
 
 		else
-            color $input-prefix-font-color-alt
+			color $input-prefix-font-color-alt
 
 	if $border
 		border-color $border
@@ -227,10 +228,10 @@ postfix($bg=$input-prefix-bg, $border=$input-prefix-border-color, $is-button=fal
 
 		// Control the font color based on background brightness
 		if $bg-lightness > 70% or $bg is yellow
-            color $input-prefix-font-color
+			color $input-prefix-font-color
 
 		else
-            color $input-prefix-font-color-alt
+			color $input-prefix-font-color-alt
 
 	if $border
 		border-color $border
@@ -262,7 +263,7 @@ fieldset()
 //
 // We use this mixin to control border and background color of error inputs
 // $color - Default: $alert-color (found in settings file)
-form-error-color($color:$alert-color)
+form-error-color($color=$alert-color)
 	border-color $color
 	background-color rgba($color, 0.1)
 
@@ -276,13 +277,13 @@ form-error-color($color:$alert-color)
 // We use this simple mixin to style labels for error inputs
 // $color - Default:$alert-color. Found in settings file
 form-label-error-color($color=$alert-color)
-    color $color
+	color $color
 
 // @MIXIN
 //
 // We use this mixin to create error message styles
 // $bg - Default: $alert-color (Found in settings file)
-form-error-message($bg:$alert-color)
+form-error-message($bg=$alert-color)
 	display block
 	padding $input-error-message-padding
 	margin-top $input-error-message-top
@@ -294,21 +295,22 @@ form-error-message($bg:$alert-color)
 	// We can control the text color based on the brightness of the background.
 	$bg-lightness = lightness($bg)
 	background $bg
+
 	if $bg-lightness < 70% or $bg is yellow
-        color $input-error-message-font-color
+		color $input-error-message-font-color
 
 	else
-        color $input-error-message-font-color-alt
+		color $input-error-message-font-color-alt
 
 // We use this mixin to style select elements
-form-select
+form-select()
 	-webkit-appearance none !important
 	-webkit-border-radius 0px
 	background-color $select-bg-color
 
 	// The custom arrow have some fake horizontal padding so we can align it
 	// from the right side of the element without relying on CSS3
-	background-image url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMTJweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIzcHgiIHZpZXdCb3g9IjAgMCA2IDMiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+)
+	background-image url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMTJweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIzcHgiIHZpZXdCb3g9IjAgMCA2IDMiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+')
 
 	// We can safely use leftmost and rightmost now
 	background-position (text-direction is rtl ? 0% : 100%) center
@@ -322,7 +324,7 @@ form-select
 	radius(0)
 
 	&.radius
-        radius($global-radius)
+		radius($global-radius)
 
 	&:hover
 		background-color $select-hover-bg-color
@@ -333,24 +335,27 @@ form-select
 // Forms Block
 //
 
-if $include-html-form-classes
-    $module.form ?=
+if $include-html-form-classes and !$module.forms
+
+	$module.forms =
 		/* Standard Forms */
 		form
-            margin 0 0 $form-spacing
+			margin 0 0 $form-spacing
 
 		/* Using forms within rows, we need to set some defaults */
 		form .row
-            form-row-base()
+			form-row-base()
 
 		/* Label Styles */
 		label
-            form-label()
+			form-label()
+
 			&.right
-                form-label(right,false)
+				form-label(right,false)
 
 			&.inline
-                form-label(inline,false)
+				form-label(inline,false)
+
 			/* Styles for required inputs */
 			small
 				text-transform $form-label-small-transform
@@ -362,48 +367,49 @@ if $include-html-form-classes
 		/* Attach elements to the beginning or end of an input */
 		.prefix
 		.postfix
-            prefix-postfix-base()
+			prefix-postfix-base()
 
 		/* Adjust padding, alignment and radius if pre/post element is a button */
 		.postfix.button
-            button-size(false,false)
-            postfix(false, false, true)
+			button-size(false,false)
+			postfix(false, false, true)
 
 		.prefix.button
-            button-size(false,false)
-            prefix(false, false, true)
+			button-size(false,false)
+			prefix(false, false, true)
 
 		.prefix.button.radius
-            radius(0)
-            side-radius($default-float, $button-radius)
+			radius(0)
+			side-radius($default-float, $button-radius)
 
 		.postfix.button.radius
-            radius(0)
-            side-radius($opposite-direction, $button-radius)
+			radius(0)
+			side-radius($opposite-direction, $button-radius)
 
 		.prefix.button.round
-            radius(0)
-            side-radius($default-float, $button-round)
+			radius(0)
+			side-radius($default-float, $button-round)
 
 		.postfix.button.round
-            radius(0)
-            side-radius($opposite-direction, $button-round)
+			radius(0)
+			side-radius($opposite-direction, $button-round)
 
 		/* Separate prefix and postfix styles when on span or label so buttons keep their own */
 		span.prefix
-        label.prefix
-            prefix()
+		label.prefix
+			prefix()
 
 			&.radius
-                radius(0)
-                side-radius($default-float, $global-radius)
+				radius(0)
+				side-radius($default-float, $global-radius)
 
 		span.postfix
-        label.postfix
-            postfix()
+		label.postfix
+			postfix()
+
 			&.radius
-                radius(0)
-                side-radius($opposite-direction, $global-radius)
+				radius(0)
+				side-radius($opposite-direction, $global-radius)
 
 		/* We use this to get basic styling on all basic form elements */
 		input[type="text"]
@@ -468,19 +474,19 @@ if $include-html-form-classes
 
 		/* Error Handling */
 
-		data('abide')
+		{data(abide)}
 			.error small.error
-            span.error
-            small.error
+			span.error
+			small.error
 				form-error-message()
 
 			span.error
-            small.error
-                display none
+			small.error
+				display none
 
 		span.error
-        small.error
-			form-error-message
+		small.error
+			form-error-message()
 
 		.error
 			input
@@ -518,4 +524,4 @@ if $include-html-form-classes
 			margin-bottom 0
 
 		label.error
-            form-label-error-color()
+			form-label-error-color()

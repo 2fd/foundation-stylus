@@ -118,9 +118,9 @@ crumbs()
 // Breadcrumb Block
 //
 
-if $include-html-nav-classes
+if $include-html-nav-classes and !$module.breadcrumbs
 
-    $module.breadcrumbs ?=
+    $module.breadcrumbs =
         .breadcrumbs
             crumb-container()
             radius($crumb-radius)

@@ -131,9 +131,9 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
 // Dropdown Buttons Block
 //
 
-if $include-html-button-classes
+if $include-html-button-classes and !$module.dropdown-button
 
-	$module.dropdown-button ?=
+	$module.dropdown-button =
 		.dropdown.button
 		button.dropdown
 			dropdown-button()
@@ -149,4 +149,3 @@ if $include-html-button-classes
 
 			&.secondary:after
 				border-color $dropdown-button-pip-color-alt transparent transparent transparent
-

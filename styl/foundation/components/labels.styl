@@ -97,8 +97,9 @@ label($padding=$label-padding, $text-size=$label-font-sizing, $bg=$primary-color
 // Progress Bars Block
 //
 
-if $include-html-label-classes
-	$module.label ?=
+if $include-html-label-classes and !$module.label
+
+	$module.label =
 		.label
 			label-base()
 			label-size()

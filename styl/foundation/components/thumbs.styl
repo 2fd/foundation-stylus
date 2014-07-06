@@ -51,9 +51,9 @@ thumb(
 // Thumbs Block
 //
 
-if $include-html-media-classes
-	$module.thumb ?=
+if $include-html-media-classes and !$module.thumb
 
+	$module.thumb =
 		/* Image Thumbnails */
 		.th
 			thumb()
@@ -61,5 +61,3 @@ if $include-html-media-classes
 
 			&.radius
 				radius($thumb-radius)
-
-

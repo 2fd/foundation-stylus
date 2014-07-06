@@ -13,10 +13,10 @@ $module ?= {}
 
 
 // IMPORT ONCE
-// We use this to prevent styles from being loaded multiple times for compenents that rely on other components. 
+// We use this to prevent styles from being loaded multiple times for compenents that rely on other components.
 $import-blocks()
 	for $i, $b in $module
-		warn( $i )
+		p( $i )
 		{$b}
 
 // RANGES
@@ -50,7 +50,7 @@ $convert-to-rem($value, $base-value = $rem-base)
 
 
 data($attr)
-	return '[data-' + $attr + ']'
+	return s('[data-%s]', $attr)
 
 // REM CALC
 
@@ -74,6 +74,6 @@ data($attr)
 $rem-calc($values, $base-value = $rem-base)
 
 	for $value, $i in $values
-		$values[$i] = $conver-to-rem($value, $base-value)
+		$values[$i] = $convert-to-rem($value, $base-value)
 
 	return $values

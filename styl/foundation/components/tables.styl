@@ -101,7 +101,7 @@ table()
     &.even
     &.alt
     &:nth-of-type(even)
-    	background $table-even-row-bg
+      background $table-even-row-bg
 
   & thead tr th
   & tfoot tr th
@@ -109,8 +109,8 @@ table()
   & tbody tr th
   & tbody tr td
   & tr td
-  	display $table-display
-  	line-height $table-line-height
+    display $table-display
+    line-height $table-line-height
 
 //
 // @Block
@@ -119,6 +119,6 @@ table()
 
 if $include-html-table-classes and !$module.tables
 
-	$module.tables =
+  $module.tables =
     table
       table()

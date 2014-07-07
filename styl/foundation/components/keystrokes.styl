@@ -61,9 +61,9 @@ keystroke($bg=$keystroke-bg)
 //
 
 if $include-html-keystroke-classes and !$module.keystroke
-
-	$module.keystroke =
-		.keystroke
-		kbd
-			keystroke()
-			radius($keystroke-radius)
+	$module.keystroke = true
+	
+	.keystroke
+	kbd
+		keystroke()
+		radius($keystroke-radius)

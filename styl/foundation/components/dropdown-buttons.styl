@@ -132,20 +132,20 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
 //
 
 if $include-html-button-classes and !$module.dropdown-button
+	$module.dropdown-button = true
+	
+	.dropdown.button
+	button.dropdown
+		dropdown-button()
 
-	$module.dropdown-button =
-		.dropdown.button
-		button.dropdown
-			dropdown-button()
+		&.tiny
+			dropdown-button($padding:tiny,$base-style:false)
 
-			&.tiny
-				dropdown-button($padding:tiny,$base-style:false)
+		&.small
+			dropdown-button($padding:small,$base-style:false)
 
-			&.small
-				dropdown-button($padding:small,$base-style:false)
+		&.large
+			dropdown-button($padding:large,$base-style:false)
 
-			&.large
-				dropdown-button($padding:large,$base-style:false)
-
-			&.secondary:after
-				border-color $dropdown-button-pip-color-alt transparent transparent transparent
+		&.secondary:after
+			border-color $dropdown-button-pip-color-alt transparent transparent transparent

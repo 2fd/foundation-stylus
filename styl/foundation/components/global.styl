@@ -306,120 +306,120 @@ $cursor-text-value ?= text
 // Global Foundation Block
 //
 if !$module.global
-  $module.global =
-    // Meta styles are included in all builds, as they are a dependancy of the Javascript.
-    // Used to provide media query values for javascript components.
-    // Forward slash placed around everything to convince PhantomJS to read the value.
+  $module.global = true
+  // Meta styles are included in all builds, as they are a dependancy of the Javascript.
+  // Used to provide media query values for javascript components.
+  // Forward slash placed around everything to convince PhantomJS to read the value.
 
-    meta.foundation-version
-      font-family "/5.3.0/"
+  meta.foundation-version
+    font-family "/5.3.0/"
 
-    meta.foundation-mq-small
-      font-family "/" + unquote($small-up) + "/"
-      width: $lower-bound($small-range)
+  meta.foundation-mq-small
+    font-family "/" + unquote($small-up) + "/"
+    width: $lower-bound($small-range)
 
-    meta.foundation-mq-medium
-      font-family "/" + unquote($medium-up) + "/"
-      width $lower-bound($medium-range)
+  meta.foundation-mq-medium
+    font-family "/" + unquote($medium-up) + "/"
+    width $lower-bound($medium-range)
 
-    meta.foundation-mq-large
-      font-family "/" + unquote($large-up) + "/"
-      width $lower-bound($large-range)
+  meta.foundation-mq-large
+    font-family "/" + unquote($large-up) + "/"
+    width $lower-bound($large-range)
 
-    meta.foundation-mq-xlarge
-      font-family "/" + unquote($xlarge-up) + "/"
-      width $lower-bound($xlarge-range)
+  meta.foundation-mq-xlarge
+    font-family "/" + unquote($xlarge-up) + "/"
+    width $lower-bound($xlarge-range)
 
-    meta.foundation-mq-xxlarge
-      font-family "/" + unquote($xxlarge-up) + "/"
-      width $lower-bound($xxlarge-range)
+  meta.foundation-mq-xxlarge
+    font-family "/" + unquote($xxlarge-up) + "/"
+    width $lower-bound($xxlarge-range)
 
-    meta.foundation-data-attribute-namespace
-      font-family $namespace
+  meta.foundation-data-attribute-namespace
+    font-family $namespace
 
-    if $include-html-global-classes
+  if $include-html-global-classes
 
-      // Must be 100% for off canvas to work
-      html
-      body
-        height 100%
+    // Must be 100% for off canvas to work
+    html
+    body
+      height 100%
 
-      // Set box-sizing globally to handle padding and border widths
-      *
-      *:before
-      *:after
-        box-sizing(border-box)
+    // Set box-sizing globally to handle padding and border widths
+    *
+    *:before
+    *:after
+      box-sizing(border-box)
 
-      html
-      body
-        font-size $base-font-size
+    html
+    body
+      font-size $base-font-size
 
-      // Default body styles
-      body
-        background $body-bg
-        color $body-font-color
-        padding 0
-        margin 0
-        font-family $body-font-family
-        font-weight $body-font-weight
-        font-style $body-font-style
-        line-height 1 // Set to $base-line-height to take on browser default of 150%
-        position relative
-        cursor $cursor-default-value
+    // Default body styles
+    body
+      background $body-bg
+      color $body-font-color
+      padding 0
+      margin 0
+      font-family $body-font-family
+      font-weight $body-font-weight
+      font-style $body-font-style
+      line-height 1 // Set to $base-line-height to take on browser default of 150%
+      position relative
+      cursor $cursor-default-value
 
-      a:hover
-        cursor $cursor-pointer-value
+    a:hover
+      cursor $cursor-pointer-value
 
-      // Grid Defaults to get images and embeds to work properly
+    // Grid Defaults to get images and embeds to work properly
+    img
+      max-width 100%
+      height auto
+
+    img
+      -ms-interpolation-mode bicubic
+
+    #map_canvas
+    .map_canvas
       img
-        max-width 100%
-        height auto
+      embed
+      object
+        max-width none !important
 
-      img
-        -ms-interpolation-mode bicubic
+    // Miscellaneous useful HTML classes
+    .left
+      float left !important
 
-      #map_canvas
-      .map_canvas
-        img
-        embed
-        object
-          max-width none !important
+    .right
+      float right !important
 
-      // Miscellaneous useful HTML classes
-      .left
-        float left !important
+    .clearfix
+      clearfix()
 
-      .right
-        float right !important
+    .hide
+      display none
 
-      .clearfix
-        clearfix()
+    // Font smoothing
+    // Antialiased font smoothing works best for light text on a dark background.
+    // Apply to single elements instead of globally to body.
+    // Note this only applies to webkit-based desktop browsers and Firefox 25 (and later) on the Mac.
+    .antialiased
+      -webkit-font-smoothing antialiased
+      -moz-osx-font-smoothing grayscale
 
-      .hide
-        display none
+    // Get rid of gap under images by making them display: inline-block; by default
+    img
+      display inline-block
+      vertical-align middle
 
-      // Font smoothing
-      // Antialiased font smoothing works best for light text on a dark background.
-      // Apply to single elements instead of globally to body.
-      // Note this only applies to webkit-based desktop browsers and Firefox 25 (and later) on the Mac.
-      .antialiased
-        -webkit-font-smoothing antialiased
-        -moz-osx-font-smoothing grayscale
+    //
+    // Global resets for forms
+    //
 
-      // Get rid of gap under images by making them display: inline-block; by default
-      img
-        display inline-block
-        vertical-align middle
+    // Make sure textarea takes on height automatically
+    textarea
+      height auto
+      min-height 50px
 
-      //
-      // Global resets for forms
-      //
-
-      // Make sure textarea takes on height automatically
-      textarea
-        height auto
-        min-height 50px
-
-      // Make select elements 100% width by default
-      select
-        width 100%
+    // Make select elements 100% width by default
+    select
+      width 100%

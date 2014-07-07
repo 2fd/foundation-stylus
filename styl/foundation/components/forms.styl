@@ -336,192 +336,192 @@ form-select()
 //
 
 if $include-html-form-classes and !$module.forms
+	$module.forms = true
+	
+	/* Standard Forms */
+	form
+		margin 0 0 $form-spacing
 
-	$module.forms =
-		/* Standard Forms */
-		form
-			margin 0 0 $form-spacing
+	/* Using forms within rows, we need to set some defaults */
+	form .row
+		form-row-base()
 
-		/* Using forms within rows, we need to set some defaults */
-		form .row
-			form-row-base()
+	/* Label Styles */
+	label
+		form-label()
 
-		/* Label Styles */
-		label
-			form-label()
+		&.right
+			form-label(right,false)
 
-			&.right
-				form-label(right,false)
+		&.inline
+			form-label(inline,false)
 
-			&.inline
-				form-label(inline,false)
+		/* Styles for required inputs */
+		small
+			text-transform $form-label-small-transform
+			color lighten($form-label-font-color,15%)
 
-			/* Styles for required inputs */
-			small
-				text-transform $form-label-small-transform
-				color lighten($form-label-font-color,15%)
+	select::-ms-expand
+		displaynone
 
-		select::-ms-expand
-			displaynone
+	/* Attach elements to the beginning or end of an input */
+	.prefix
+	.postfix
+		prefix-postfix-base()
 
-		/* Attach elements to the beginning or end of an input */
-		.prefix
-		.postfix
-			prefix-postfix-base()
+	/* Adjust padding, alignment and radius if pre/post element is a button */
+	.postfix.button
+		button-size(false,false)
+		postfix(false, false, true)
 
-		/* Adjust padding, alignment and radius if pre/post element is a button */
-		.postfix.button
-			button-size(false,false)
-			postfix(false, false, true)
+	.prefix.button
+		button-size(false,false)
+		prefix(false, false, true)
 
-		.prefix.button
-			button-size(false,false)
-			prefix(false, false, true)
+	.prefix.button.radius
+		radius(0)
+		side-radius($default-float, $button-radius)
 
-		.prefix.button.radius
+	.postfix.button.radius
+		radius(0)
+		side-radius($opposite-direction, $button-radius)
+
+	.prefix.button.round
+		radius(0)
+		side-radius($default-float, $button-round)
+
+	.postfix.button.round
+		radius(0)
+		side-radius($opposite-direction, $button-round)
+
+	/* Separate prefix and postfix styles when on span or label so buttons keep their own */
+	span.prefix
+	label.prefix
+		prefix()
+
+		&.radius
 			radius(0)
-			side-radius($default-float, $button-radius)
+			side-radius($default-float, $global-radius)
 
-		.postfix.button.radius
+	span.postfix
+	label.postfix
+		postfix()
+
+		&.radius
 			radius(0)
-			side-radius($opposite-direction, $button-radius)
+			side-radius($opposite-direction, $global-radius)
 
-		.prefix.button.round
-			radius(0)
-			side-radius($default-float, $button-round)
+	/* We use this to get basic styling on all basic form elements */
+	input[type="text"]
+	input[type="password"]
+	input[type="date"]
+	input[type="datetime"]
+	input[type="datetime-local"]
+	input[type="month"]
+	input[type="week"]
+	input[type="email"]
+	input[type="number"]
+	input[type="search"]
+	input[type="tel"]
+	input[type="time"]
+	input[type="url"]
+	textarea
+		-webkit-appearance none
+		-webkit-border-radius 0px
+		form-element()
 
-		.postfix.button.round
-			radius(0)
-			side-radius($opposite-direction, $button-round)
+		if $input-include-glowing-effect is false
+			single-transition(all, 0.15s, linear)
 
-		/* Separate prefix and postfix styles when on span or label so buttons keep their own */
-		span.prefix
-		label.prefix
-			prefix()
+		&.radius
+			radius($input-border-radius)
 
-			&.radius
-				radius(0)
-				side-radius($default-float, $global-radius)
+	input[type="submit"]
+		-webkit-appearance none
+		-webkit-border-radius 0px
 
-		span.postfix
-		label.postfix
-			postfix()
+	/* Respect enforced amount of rows for textarea */
+	textarea[rows]
+		height auto
 
-			&.radius
-				radius(0)
-				side-radius($opposite-direction, $global-radius)
+	/* Add height value for select elements to match text input height */
+	select
+		form-select()
+		height: ($input-font-size + ($form-spacing * 1.5) - $rem-calc(1))
 
-		/* We use this to get basic styling on all basic form elements */
-		input[type="text"]
-		input[type="password"]
-		input[type="date"]
-		input[type="datetime"]
-		input[type="datetime-local"]
-		input[type="month"]
-		input[type="week"]
-		input[type="email"]
-		input[type="number"]
-		input[type="search"]
-		input[type="tel"]
-		input[type="time"]
-		input[type="url"]
-		textarea
-			-webkit-appearance none
-			-webkit-border-radius 0px
-			form-element()
+	/* Adjust margin for form elements below */
+	input[type="file"]
+	input[type="checkbox"]
+	input[type="radio"]
+	select
+		margin 0 0 $form-spacing 0
 
-			if $input-include-glowing-effect is false
-				single-transition(all, 0.15s, linear)
+	input[type="checkbox"] + label
+	input[type="radio"] + label
+		display inline-block
+		margin-{$default-float} $form-spacing * .5
+		margin-{$opposite-direction} $form-spacing
+		margin-bottom 0
+		vertical-align baseline
 
-			&.radius
-				radius($input-border-radius)
+	/* Normalize file input width */
+	input[type="file"]
+		width 100%
 
-		input[type="submit"]
-			-webkit-appearance none
-			-webkit-border-radius 0px
+	/* We add basic fieldset styling */
+	fieldset
+		fieldset()
 
-		/* Respect enforced amount of rows for textarea */
-		textarea[rows]
-			height auto
+	/* Error Handling */
 
-		/* Add height value for select elements to match text input height */
-		select
-			form-select()
-			height: ($input-font-size + ($form-spacing * 1.5) - $rem-calc(1))
-
-		/* Adjust margin for form elements below */
-		input[type="file"]
-		input[type="checkbox"]
-		input[type="radio"]
-		select
-			margin 0 0 $form-spacing 0
-
-		input[type="checkbox"] + label
-		input[type="radio"] + label
-			display inline-block
-			margin-{$default-float} $form-spacing * .5
-			margin-{$opposite-direction} $form-spacing
-			margin-bottom 0
-			vertical-align baseline
-
-		/* Normalize file input width */
-		input[type="file"]
-			width 100%
-
-		/* We add basic fieldset styling */
-		fieldset
-			fieldset()
-
-		/* Error Handling */
-
-		{data(abide)}
-			.error small.error
-			span.error
-			small.error
-				form-error-message()
-
-			span.error
-			small.error
-				display none
-
+	{data(abide)}
+		.error small.error
 		span.error
 		small.error
 			form-error-message()
 
-		.error
-			input
-			textarea
-			select
-				margin-bottom 0
+		span.error
+		small.error
+			display none
 
-			input[type="checkbox"]
-			input[type="radio"]
-				margin-bottom $form-spacing
+	span.error
+	small.error
+		form-error-message()
 
-			label
-			label.error
-				form-label-error-color()
-
-			small.error
-				form-error-message()
-
-			> label
-				> small
-					color lighten($form-label-font-color,15%)
-					background transparent
-					padding 0
-					text-transform $form-label-small-transform
-					font-style normal
-					font-size 60%
-					margin 0
-					display inline
-
-			span.error-message
-				display block
-
-		input.error
-		textarea.error
+	.error
+		input
+		textarea
+		select
 			margin-bottom 0
 
+		input[type="checkbox"]
+		input[type="radio"]
+			margin-bottom $form-spacing
+
+		label
 		label.error
 			form-label-error-color()
+
+		small.error
+			form-error-message()
+
+		> label
+			> small
+				color lighten($form-label-font-color,15%)
+				background transparent
+				padding 0
+				text-transform $form-label-small-transform
+				font-style normal
+				font-size 60%
+				margin 0
+				display inline
+
+		span.error-message
+			display block
+
+	input.error
+	textarea.error
+		margin-bottom 0
+
+	label.error
+		form-label-error-color()

@@ -52,12 +52,12 @@ thumb(
 //
 
 if $include-html-media-classes and !$module.thumb
+	$module.thumb = true
+	
+	/* Image Thumbnails */
+	.th
+		thumb()
+		transition all $thumb-transition-speed ease-out
 
-	$module.thumb =
-		/* Image Thumbnails */
-		.th
-			thumb()
-			transition all $thumb-transition-speed ease-out
-
-			&.radius
-				radius($thumb-radius)
+		&.radius
+			radius($thumb-radius)

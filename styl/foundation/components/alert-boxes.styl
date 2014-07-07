@@ -113,33 +113,34 @@ alert($bg = $primary-color, $radius = false)
 //
 
 if $include-html-alert-classes and !$module.alert-box
-	$module.alert-box =
-		.alert-box
-			alert()
+	$module.alert-box = true
 
-			.close
-				alert-close()
+	.alert-box
+		alert()
 
-			&.radius
-				radius($alert-radius)
+		.close
+			alert-close()
 
-			&.round
-				radius($global-rounded)
+		&.radius
+			radius($alert-radius)
 
-			&.success
-				alert-style($success-color)
+		&.round
+			radius($global-rounded)
 
-			&.alert
-				alert-style($alert-color)
+		&.success
+			alert-style($success-color)
 
-			&.secondary
-				alert-style($secondary-color)
+		&.alert
+			alert-style($alert-color)
 
-			&.warning
-				alert-style($warning-color)
+		&.secondary
+			alert-style($secondary-color)
 
-			&.info
-				alert-style($info-color)
+		&.warning
+			alert-style($warning-color)
 
-			&.alert-close
-				opacity 0
+		&.info
+			alert-style($info-color)
+
+		&.alert-close
+			opacity 0

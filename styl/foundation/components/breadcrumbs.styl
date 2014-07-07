@@ -119,11 +119,11 @@ crumbs()
 //
 
 if $include-html-nav-classes and !$module.breadcrumbs
+    $module.breadcrumbs = true
+    
+    .breadcrumbs
+        crumb-container()
+        radius($crumb-radius)
 
-    $module.breadcrumbs =
-        .breadcrumbs
-            crumb-container()
-            radius($crumb-radius)
-
-            &>*
-                crumbs()
+        &>*
+            crumbs()

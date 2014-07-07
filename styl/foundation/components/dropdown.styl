@@ -215,39 +215,39 @@ dropdown-style()
 //
 
 if $include-html-dropdown-classes and !$module.dropdown
-	$module.dropdown =
+	$module.dropdown = true
 
-		/* Foundation Dropdowns */
-		.f-dropdown
-			dropdown-container(list, bottom)
+	/* Foundation Dropdowns */
+	.f-dropdown
+		dropdown-container(list, bottom)
 
-			&.drop-right
-				dropdown-container(list, left)
-
-
-			&.drop-left
-				dropdown-container(list, right)
+		&.drop-right
+			dropdown-container(list, left)
 
 
-			&.drop-top
-				dropdown-container(list, top)
+		&.drop-left
+			dropdown-container(list, right)
 
-			li
-				dropdown-style()
 
-			// You can also put custom content in these dropdowns
-			&.content
-				dropdown-container(content, $triangle:false)
+		&.drop-top
+			dropdown-container(list, top)
 
-			// Sizes
-			&.tiny
-				max-width: 200px
+		li
+			dropdown-style()
 
-			&.small
-				max-width: 300px
+		// You can also put custom content in these dropdowns
+		&.content
+			dropdown-container(content, $triangle:false)
 
-			&.medium
-				max-width: 500px
+		// Sizes
+		&.tiny
+			max-width: 200px
 
-			&.large
-				max-width: 800px
+		&.small
+			max-width: 300px
+
+		&.medium
+			max-width: 500px
+
+		&.large
+			max-width: 800px

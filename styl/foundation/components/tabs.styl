@@ -33,92 +33,92 @@ $tabs-vertical-navigation-margin-bottom ?= 1.25rem
 //
 
 if $include-html-tabs-classes and !$module.tabs
+	$module.tabs = true
+	
+	.tabs
+		clearfix()
+		margin-bottom 0 !important
+		margin-left 0
 
-	$module.tabs =
-		.tabs
-			clearfix()
+		dd
+		.tab-title
+			position relative
 			margin-bottom 0 !important
-			margin-left 0
+			list-style none
+			float $default-float
 
+			> a
+				display block
+				background $tabs-navigation-bg-color
+				color $tabs-navigation-font-color
+				padding $tabs-navigation-padding $tabs-navigation-padding * 2
+				font-family $tabs-navigation-font-family
+				font-size $tabs-navigation-font-size
+
+				&:hover
+					background $tabs-navigation-hover-bg-color
+
+			&.active a
+				background $tabs-navigation-active-bg-color
+				color:$tabs-navigation-active-font-color
+
+		&.radius
+			dd:first-child
+			.tab:first-child
+				a
+					side-radius($default-float, $global-radius)
+
+			dd:last-child
+			.tab:last-child
+				a
+					side-radius($opposite-direction, $global-radius)
+
+		&.vertical
 			dd
 			.tab-title
-				position relative
-				margin-bottom 0 !important
-				list-style none
-				float $default-float
+				position inherit
+				float none
+				display block
+				top auto
 
-				> a
-					display block
-					background $tabs-navigation-bg-color
-					color $tabs-navigation-font-color
-					padding $tabs-navigation-padding $tabs-navigation-padding * 2
-					font-family $tabs-navigation-font-family
-					font-size $tabs-navigation-font-size
+	.tabs-content
+		clearfix()
+		margin-bottom $tabs-content-margin-bottom
+		width 100%
 
-					&:hover
-						background $tabs-navigation-hover-bg-color
-
-				&.active a
-					background $tabs-navigation-active-bg-color
-					color:$tabs-navigation-active-font-color
-
-			&.radius
-				dd:first-child
-				.tab:first-child
-					a
-						side-radius($default-float, $global-radius)
-
-				dd:last-child
-				.tab:last-child
-					a
-						side-radius($opposite-direction, $global-radius)
-
-			&.vertical
-				dd
-				.tab-title
-					position inherit
-					float none
-					display block
-					top auto
-
-		.tabs-content
-			clearfix()
-			margin-bottom $tabs-content-margin-bottom
+		> .content
+			display none
+			float $default-float
+			padding $tabs-content-padding 0
 			width 100%
 
-			> .content
-				display none
-				float $default-float
-				padding $tabs-content-padding 0
-				width 100%
-
-				&.active
-					display block
-					float none
-
-				&.contained
-					padding $tabs-content-padding
-
-			&.vertical
-				display block
-
-				> .content
-					padding 0 $tabs-content-padding
-
-		@media $medium-up
-			.tabs
-				&.vertical
-					width 20%
-					float $default-float
-					margin-bottom $tabs-vertical-navigation-margin-bottom
-
-			.tabs-content
-				&.vertical
-					width 80%
-					float $default-float
-					margin-{$default-float} -1px
-
-		.no-js
-			.tabs-content > .content
+			&.active
 				display block
 				float none
+
+			&.contained
+				padding $tabs-content-padding
+
+		&.vertical
+			display block
+
+			> .content
+				padding 0 $tabs-content-padding
+
+	@media $medium-up
+		.tabs
+			&.vertical
+				width 20%
+				float $default-float
+				margin-bottom $tabs-vertical-navigation-margin-bottom
+
+		.tabs-content
+			&.vertical
+				width 80%
+				float $default-float
+				margin-{$default-float} -1px
+
+	.no-js
+		.tabs-content > .content
+			display block
+			float none

@@ -53,6 +53,7 @@ flex-video-container()
 //
 
 if $include-html-media-classes and !$module.flex-video
-	$module.flex-video =
-		.flex-video
-			flex-video-container()
+	$module.flex-video = true
+	
+	.flex-video
+		flex-video-container()

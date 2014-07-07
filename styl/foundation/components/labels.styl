@@ -98,26 +98,26 @@ label($padding=$label-padding, $text-size=$label-font-sizing, $bg=$primary-color
 //
 
 if $include-html-label-classes and !$module.label
+	$module.label = true
+	
+	.label
+		label-base()
+		label-size()
+		label-style()
 
-	$module.label =
-		.label
-			label-base()
-			label-size()
-			label-style()
+		&.radius
+			label-style(false, true)
+		&.round
+			label-style(false, $radius:1000px)
 
-			&.radius
-				label-style(false, true)
-			&.round
-				label-style(false, $radius:1000px)
+		&.alert
+			label-style($alert-color)
 
-			&.alert
-				label-style($alert-color)
+		&.warning
+			label-style($warning-color)
 
-			&.warning
-				label-style($warning-color)
+		&.success
+			label-style($success-color)
 
-			&.success
-				label-style($success-color)
-
-			&.secondary
-				label-style($secondary-color)
+		&.secondary
+			label-style($secondary-color)

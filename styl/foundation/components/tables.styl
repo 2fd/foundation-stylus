@@ -56,9 +56,9 @@ $table-margin-bottom ?= $rem-calc(20)
 //
 
 table()
-  background= $table-bg
-  margin-bottom= $table-margin-bottom
-  border= $table-border-style $table-border-size $table-border-color
+  background $table-bg
+  margin-bottom $table-margin-bottom
+  border $table-border-style $table-border-size $table-border-color
 
   caption
     background $table-caption-bg
@@ -118,7 +118,8 @@ table()
 //
 
 if $include-html-table-classes and !$module.tables
+  $module.tables = true
+  
+  table
+    table()
 
-  $module.tables =
-    table
-      table()

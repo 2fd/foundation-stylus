@@ -54,33 +54,32 @@ progress-meter($bg=$progress-meter-color)
 // Progress Bars Block
 //
 if $include-html-media-classes and !$module.progress-bar
+	$module.progress-bar = true
 
-	$module.progress-bar =
+	/* Progress Bar */
+	.progress
+		progress-container()
 
-		/* Progress Bar */
-		.progress
-			progress-container()
+		// Meter
+		.meter
+			progress-meter()
 
-			// Meter
+		&.secondary .meter
+			progress-meter($bg:$progress-meter-secondary-color)
+
+		&.success .meter
+			progress-meter($bg:$progress-meter-success-color)
+
+		&.alert .meter
+			progress-meter($bg:$progress-meter-alert-color)
+
+		&.radius
+			radius($progress-bar-border-radius)
+
 			.meter
-				progress-meter()
+				radius($progress-bar-border-radius - 1)
 
-			&.secondary .meter
-				progress-meter($bg:$progress-meter-secondary-color)
-
-			&.success .meter
-				progress-meter($bg:$progress-meter-success-color)
-
-			&.alert .meter
-				progress-meter($bg:$progress-meter-alert-color)
-
-			&.radius
-				radius($progress-bar-border-radius)
-
-				.meter
-					radius($progress-bar-border-radius - 1)
-
-			&.round
-				radius(1000px)
-				.meter
-					radius(999px)
+		&.round
+			radius(1000px)
+			.meter
+				radius(999px)

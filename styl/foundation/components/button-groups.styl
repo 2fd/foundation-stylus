@@ -96,25 +96,25 @@ button-group-style($radius=false, $even=false, $float=$default-float)
 // Button Group Block
 //
 if $include-html-button-classes and !$module.button-group
+  $module.button-group = true
 
-  $module.button-group =
+  .button-group
+    button-group-container()
+
+    & > li
+      button-group-style()
+
+    &.radius > *
+      button-group-style($radius:$button-radius, $float:null)
+
+    &.round > *
+      button-group-style($radius:$button-round, $float:null)
+
+    for $i in (2..8)
+      &.even-{$i} li
+        button-group-style($even:$i, $float:null)
+
+  .button-bar
+    clearfix()
     .button-group
-      button-group-container()
-
-      & > li
-        button-group-style()
-
-      &.radius > *
-        button-group-style($radius:$button-radius, $float:null)
-
-      &.round > *
-        button-group-style($radius:$button-round, $float:null)
-
-      for $i in (2..8)
-        &.even-{$i} li
-          button-group-style($even:$i, $float:null)
-
-    .button-bar
-      clearfix()
-      .button-group
-        button-group-container($styles:false,$float:true)
+      button-group-container($styles:false,$float:true)

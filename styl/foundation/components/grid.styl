@@ -106,8 +106,8 @@ grid-column(
     padding-right 0
 
 
-    // Gutter padding whenever a column isn't set to collapse
-    // (use $collapse:null to do nothing)
+  // Gutter padding whenever a column isn't set to collapse
+  // (use $collapse:null to do nothing)
   else if $collapse is false
     padding-left $column-gutter / 2
     padding-right $column-gutter / 2
@@ -157,7 +157,7 @@ grid-column(
 // $size - Name of class to use, i.e. "large" will generate .large-1, .large-2, etc.
 grid-html-classes($size)
 
-  for $i in (0..($total-columns - 1))
+  for $i in (1..($total-columns - 1))
     .{$size}-push-{$i}
       grid-column($push:$i, $collapse:null, $float:false)
 
@@ -167,7 +167,6 @@ grid-html-classes($size)
   .column
   .columns
     grid-column($columns:false, $position:true)
-
 
   for $i in (1..$total-columns)
     .{$size}-{$i}
@@ -218,7 +217,7 @@ grid-html-classes($size)
 
 if $include-html-grid-classes and !$module.grid
   $module.grid = true
-  
+
   .row
     grid-row()
 

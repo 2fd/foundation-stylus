@@ -267,25 +267,25 @@ $xlarge-range ?= 90.063em 120em
 $xxlarge-range ?= 120.063em 99999999em
 
 
-$screen ?= 'only screen'
+$screen ?= only screen
 
-$landscape ?= s('%s and (orientation: landscape)', unquote($screen))
-$portrait ?= s('%s and (orientation: portrait)', unquote($screen))
+$landscape ?= s('%s and (orientation: landscape)', $screen)
+$portrait ?= s('%s and (orientation: portrait)', $screen)
 
 $small-up ?= $screen
-$small-only ?= s('%s and (max-width: %s)', unquote($screen), $upper-bound($small-range))
+$small-only ?= s('%s and (max-width: %s)', $screen, $upper-bound($small-range))
 
-$medium-up ?= s('%s and (min-width:%s)', unquote($screen), $lower-bound($medium-range))
-$medium-only ?= s('%s and (min-width:%s) and (max-width:%s)', unquote($screen), $lower-bound($medium-range), $upper-bound($medium-range))
+$medium-up ?= s('%s and (min-width:%s)', $screen, $lower-bound($medium-range))
+$medium-only ?= s('%s and (min-width:%s) and (max-width:%s)', $screen, $lower-bound($medium-range), $upper-bound($medium-range))
 
-$large-up ?= s('%s and (min-width:%s)', unquote($screen), $lower-bound($large-range))
-$large-only ?= s('%s and (min-width:%s) and (max-width:%s)', unquote($screen), $lower-bound($large-range), $upper-bound($large-range))
+$large-up ?= s('%s and (min-width:%s)', $screen, $lower-bound($large-range))
+$large-only ?= s('%s and (min-width:%s) and (max-width:%s)', $screen, $lower-bound($large-range), $upper-bound($large-range))
 
-$xlarge-up ?= s('%s and (min-width:%s)', unquote($screen), $lower-bound($xlarge-range))
-$xlarge-only ?= s('%s and (min-width:%s) and (max-width:%s)', unquote($screen), $lower-bound($xlarge-range), $upper-bound($xlarge-range))
+$xlarge-up ?= s('%s and (min-width:%s)', $screen, $lower-bound($xlarge-range))
+$xlarge-only ?= s('%s and (min-width:%s) and (max-width:%s)', $screen, $lower-bound($xlarge-range), $upper-bound($xlarge-range))
 
-$xxlarge-up ?= s('%s and (min-width:%s)', unquote($screen), $lower-bound($xxlarge-range))
-$xxlarge-only ?= s('%s and (min-width:%s) and (max-width:%s)', unquote($screen), $lower-bound($xxlarge-range), $upper-bound($xxlarge-range))
+$xxlarge-up ?= s('%s and (min-width:%s)', $screen, $lower-bound($xxlarge-range))
+$xxlarge-only ?= s('%s and (min-width:%s) and (max-width:%s)', $screen, $lower-bound($xxlarge-range), $upper-bound($xxlarge-range))
 
 // Legacy
 $small ?= $medium-up

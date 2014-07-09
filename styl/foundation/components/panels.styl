@@ -1,1 +1,102 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
 
+@import "global";
+
+//
+// @Variables
+// Panels Variables
+//
+$include-html-panel-classes ?= $include-html-classes
+
+// We use these to control the background and border styles
+$panel-bg ?= lighten(#fff, -5%)
+$panel-border-style ?= solid
+$panel-border-size ?= 1px
+
+// We use this % to control how much we darken things on hover
+$panel-function-factor ?= -11%
+$panel-border-color ?= lighten($panel-bg, $panel-function-factor)
+
+// We use these to set default inner padding and bottom margin
+$panel-margin-bottom ?= $rem-calc(20)
+$panel-padding ?= $rem-calc(20)
+
+// We use these to set default font colors
+$panel-font-color ?= #333
+$panel-font-color-alt ?= #fff
+
+$panel-header-adjust ?= true
+$callout-panel-link-color ?= $primary-color
+
+//
+// @Mixins
+// Panels Mixins
+//
+
+// @mixins
+//
+// We use this mixin to create panels.
+// $bg - Sets the panel background color. Default: $panel-pg || lighten(#fff, -5%) !default
+// $padding - Sets the panel padding amount. Default: $panel-padding || $rem-calc(20)
+// $adjust - Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust || true
+@mixin panel($bg=$panel-bg, $padding=$panel-padding, $adjust=$panel-header-adjust) {
+
+  if $bg
+    $bg-lightness = lightness($bg);
+
+    border-style $panel-border-style
+    border-width $panel-border-size
+    border-color lighten($bg, $panel-function-factor)
+    margin-bottom $panel-margin-bottom
+    padding $padding
+
+    background $bg
+
+    // Respect the padding, fool.
+    &>:first-child
+      margin-top 0
+
+    &>:last-child
+      margin-bottom 0
+
+    if $adjust
+      // We set the font color based on the darkness of the bg.
+      if $bg-lightness >= 50%
+        h1,h2,h3,h4,h5,h6,p,li,dl
+          color $panel-font-color
+
+      else
+        h1,h2,h3,h4,h5,h6,p,li,dl
+          color $panel-font-color-alt
+
+      // reset header line-heights for panels
+      h1,h2,h3,h4,h5,h6
+        line-height 1
+        margin-bottom ($rem-calc(20) / 2)
+
+        &.subheader
+          line-height 1.4
+
+//
+// @Block
+// Thumbs Block
+//
+
+if $include-html-panel-classes and !$module.panels
+  $module.panels = true
+
+  /* Panels */
+  .panel
+    panel()
+
+    &.callout
+      panel(lighten($primary-color, 94%))
+
+      a:not(.button)
+        color $callout-panel-link-color
+
+    &.radius
+      radius()
+      

@@ -1,1 +1,534 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global"
+
+//
+// @Variables
+// Visibility Variables
+//
+$include-html-visibility-classes ?= $include-html-classes
+$include-accessibility-classes ?= true
+$include-table-visibility-classes ?= true
+$include-legacy-visibility-classes ?= true
+
+//
+// Media Class Names
+//
+// Visibility Breakpoints
+$visibility-breakpoint-sizes =  small,
+                                medium,
+                                large,
+                                xlarge,
+                                xxlarge
+
+$visibility-breakpoint-queries =  $small-up,
+                                  $medium-up,
+                                  $large-up,
+                                  $xlarge-up,
+                                  $xxlarge-up
+
+//
+// @Mixins
+// Visibility Mixins
+//
+
+visibility-loop()
+  for $current-visibility-breakpoint, $current in $visibility-breakpoint-sizes
+
+    $visibility-inherit-list = ()
+    $visibility-none-list = ()
+
+    $visibility-visible-list = ()
+    $visibility-hidden-list = ()
+
+    $visibility-table-list = ()
+    $visibility-table-header-group-list = ()
+    $visibility-table-row-group-list = ()
+    $visibility-table-row-list = ()
+    $visibility-table-cell-list = ()
+
+    for $visibility-comparison-breakpoint, $comparison in $visibility-breakpoint-sizes
+      if $comparison < $current
+
+        // Smaller than current breakpoint
+        push( $visibility-inherit-list,
+          s('.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-none-list,
+          s('.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-visible-list,
+          s('.hidden-for-%s-only', $visibility-comparison-breakpoint),
+          s('.visible-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-hidden-list,
+          s('.visible-for-%s-only', $visibility-comparison-breakpoint),
+          s('.hidden-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-list,
+          s('table.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('table.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-header-group-list,
+          s('thead.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('thead.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-row-group-list,
+          s('tbody.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('tbody.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-row-list,
+          s('tr.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('tr.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-cell-list,
+          s('th.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('td.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('th.show-for-%s-up', $visibility-comparison-breakpoint),
+          s('td.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+
+        // Foundation 4 compatibility:
+        // Include .show/hide-for-[size] and .show/hide-for-[size]-down classes
+        // for small, medium, and large breakpoints only
+        if $include-legacy-visibility-classes and $visibility-comparison-breakpoint in (small medium large)
+
+          push( $visibility-inherit-list,
+            s('.hide-for-%s', $visibility-comparison-breakpoint),
+            s('.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-none-list,
+            s('.show-for-%s', $visibility-comparison-breakpoint),
+            s('.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-visible-list,
+            s('.hidden-for-%s', $visibility-comparison-breakpoint),
+            s('.hidden-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-hidden-list,
+            s('.visible-for-%s', $visibility-comparison-breakpoint),
+            s('.visible-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-list,
+            s('table.hide-for-%s', $visibility-comparison-breakpoint),
+            s('table.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-header-group-list,
+            s('thead.hide-for-%s', $visibility-comparison-breakpoint),
+            s('thead.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-row-group-list,
+            s('tbody.hide-for-%s', $visibility-comparison-breakpoint),
+            s('tbody.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-row-list,
+            s('tr.hide-for-%s', $visibility-comparison-breakpoint),
+            s('tr.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-cell-list,
+            s('th.hide-for-%s', $visibility-comparison-breakpoint),
+            s('td.hide-for-%s', $visibility-comparison-breakpoint),
+            s('th.hide-for-%s-down', $visibility-comparison-breakpoint),
+            s('td.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+
+      else if $comparison > $current
+
+        // Larger than current breakpoint
+        push( $visibility-inherit-list,
+          s('.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-none-list,
+          s('.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-visible-list,
+          s('.hidden-for-%s-only', $visibility-comparison-breakpoint),
+          s('.hidden-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-hidden-list,
+          s('.visible-for-%s-only', $visibility-comparison-breakpoint),
+          s('.visible-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-list,
+          s('table.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('table.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-header-group-list,
+          s('thead.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('thead.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-row-group-list,
+          s('tbody.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('tbody.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-row-list,
+          s('tr.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('tr.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-cell-list,
+          s('th.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('td.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('th.hide-for-%s-up', $visibility-comparison-breakpoint),
+          s('td.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+
+        // Foundation 4 compatibility:
+        // Include .show/hide-for-[size] and .show/hide-for-[size]-down classes
+        // for small, medium, and large breakpoints only
+        if $include-legacy-visibility-classes and $visibility-comparison-breakpoint in (small medium large)
+
+          push( $visibility-inherit-list,
+            s('.hide-for-%s', $visibility-comparison-breakpoint),
+            s('.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-none-list,
+            s('.show-for-%s', $visibility-comparison-breakpoint),
+            s('.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-visible-list,
+            s('.hidden-for-%s', $visibility-comparison-breakpoint),
+            s('.visible-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-hidden-list,
+            s('.visible-for-%s', $visibility-comparison-breakpoint),
+            s('.hidden-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-list,
+            s('table.hide-for-%s', $visibility-comparison-breakpoint),
+            s('table.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-header-group-list,
+            s('thead.hide-for-%s', $visibility-comparison-breakpoint),
+            s('thead.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-row-group-list,
+            s('tbody.hide-for-%s', $visibility-comparison-breakpoint),
+            s('tbody.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-row-list,
+            s('tr.hide-for-%s', $visibility-comparison-breakpoint),
+            s('tr.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-cell-list,
+            s('th.hide-for-%s', $visibility-comparison-breakpoint),
+            s('td.hide-for-%s', $visibility-comparison-breakpoint),
+            s('th.show-for-%s-down', $visibility-comparison-breakpoint),
+            s('td.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+
+      else
+
+        // Current breakpoint
+        push( $visibility-inherit-list,
+          s('.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-none-list,
+          s('.hide-for-%s-only', $visibility-comparison-breakpoint),
+          s('.hide-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-visible-list,
+          s('.visible-for-%s-only', $visibility-comparison-breakpoint),
+          s('.visible-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-hidden-list,
+          s('.hidden-for-%s-only', $visibility-comparison-breakpoint),
+          s('.hidden-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-list,
+          s('table.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('table.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-header-group-list,
+          s('thead.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('thead.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-row-group-list,
+          s('tbody.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('tbody.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-row-list,
+          s('tr.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('tr.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+        push( $visibility-table-cell-list,
+          s('th.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('td.show-for-%s-only', $visibility-comparison-breakpoint),
+          s('th.show-for-%s-up', $visibility-comparison-breakpoint),
+          s('td.show-for-%s-up', $visibility-comparison-breakpoint)
+        )
+
+        // Foundation 4 compatibility:
+        // Include .show/hide-for-[size] and .show/hide-for-[size]-down classes
+        // for small, medium, and large breakpoints only
+        if $include-legacy-visibility-classes and $visibility-comparison-breakpoint in (small medium large)
+
+          push( $visibility-inherit-list,
+            s('.show-for-%s', $visibility-comparison-breakpoint),
+            s('.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-inherit-list,
+            s('.hide-for-%s', $visibility-comparison-breakpoint),
+            s('.hide-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-visible-list,
+            s('.visible-for-%s', $visibility-comparison-breakpoint),
+            s('.visible-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-hidden-list,
+            s('.hidden-for-%s', $visibility-comparison-breakpoint),
+            s('.hidden-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-list,
+            s('table.show-for-%s', $visibility-comparison-breakpoint),
+            s('table.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-header-group-list,
+            s('thead.show-for-%s', $visibility-comparison-breakpoint),
+            s('thead.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-row-group-list,
+            s('tbody.show-for-%s', $visibility-comparison-breakpoint),
+            s('tbody.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+          push( $visibility-table-cell-list,
+            s('th.show-for-%s', $visibility-comparison-breakpoint),
+            s('td.show-for-%s', $visibility-comparison-breakpoint),
+            s('th.show-for-%s-down', $visibility-comparison-breakpoint),
+            s('td.show-for-%s-down', $visibility-comparison-breakpoint)
+          )
+
+    /* $current-visibility-breakpoint displays */
+    @media $visibility-breakpoint-queries[$current]
+
+      {join(',', $visibility-inherit-list)}
+        display inherit !important
+
+      {join(',', $visibility-none-list)}
+        display none !important
+
+      if $include-accessibility-classes
+        {join(',', $visibility-visible-list)}
+          element-invisible-off()
+
+        {join(',', $visibility-hidden-list)}
+          element-invisible()
+
+      if $include-table-visibility-classes
+
+        {join(',', $visibility-table-list)}
+          display table
+
+        {join(',', $visibility-table-header-group-list)}
+          display table-header-group !important
+
+        {join(',', $visibility-table-row-group-list)}
+          display table-row-group !important
+
+        {join(',', $visibility-table-row-list)}
+          display table-row !important
+
+        {join(',', $visibility-table-cell-list)}
+          display table-cell !important
+
+if $include-html-visibility-classes
+
+  visibility-loop()
+
+  /* Orientation targeting */
+  .show-for-landscape
+  .hide-for-portrait
+    display inherit !important
+
+  .hide-for-landscape
+  .show-for-portrait
+    display none !important
+
+  /* Specific visibility for tables */
+  table
+    &.hide-for-landscape
+    &.show-for-portrait
+      display table
+
+  thead
+    &.hide-for-landscape
+    &.show-for-portrait
+      display table-header-group !important
+
+  tbody
+    &.hide-for-landscape
+    &.show-for-portrait
+      display table-row-group !important
+
+  tr
+    &.hide-for-landscape
+    &.show-for-portrait
+      display table-row !important
+
+  td
+  th
+    &.hide-for-landscape
+    &.show-for-portrait
+      display table-cell !important
+
+  @media $landscape
+
+    .show-for-landscape
+    .hide-for-portrait
+      display inherit !important
+
+    .hide-for-landscape
+    .show-for-portrait
+      display none !important
+
+    /* Specific visibility for tables */
+    table
+      &.show-for-landscape
+      &.hide-for-portrait
+        display table
+
+    thead
+      &.show-for-landscape
+      &.hide-for-portrait
+        display table-header-group !important
+
+    tbody
+      &.show-for-landscape
+      &.hide-for-portrait
+        display table-row-group !important
+
+    tr
+      &.show-for-landscape
+      &.hide-for-portrait
+        display table-row !important
+
+    td
+    th
+      &.show-for-landscape
+      &.hide-for-portrait
+        display table-cell !important
+
+  @media $portrait
+
+    .show-for-portrait
+    .hide-for-landscape
+      display inherit !important
+
+    .hide-for-portrait
+    .show-for-landscape
+      display none !important
+
+    /* Specific visibility for tables */
+    table
+      &.show-for-portrait
+      &.hide-for-landscape
+        display table
+
+    thead
+      &.show-for-portrait,
+      &.hide-for-landscape
+        display table-header-group !important
+
+    tbody
+      &.show-for-portrait
+      &.hide-for-landscape
+        display table-row-group !important
+
+    tr
+      &.show-for-portrait
+      &.hide-for-landscape
+        display table-row !important
+
+    td
+    th
+      &.show-for-portrait
+      &.hide-for-landscape
+        display table-cell !important
+
+  /* Touch-enabled device targeting */
+  .show-for-touch
+    display none !important
+
+  .hide-for-touch
+    display inherit !important
+
+  .touch .show-for-touch
+    display inherit !important
+
+  .touch .hide-for-touch
+    display none !important
+
+
+  /* Specific visibility for tables */
+  table.hide-for-touch
+    display table
+
+  .touch table.show-for-touch
+    display table
+
+  thead.hide-for-touch
+    display table-header-group !important
+
+  .touch thead.show-for-touch
+    display table-header-group !important
+
+  tbody.hide-for-touch
+    display table-row-group !important
+
+  .touch tbody.show-for-touch
+    display table-row-group !important
+
+  tr.hide-for-touch
+    display table-row !important
+
+  .touch tr.show-for-touch
+    display table-row !important
+
+  td.hide-for-touch
+    display table-cell !important
+
+  .touch td.show-for-touch
+    display table-cell !important
+
+  th.hide-for-touch
+    display table-cell !important
+
+  .touch th.show-for-touch
+    display table-cell !important
+
+
+
+  /* Print visibility */
+  @media print
+    .show-for-print
+      display block
+
+    .hide-for-print
+      display none
+
+
+    table.show-for-print
+      display table
+
+    thead.show-for-print
+      display table-header-group !important
+
+    tbody.show-for-print
+      display table-row-group !important
+
+    tr.show-for-print
+      display table-row !important
+
+    td.show-for-print
+      display table-cell !important
+
+    th.show-for-print
+      display table-cell !important
+
 

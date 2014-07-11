@@ -1,1 +1,156 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
 
+@import "global";
+
+//
+// @Variables
+// Paginations Variables
+//
+$include-pagination-classes ?= $include-html-classes
+
+// We use these to control the pagination container
+$pagination-height ?= $rem-calc(24)
+$pagination-margin ?= $rem-calc(-5)
+
+// We use these to set the list-item properties
+$pagination-li-float ?= $default-float
+$pagination-li-height ?= $rem-calc(24)
+$pagination-li-font-color ?= #222
+$pagination-li-font-size ?= $rem-calc(14)
+$pagination-li-margin ?= $rem-calc(5)
+
+// We use these for the pagination anchor links
+$pagination-link-pad ?= $rem-calc(1 10 1)
+$pagination-link-font-color ?= #999
+$pagination-link-active-bg ?= lighten(#fff, -10%)
+
+// We use these for disabled anchor links
+$pagination-link-unavailable-cursor ?= default
+$pagination-link-unavailable-font-color ?= #999
+$pagination-link-unavailable-bg-active ?= transparent
+
+// We use these for currently selected anchor links
+$pagination-link-current-background ?= $primary-color
+$pagination-link-current-font-color ?= #fff
+$pagination-link-current-font-weight ?= $font-weight-bold
+$pagination-link-current-cursor ?= default
+$pagination-link-current-active-bg ?= $primary-color
+
+//
+// @Mixins
+// Paginations Mixins
+//
+
+// Style the pagination container. Currently only used when centering elements.
+// $center - Default: false, Options: true
+pagination-container($center=false)
+
+  if $center
+  	text-align center
+
+// @mixins
+// Style unavailable list items
+pagination-unavailable-item()
+
+  a
+    cursor $pagination-link-unavailable-cursor
+    color $pagination-link-unavailable-font-color
+
+  &:hover a
+  & a:focus
+  	background $pagination-link-unavailable-bg-active
+
+// @mixins
+// Style the current list item. Do not assume that the current item has
+// an anchor <a> element.
+// $has-anchor - Default: true, Options: false
+pagination-current-item($has-anchor=true)
+
+  if $has-anchor
+    a
+      background $pagination-link-current-background
+      color $pagination-link-current-font-color
+      font-weight $pagination-link-current-font-weight
+      cursor $pagination-link-current-cursor
+
+      &:hover
+      &:focus
+      	background $pagination-link-current-active-bg
+
+  else
+    height auto
+    padding $pagination-link-pad
+    background $pagination-link-current-background
+    color $pagination-link-current-font-color
+    font-weight $pagination-link-current-font-weight
+    cursor $pagination-link-current-cursor
+    radius()
+
+    &:hover
+    &:focus
+    	background $pagination-link-current-active-bg
+
+
+// We use this mixin to set the properties for the creating Foundation pagination
+// $center - Left or center align the li elements. Default: false
+// $base-style - Sets base styles for pagination. Default: true, Options: false
+// $use-default-classes - Makes unavailable & current classes available for use. Default: true
+pagination($center:false, $base-style:true, $use-default-classes:true)
+
+  if $base-style
+    display block
+    min-height $pagination-height
+    margin-{$default-float} $pagination-margin
+
+    li
+      height $pagination-li-height
+      color $pagination-li-font-color
+      font-size $pagination-li-font-size
+      margin-{$default-float} $pagination-li-margin
+
+      a
+        display block
+        padding $pagination-link-pad
+        color $pagination-link-font-color
+        radius()
+
+      &:hover a
+      a:focus
+      	background $pagination-link-active-bg
+
+      if $use-default-classes
+        &.unavailable
+        	pagination-unavailable-item()
+
+        &.current
+        	pagination-current-item()
+
+  // Left or center align the li elements
+  li
+    if $center
+      float none
+      display inline-block
+
+    else
+      float $pagination-li-float
+      display block
+
+//
+// @Block
+// Paginations Block
+//
+
+if $include-pagination-classes and !$module.pagination
+	$module.pagination = true
+
+  ul.pagination
+  	pagination()
+
+  /* Pagination centred wrapper */
+  .pagination-centered
+    pagination-container(true)
+
+    ul.pagination
+      pagination(true, false);

@@ -1,1 +1,113 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
+
+@import "global"
+
+//
+// @Variables
+// Side Nav Variables
+//
+$include-html-nav-classes ?= $include-html-classes
+
+// We use this to control padding.
+$side-nav-padding ?= $rem-calc(14 0)
+
+// We use these to control list styles.
+$side-nav-list-type ?= none
+$side-nav-list-position ?= outside
+$side-nav-list-margin ?= $rem-calc(0 0 7 0)
+
+// We use these to control link styles.
+$side-nav-link-color ?= $primary-color
+$side-nav-link-color-active ?= lighten($side-nav-link-color, 30%)
+$side-nav-link-color-hover ?= lighten($side-nav-link-color, 30%)
+$side-nav-link-bg-hover ?= hsla(0, 0, 0, 0.025)
+$side-nav-link-margin ?= 0
+$side-nav-link-padding ?= $rem-calc(7 14)
+$side-nav-font-size ?= $rem-calc(14)
+$side-nav-font-weight ?= $font-weight-normal
+$side-nav-font-weight-active ?= $side-nav-font-weight
+$side-nav-font-family ?= $body-font-family
+$side-nav-font-family-active ?= $side-nav-font-family
+
+// We use these to control heading styles.
+$side-nav-heading-color ?= $side-nav-link-color
+$side-nav-heading-font-size ?= $side-nav-font-size
+$side-nav-heading-font-weight ?= bold
+$side-nav-heading-text-transform ?= uppercase
+
+// We use these to control border styles
+$side-nav-divider-size ?= 1px
+$side-nav-divider-style ?= solid
+$side-nav-divider-color ?= lighten(#fff, 10%)
+
+//
+// @Mixins
+// Side Nav Mixins
+//
+
+// We use this to style the side-nav
+//
+// $divider-color - Border color of divider. Default: $side-nav-divider-color.
+// $font-size - Font size of nav items. Default: $side-nav-font-size.
+// $link-color - Color of navigation links. Default: $side-nav-link-color.
+// $link-color-hover - Color of navigation links when hovered. Default: $side-nav-link-color-hover.
+side-nav(
+  $divider-color=$side-nav-divider-color,
+  $font-size=$side-nav-font-size,
+  $link-color=$side-nav-link-color,
+  $link-color-hover=$side-nav-link-color-hover,
+  $link-bg-hover=$side-nav-link-bg-hover
+)
+  display block
+  margin 0
+  padding $side-nav-padding
+  list-style-type $side-nav-list-type
+  list-style-position $side-nav-list-position
+  font-family $side-nav-font-family
+
+  li
+    margin $side-nav-list-margin
+    font-size $font-size
+
+    a:not(.button)
+      display block
+      color $link-color
+      margin $side-nav-link-margin
+      padding $side-nav-link-padding
+
+      &:hover
+      &:focus
+        background $link-bg-hover
+        color $link-color-hover
+
+    &.active > a:first-child:not(.button)
+      color $side-nav-link-color-active
+      font-weight $side-nav-font-weight-active
+      font-family $side-nav-font-family-active
+
+    &.divider
+      border-top $side-nav-divider-size $side-nav-divider-style
+      height 0
+      padding 0
+      list-style none
+      border-top-color $divider-color
+
+    &.heading
+      color $side-nav-heading-color
+      font-size $side-nav-heading-font-size
+      font-weight $side-nav-heading-font-weight
+      text-transform $side-nav-heading-text-transform
+
+//
+// @Block
+// Side Nav Block
+//
+
+if $include-html-nav-classes and !$module.side-nav
+  $module.side-nav = true
+
+  .side-nav
+    side-nav()
 

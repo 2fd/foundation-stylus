@@ -19,18 +19,18 @@ $magellan-padding ?= 10px
 //
 
 if $include-html-magellan-classes and !$module.magellan
-	$module.magellan = true
-	
-	{data(magellan-expedition)}
-	{data(magellan-expedition-clone)}
-		background $magellan-bg
-		z-index 50
-		min-width 100%
-		padding $magellan-padding
+  $module.magellan = true
 
-		.sub-nav
-			margin-bottom 0
-			dd
-				margin-bottom 0
-			a
-				line-height 1.8em
+  {data(magellan-expedition)},
+  {data(magellan-expedition-clone)}
+    background $magellan-bg
+    z-index 50
+    min-width 100%
+    padding $magellan-padding
+
+    .sub-nav
+      margin-bottom 0
+      dd
+        margin-bottom 0
+      a
+        line-height 1.8em

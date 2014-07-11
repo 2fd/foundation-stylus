@@ -1,1 +1,180 @@
+// Foundation by ZURB
+// foundation.zurb.com
+// Licensed under MIT Open Source
 
+@import "global";
+
+//
+// @Variables
+// Range Slider Variables
+//
+$include-html-range-slider-classes ?= $include-html-classes
+
+// These variabels define the slider bar styles
+$range-slider-bar-width ?= 100%
+$range-slider-bar-height ?= $rem-calc(16)
+
+$range-slider-bar-border-width ?= 1px
+$range-slider-bar-border-style ?= solid
+$range-slider-bar-border-color ?= #ddd
+$range-slider-radius ?= $global-radius
+$range-slider-round ?= $global-rounded
+$range-slider-bar-bg-color ?= #fafafa
+
+// Vertical bar styles
+$range-slider-vertical-bar-width ?= $rem-calc(16)
+$range-slider-vertical-bar-height ?= $rem-calc(200)
+
+// These variabels define the slider handle styles
+$range-slider-handle-width ?= $rem-calc(32)
+$range-slider-handle-height ?= $rem-calc(22)
+$range-slider-handle-position-top ?= $rem-calc(-5)
+$range-slider-handle-bg-color ?= $primary-color
+$range-slider-handle-border-width ?= 1px
+$range-slider-handle-border-style ?= solid
+$range-slider-handle-border-color ?= none
+$range-slider-handle-radius ?= $global-radius
+$range-slider-handle-round ?= $global-rounded
+$range-slider-handle-bg-hover-color ?= lighten($primary-color, -12%)
+$range-slider-handle-cursor ?= pointer
+
+$range-slider-disabled-opacity ?= 0.7
+
+//
+// @Mixins
+// Range Slider Mixins
+//
+
+range-slider-bar-base($vertical: false)
+
+  display block
+  position relative
+  width $range-slider-bar-width
+  height $range-slider-bar-height
+  border $range-slider-bar-border-width $range-slider-bar-border-style $range-slider-bar-border-color
+  margin $rem-calc(20 0)
+  -ms-touch-action none
+  touch-action none
+
+  if $vertical == true
+    display inline-block
+    width $range-slider-vertical-bar-width
+    height $range-slider-vertical-bar-height
+
+range-slider-bar-style(
+  $bg=true,
+  $radius=false,
+  $round=false,
+  $disabled=false
+)
+  if $bg
+    background $range-slider-bar-bg-color
+
+  if $radius
+    radius($range-slider-radius)
+
+  if $round
+    radius($range-slider-round)
+
+  if $disabled
+    cursor $cursor-default-value
+    opacity $range-slider-disabled-opacity
+
+range-slider-bar(
+  $bg=$range-slider-bar-bg-color,
+  $radius=false
+)
+  range-slider-bar-base()
+  range-slider-bar-style()
+
+range-slider-handle-base()
+  display inline-block
+  position absolute
+  z-index 1
+  top $range-slider-handle-position-top
+  width $range-slider-handle-width
+  height $range-slider-handle-height
+  border $range-slider-handle-border-width $range-slider-handle-border-style $range-slider-handle-border-color
+  cursor $range-slider-handle-cursor
+
+range-slider-handle-style(
+  $bg: true,
+  $radius: false,
+  $round: false,
+  $disabled: false
+)
+  if $bg
+    background $range-slider-handle-bg-color
+
+  if $radius
+    radius($range-slider-radius)
+
+  if $round
+    radius($range-slider-round)
+
+  if $disabled
+    cursor $cursor-default-value
+    opacity $range-slider-disabled-opacity
+
+  &:hover
+    background $range-slider-handle-bg-hover-color
+
+range-slider-handle()
+  range-slider-handle-base()
+  range-slider-handle-style()
+
+//
+// @Block
+// Keystroke Block
+//
+
+if $include-html-range-slider-classes and !$module.range-slider
+  $module.range-slider = true
+
+  .range-slider
+    range-slider-bar-base()
+    range-slider-bar-style($bg:true, $radius:false)
+
+    &.vertical-range
+      range-slider-bar-base($vertical: true)
+
+      .range-slider-handle
+        margin-top 0
+        margin-{$default-float} -($range-slider-handle-width / 4)
+        position absolute
+        bottom -($range-slider-vertical-bar-height - $range-slider-handle-width)
+
+      .range-slider-active-segment
+        width ($range-slider-bar-height - $rem-calc(($strip-unit($range-slider-bar-border-width) * 2)))
+        height auto
+        bottom 0
+
+    &.radius
+      range-slider-bar-style($radius:true)
+
+      .range-slider-handle
+        range-slider-handle-style($radius: true)
+
+    &.round
+      range-slider-bar-style($round:true)
+
+      .range-slider-handle
+        range-slider-handle-style($round: true)
+
+    &.disabled
+    &[disabled]
+      range-slider-bar-style($disabled:true)
+
+      .range-slider-handle
+        range-slider-handle-style($disabled: true)
+
+
+  .range-slider-active-segment
+    display inline-block
+    position absolute
+    height ($range-slider-bar-height - $rem-calc(($strip-unit($range-slider-bar-border-width) * 2)))
+    background lighten($secondary-color, -1%)
+
+  .range-slider-handle
+    range-slider-handle-base()
+    range-slider-handle-style($bg:true, $radius: false)

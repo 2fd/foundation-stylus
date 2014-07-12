@@ -56,7 +56,7 @@ block-grid($per-row=false, $spacing=$block-grid-default-spacing,$include-spacing
 
 	if $per-row
 		&>li
-			width (100%/$per-row)
+			width round((100%/$per-row), 5)
 			if $include-spacing
 				padding 0 ($spacing/2) $spacing
 
@@ -73,7 +73,7 @@ block-grid($per-row=false, $spacing=$block-grid-default-spacing,$include-spacing
 
 
 block-grid-aligned($per-row, $spacing)
-	for $i in $block-grid-elements
+	for $i in (1..$block-grid-elements)
 
 		if $per-row >= $i
 			$grid-column = '+' + $i;
@@ -89,7 +89,7 @@ block-grid-aligned($per-row, $spacing)
 //
 // $size - Name of class to use, i.e. "large" will generate .large-block-grid-1, .large-block-grid-2, etc.
 block-grid-html-classes($size,$include-spacing)
-	for $i in $block-grid-elements
+	for $i in (1..$block-grid-elements)
 
 		.{$size}-block-grid-{$i}
 			block-grid($i,$block-grid-default-spacing,$include-spacing,false)

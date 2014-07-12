@@ -35,7 +35,7 @@ $base-line-height ?= 150%
 // $radius - Default: $global-radius || 4px
 radius($radius=$global-radius)
 
-  if $radius
+  if type($radius) is 'unit'
     border-radius $radius
 
 // @mixins
@@ -145,7 +145,7 @@ hamburger($width, $left, $top, $thickness, $gap, $color, $hover-color, $offcanva
     else
       top 50%
       margin-top -($width/2)
-      $opposite-direction $topbar-link-padding
+      {$opposite-direction} $topbar-link-padding
 
     box-shadow 0 0px 0 $thickness $color, 0 ($gap + $thickness) 0 $thickness $color, 0 ( (2*$gap) + (2*$thickness) ) 0 $thickness $color
 
@@ -267,7 +267,7 @@ $xlarge-range ?= 90.063em 120em
 $xxlarge-range ?= 120.063em 99999999em
 
 
-$screen ?= only screen
+$screen ?= s('only screen')
 
 $landscape ?= s('%s and (orientation: landscape)', $screen)
 $portrait ?= s('%s and (orientation: portrait)', $screen)

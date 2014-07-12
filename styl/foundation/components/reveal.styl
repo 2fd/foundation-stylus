@@ -94,9 +94,8 @@ reveal-modal-base(
       margin-bottom 0
 
   if $width
-    @media $medium-up
-      margin-{$default-float} -($width/2)
-      width $width
+    margin-{$default-float} -($width/2)
+    width $width
 
 // We use this to style the reveal modal defaults
 //
@@ -191,7 +190,6 @@ if $include-html-reveal-classes and !$module.reveal
     visibility visible
 
   @media $medium-up
-
     dialog
     .{$reveal-modal-class}
       reveal-modal-style($padding:($reveal-modal-padding * 1.5))

@@ -190,7 +190,7 @@ prefix-postfix-base()
 prefix($bg=$input-prefix-bg, $border=$input-prefix-border-color, $is-button=false)
 
 	if $bg
-		$bg-lightness lightness($bg)
+		$bg-lightness = lightness($bg)
 		background $bg
 		border-{$opposite-direction} none
 
@@ -337,7 +337,7 @@ form-select()
 
 if $include-html-form-classes and !$module.forms
 	$module.forms = true
-	
+
 	/* Standard Forms */
 	form
 		margin 0 0 $form-spacing

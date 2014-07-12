@@ -97,11 +97,11 @@ grid-column(
 
   // If positioned for default .column, include relative position
   // push and pull require position set
-  if $position or $push or $pull
+  if $position isnt false or $push isnt false or $pull isnt false
     position relative
 
   // If collapsed, get rid of gutter padding
-  if $collapse
+  if $collapse isnt false
     padding-left 0
     padding-right 0
 
@@ -114,20 +114,20 @@ grid-column(
 
 
   // If a column number is given, calculate width
-  if $columns
+  if $columns isnt false
     width $grid-calc($columns, $total-columns)
 
     // If last column, float naturally instead of to the right
-    if $last-column
+    if $last-column isnt false
       float $opposite-direction
 
 
   // Source Ordering, adds left/right depending on which you use.
-  if $push
+  if $push isnt false
     {$default-float} $grid-calc($push, $total-columns)
     {$opposite-direction} auto
 
-  if $pull
+  if $pull isnt false
     {$opposite-direction} $grid-calc($pull, $total-columns)
     {$default-float} auto
 
@@ -142,14 +142,14 @@ grid-column(
       float none
 
   // If centered, get rid of float and add appropriate margins
-  if $center
+  if $center isnt false
     margin-{$default-float} auto
     margin-{$opposite-direction} auto
     float none
 
 
   // If offset, calculate appropriate margins
-  if $offset
+  if $offset isnt false
     margin-{$default-float} $grid-calc($offset, $total-columns) !important
 
 // Create presentational classes for grid
@@ -157,7 +157,7 @@ grid-column(
 // $size - Name of class to use, i.e. "large" will generate .large-1, .large-2, etc.
 grid-html-classes($size)
 
-  for $i in (1..($total-columns - 1))
+  for $i in (0..($total-columns - 1))
     .{$size}-push-{$i}
       grid-column($push:$i, $collapse:null, $float:false)
 

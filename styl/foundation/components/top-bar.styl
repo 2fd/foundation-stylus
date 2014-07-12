@@ -103,9 +103,9 @@ topbar-show-dropdown()
 // Top Bar Block
 //
 
-if $include-html-top-bar-classes and $module.top-bar
+if $include-html-top-bar-classes and !$module.top-bar
   $module.top-bar = true
-  
+
   // Used to provide media query values for javascript components.
   // This class is generated despite the value of $include-html-top-bar-classes
   // to ensure width calculations work correctly.

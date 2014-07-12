@@ -23,13 +23,13 @@ $button-group-border-width ?= 1px
 // We use this to add styles for a button group container
 button-group-container($styles=true, $float=false)
   if $styles
+    clearfix()
     list-style none
     margin 0
     {$default-float} 0
-    clearfix()
 
   if $float
-    float {$default-float}
+    float $default-float
     margin-{$opposite-direction} $button-bar-margin-opposite
 
     & div
@@ -116,5 +116,6 @@ if $include-html-button-classes and !$module.button-group
 
   .button-bar
     clearfix()
+
     .button-group
       button-group-container($styles:false,$float:true)

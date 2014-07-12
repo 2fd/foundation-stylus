@@ -70,7 +70,7 @@ alert-base()
 alert-style($bg = $primary-color)
 
 	// This finds the lightness percentage of the background color.
-	$bg-lightness: lightness($bg);
+	$bg-lightness = lightness($bg);
 
 	// We control which background color and border come through.
 	background-color: $bg;
@@ -112,8 +112,8 @@ alert($bg = $primary-color, $radius = false)
 // Alert Box Block
 //
 
-if $include-html-alert-classes and !$module.alert-box
-	$module.alert-box = true
+if $include-html-alert-classes and !$module.alert-boxes
+	$module.alert-boxes = true
 
 	.alert-box
 		alert()

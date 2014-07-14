@@ -65,7 +65,7 @@ module.exports = function(grunt) {
         dest: 'dist/assets/css/',
         ext: '.min.css'
       }
-    }
+    },
 
     copy: {
       dist: {

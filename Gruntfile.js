@@ -1,7 +1,4 @@
 module.exports = function(grunt) {
-  var hljs = require('highlight.js');
-  hljs.LANGUAGES['scss'] = require('./lib/scss.js')(hljs);
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     vendor: grunt.file.readJSON('.bowerrc').directory,

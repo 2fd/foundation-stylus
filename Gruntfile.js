@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {
-          compress: false 
+          compress: false
         },
         files: {
           'dist/assets/css/foundation.css': '<%= foundation.styl %>',
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');;
 
   grunt.task.registerTask('watch_start', ['karma:dev_watch:start', 'watch']);
-  grunt.registerTask('build:assets', ['clean', 'stylus', 'cssmin', 'concat', 'uglify', 'copy', 'jst']);
+  grunt.registerTask('build:assets', ['clean', 'stylus', 'cssmin', 'concat', 'uglify', 'copy']);
   grunt.registerTask('build', ['build:assets']);
   grunt.registerTask('travis', ['build', 'karma:continuous']);
   grunt.registerTask('develop', ['travis', 'watch_start']);

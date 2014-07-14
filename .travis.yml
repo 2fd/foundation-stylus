@@ -6,14 +6,13 @@ branches:
     - master
 before_install:
   - npm install -g grunt-cli bower
-  - gem install bundler
-  - bundle install
 before_script:
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - git config --global user.email "i@2fd.me"
   - git config --global user.name "Fede Ramirez"
   - bower install
-script: ./run-tests.sh
+script:
+  - grunt travis
 after_success:
   - echo -e "Done with magic\n"
 env:

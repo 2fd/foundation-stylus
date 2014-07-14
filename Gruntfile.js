@@ -8,55 +8,21 @@ module.exports = function(grunt) {
 
     foundation: {
       js: ['js/foundation/foundation.js', 'js/foundation/foundation.*.js'],
-      scss: ['scss/foundation.scss']
+      styl: ['styl/foundation.styl']
     },
 
-    jst: {
+    stylus: {
       compile: {
-        files: {
-          'dist/docs/assets/js/templates.js': ['doc/templates/*.html']
-        }
-      }
-    },
-
-    assemble: {
-      options: {
-        marked: {
-          highlight: function(code, lang) {
-            if (lang === undefined) lang = 'bash';
-            if (lang === 'html') lang = 'xml';
-            if (lang === 'js') lang = 'javascript';
-            return '<div class="code-container">' + hljs.highlight(lang, code).value + '</div>';
-          }
-        }
-      },
-      dist: {
         options: {
-          flatten: false,
-          assets: 'dist/docs/assets',
-          data: ['doc/data/*.json'],
-          helpers: ['doc/helpers/*.js'],
-          partials: ['doc/includes/**/*.{html,scss}'],
-          layoutdir: 'doc/layouts',
-          layout: 'default.html'
-        },
-        expand: true,
-        cwd: 'doc/pages',
-        src: '**/*.{html,md}',
-        dest: 'dist/docs/'
-      }
-    },
-
-    sass: {
-      dist: {
-        options: {
-          includePaths: ['scss'],
-          sourceMap: true
+          compress: false,
+          includePaths: ['styls'],
+          use: [
+            require('nib')
+          ]
         },
         files: {
-          'dist/assets/css/foundation.css': '<%= foundation.scss %>',
-          'dist/assets/css/normalize.css': 'scss/normalize.scss',
-          'dist/docs/assets/css/docs.css': 'doc/assets/scss/docs.scss'
+          'dist/assets/css/foundation.css': '<%= foundation.styl %>',
+          'dist/assets/css/normalize.css': 'styl/normalize.styl',
         }
       }
     },
@@ -90,6 +56,16 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    cssmin: {
+      minify: {
+        expand: true,
+        cwd: 'dist/assets/css/',
+        src: ['foundation.css'],
+        dest: 'dist/assets/css/',
+        ext: '.min.css'
+      }
+    }
 
     copy: {
       dist: {
@@ -159,9 +135,9 @@ module.exports = function(grunt) {
         ],
         tasks: ['karma:dev_watch:run']
       },
-      sass: {
-        files: ['scss/**/*.scss', 'doc/assets/**/*.scss'],
-        tasks: ['sass'],
+      styl: {
+        files: ['styl/**/*.styl'],
+        tasks: ['styl','cssmin'],
         options: {
           livereload:true
         }
@@ -171,57 +147,24 @@ module.exports = function(grunt) {
         tasks: ['copy', 'concat', 'uglify'],
         options: {livereload:true}
       },
-      assemble_all: {
-        files: ['doc/{includes,layouts}/**/*.html'],
-        tasks: ['assemble'],
-        options: {livereload:true}
-      },
-      assemble_pages: {
-        files: ['doc/pages/**/*.html'],
-        tasks: ['newer:assemble'],
-        options: {livereload:true}
-      },
-      assets: {
-        options: {cwd: 'doc/assets/', livereload: true},
-        files: ['**/*','!{scss,js}/**/*'],
-        tasks: ['copy']
-      },
-      jst: {
-        files: ['doc/templates/*.html'],
-        tasks: ['jst'],
-        options: {livereload:false}
-      }
-    },
-
-    rsync: {
-      dist: {
-        options: {
-          args: ["--verbose"],
-          src: "./dist/docs/",
-          recursive: true,
-          dest: "/home/deployer/sites/foundation-docs/current",
-          host: "deployer@72.32.134.77"
-        }
-      }
     }
   });
 
-  grunt.loadNpmTasks('assemble');
+
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-rsync');
-  grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-contrib-jst');
-  
+  grunt.loadNpmTasks('grunt-newer');;
+
   grunt.task.registerTask('watch_start', ['karma:dev_watch:start', 'watch']);
-  grunt.registerTask('build:assets', ['clean', 'sass', 'concat', 'uglify', 'copy', 'jst']);
-  grunt.registerTask('build', ['build:assets', 'assemble']);
+  grunt.registerTask('build:assets', ['clean', 'stylus', 'cssmin', 'concat', 'uglify', 'copy', 'jst']);
+  grunt.registerTask('build', ['build:assets']);
   grunt.registerTask('travis', ['build', 'karma:continuous']);
   grunt.registerTask('develop', ['travis', 'watch_start']);
   grunt.registerTask('deploy', ['build', 'rsync:dist']);

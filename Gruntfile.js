@@ -11,11 +11,7 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {
-          compress: false,
-          includePaths: ['styls'],
-          use: [
-            require('nib')
-          ]
+          compress: false 
         },
         files: {
           'dist/assets/css/foundation.css': '<%= foundation.styl %>',

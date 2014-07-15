@@ -34,9 +34,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/assets/js/foundation.min.js': ['<%= foundation.js %>'],
-          'dist/docs/assets/js/modernizr.js': ['<%= vendor %>/modernizr/modernizr.js'],
-          'dist/docs/assets/js/all.js': ['<%= vendor %>/jquery/dist/jquery.js', 'vendor/lodash/dist/lodash.min.js','<%= vendor %>/fastclick/lib/fastclick.js', '<%= vendor %>/jquery-placeholder/jquery.placeholder.js', '<%= vendor %>/jquery.autocomplete/dist/jquery.autocomplete.js', '<%= foundation.js %>', 'doc/assets/js/docs.js']
+          'dist/assets/js/foundation.min.js': ['<%= foundation.js %>']
         }
       },
       vendor: {
@@ -54,7 +52,7 @@ module.exports = function(grunt) {
       minify: {
         expand: true,
         cwd: 'dist/assets/css/',
-        src: ['foundation.css'],
+        src: ['normaliza.css', 'foundation.css'],
         dest: 'dist/assets/css/',
         ext: '.min.css'
       }
@@ -63,10 +61,7 @@ module.exports = function(grunt) {
     copy: {
       dist: {
         files: [
-          {expand:true, cwd: 'doc/assets/', src: ['**/*','!{scss,js}/**/*'], dest: 'dist/docs/assets/', filter:'isFile'},
           {expand:true, cwd: 'js/', src: ['foundation/*.js'], dest: 'dist/assets/js', filter: 'isFile'},
-          {src: '<%= vendor %>/jquery/jquery.min.js', dest: 'dist/docs/assets/js/jquery.js'},
-          {expand:true, cwd: 'scss/', src: '**/*.scss', dest: 'dist/assets/scss/', filter: 'isFile'},
           {src: 'bower.json', dest: 'dist/assets/'}
         ]
       }
@@ -159,6 +154,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build:assets', ['clean', 'stylus', 'cssmin', 'concat', 'uglify', 'copy']);
   grunt.registerTask('build', ['build:assets']);
   grunt.registerTask('travis', ['build', 'karma:continuous']);
+  //grunt.registerTask('travis', ['build']);
   grunt.registerTask('develop', ['travis', 'watch_start']);
   grunt.registerTask('deploy', ['build', 'rsync:dist']);
   grunt.registerTask('default', ['build', 'watch']);

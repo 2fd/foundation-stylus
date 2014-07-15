@@ -182,9 +182,7 @@ button-style($bg=$button-bg, $radius=false, $disabled=false, $bc=$button-border-
 // $radius - If true, set to button radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default:false.
 // $full-width - We can set $full-width:true to remove side padding extend width. Default:false.
 // $disabled - We can set $disabled:true to create a disabled transparent button. Default:false.
-// $is-input - <input>'s and <button>'s take on strange padding. We added this to help fix that. Default:false.
-// $is-prefix - Not used? Default:false.
-button($padding=$button-med, $bg=$button-bg, $radius=false, $full-width=false, $disabled=false, $is-prefix=false)
+button($padding=$button-med, $bg=$button-bg, $radius=false, $full-width=false, $disabled=false)
 	button-base()
 	button-size($padding, $full-width)
 	button-style($bg, $radius, $disabled)
@@ -197,7 +195,7 @@ button($padding=$button-med, $bg=$button-bg, $radius=false, $full-width=false, $
 
 if $include-html-button-classes and !$module.buttons
 	$module.buttons = true
-	
+
 	// Default styles applied outside of media query
 	button
 	.button

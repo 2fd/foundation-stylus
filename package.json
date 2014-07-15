@@ -1,11 +1,7 @@
 {
-  "name": "foundation",
+  "name": "foundation-stylus",
   "version": "5.3.0",
-  "main": "stylus/foundation",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/2fd/foundation.git"
-  },
+  "main": "styl/foundation",
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-clean": "~0.5.0",
@@ -40,26 +36,16 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/zurb/foundation"
+    "url" : "https://github.com/2fd/foundation-stylus.git"
   },
-  "keywords": [
-    "handlebars-helper-rel",
-    "handlebars-helper-slugify"
-  ],
   "licenses": [
     {
       "type": "MIT",
       "url": "https://github.com/zurb/foundation/blob/master/LICENSE"
     }
   ],
-  "dependencies": {
-    "stylus": "~0.32.1",
-    "stylus-type-utils": "~0.0.3"
-  },
   "keywords": [
-    "zurb",
     "foundation",
-    "stylus",
-    "express"
+    "stylus"
   ]
 }

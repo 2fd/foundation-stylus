@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       minify: {
         expand: true,
         cwd: 'dist/assets/css/',
-        src: ['normaliza.css', 'foundation.css'],
+        src: ['normalize.css', 'foundation.css'],
         dest: 'dist/assets/css/',
         ext: '.min.css'
       }

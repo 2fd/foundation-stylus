@@ -8,7 +8,7 @@
 // @Variables
 // Icon Bar Variables
 //
-$include-html-form-classes ?= $include-html-classes
+$include-html-icon-bar-classes ?= $include-html-classes
 
 // We use these to style the icon-bar and items
 $icon-bar-bg ?= #333
@@ -166,17 +166,17 @@ icon-bar(
 )
   icon-bar-base()
   icon-bar-size($padding, $font-size, $icon-size, $image-width, $image-height)
-  icon-bar-style($bar-bg, $bar-font-color, $bar-hover-color, $bar-icon-color, $bar-active-color, $base-style: true)
+  icon-bar-style($bar-bg, $bar-font-color, $bar-hover-color, $bar-icon-color, $bar-active-color, $base-style)
 
 //
 // @Block
 // Thumbs Block
 //
 
-if $include-html-form-classes and ! $module.icon-bar
+if $include-html-icon-bar-classes and ! $module.icon-bar
   $module.icon-bar = true
 
-  div.icon-bar
+  .icon-bar
     icon-bar()
 
   // toolbar styles

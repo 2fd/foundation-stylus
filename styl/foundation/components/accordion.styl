@@ -82,7 +82,7 @@ accordion-navigation( $bg= $accordion-navigation-bg-color, $hover-bg= $accordion
 
 		else
 			font-size null
-			warn "`{$font-size}` is not a valid unit and the default value of $accordion-navigation-font-size is not defined. A value of `null` will be returned to not generate a value for font-size."
+			warn "`{$font-size}` is not a valid unit and the default value of $accordion-navigation-font-size is not defined. A value of `null` will be returned to not generate an invalid value for font-size."
 
 		&:hover
 			background $hover-bg
@@ -122,7 +122,7 @@ accordion-content($bg= $accordion-content-active-bg-color, $padding= $accordion-
 
 if $include-html-accordion-classes and !$module.accordion
 	$module.accordion = true
-	
+
 	.accordion
 		accordion-container()
 

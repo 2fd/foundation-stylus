@@ -6,7 +6,6 @@
 $rem-base ?= 16px
 $module ?= {}
 
-
 //
 // @functions
 //
@@ -24,7 +23,6 @@ $upper-bound($range)
 		return 999999999999
 
 	return $range[1]
-
 
 // STRIP UNIT
 // It strips the unit of measure and returns it
@@ -44,8 +42,8 @@ $convert-to-rem($value, $base-value = $rem-base)
 data($attr)
 	return s('[data-%s]', $attr)
 
-// REM CALC
 
+// REM CALC
 // New Syntax, allows to optionally calculate on a different base value to counter compounding effect of rem's.
 // Call with 1, 2, 3 or 4 parameters, 'px' is not required but supported:
 //

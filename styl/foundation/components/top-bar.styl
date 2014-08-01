@@ -167,7 +167,7 @@ if $include-html-top-bar-classes and !$module.top-bar
       margin-bottom 0
 
     input
-      height auto
+      height 1.8rem
       padding-top .35rem
       padding-bottom .35rem
       font-size $topbar-button-font-size
@@ -402,6 +402,7 @@ if $include-html-top-bar-classes and !$module.top-bar
             font-weight $topbar-link-weight
 
         &.title h5
+        &.parent-link
           margin-bottom 0
           margin-top 0
 
@@ -409,6 +410,9 @@ if $include-html-top-bar-classes and !$module.top-bar
             color $topbar-link-color
             line-height ($topbar-height/2)
             display block
+
+            &:hover
+              background none
 
         &.has-form
           padding 8px $topbar-link-padding
@@ -503,6 +507,7 @@ if $include-html-top-bar-classes and !$module.top-bar
 
             &:hover
               background $topbar-link-bg-active-hover
+              color $topbar-link-color-active-hover
 
       .has-dropdown
 

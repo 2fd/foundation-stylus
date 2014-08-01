@@ -108,12 +108,12 @@ off-canvas-menu($position)
   transition transform 500ms ease 0s
   -webkit-overflow-scrolling touch
 
-  if $position == left
-    transform translate3d(-100%,0,0)
+  if $position is left
+    transform translate3d(-100.5%,0,0)
     left 0
 
-  if $position == right
-    transform translate3d(100%,0,0)
+  if $position is right
+    transform translate3d(100.5%,0,0)
     right 0
 
 // OFF CANVAS WRAP
@@ -151,7 +151,7 @@ tab-bar-base()
   height $tabbar-height
   line-height $tabbar-line-height
 
-  // make sure it's below the .exit-offcanvas link
+  // make sure it's below the .exit-off-canvas link
   position relative
   // z-index 999
 
@@ -174,12 +174,12 @@ tabbar-small-section($position)
   position absolute
   top 0
 
-  if $position == left
+  if $position is left
     border-right $tabbar-left-section-border
     // box-shadow 1px 0 0 lighten($tabbar-bg, 13%)
     left 0
 
-  if $position == right
+  if $position is right
     border-left $tabbar-right-section-border
     // box-shadow -1px 0 0 lighten($tabbar-bg, -50%)
     right 0
@@ -349,9 +349,8 @@ if $include-html-off-canvas-classes and !$module.offcanvas
       transform none
       z-index 1003
 
-    .exit-offcanvas-menu
+    .exit-off-canvas
       back-link()
-      z-index 1002
 
   // Older browsers
   .no-csstransforms

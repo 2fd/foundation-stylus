@@ -88,7 +88,7 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
 
 
 	// If we're dealing with small buttons, use these styles
-	if $padding == small
+	if $padding is small
 		padding-{$opposite-direction} $dropdown-button-padding-sml
 
 		&:after
@@ -99,7 +99,7 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
 
 
 	// If we're dealing with default (medium) buttons, use these styles
-	if $padding == medium
+	if $padding is medium
 		padding-{$opposite-direction} $dropdown-button-padding-med
 
 		&:after
@@ -110,7 +110,7 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
 
 
 	// If we're dealing with large buttons, use these styles
-	if $padding == large
+	if $padding is large
 		padding-{$opposite-direction} $dropdown-button-padding-lrg
 
 		&:after

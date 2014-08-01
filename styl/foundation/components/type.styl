@@ -55,9 +55,15 @@ $paragraph-aside-font-style ?= italic
 $paragraph-text-rendering ?= optimizeLegibility
 
 // We use these to style <code> tags
-$code-color ?= lighten($alert-color,-27%)
+$code-color ?= #333
 $code-font-family ?= Consolas, 'Liberation Mono', Courier, monospace
-$code-font-weight ?= $font-weight-bold
+$code-font-weight ?= $font-weight-normal
+$code-font-weight ?= $font-weight-normal
+$code-background-color ?= lighten($secondary-color, 70%)
+$code-border-size ?= 1px
+$code-border-style ?= solid
+$code-border-color ?= lighten($code-background-color, -10%)
+$code-padding ?= $rem-calc(2) $rem-calc(5) $rem-calc(1)
 
 // We use these to style anchors
 $anchor-text-decoration ?= none
@@ -193,7 +199,7 @@ if $include-html-type-classes and !$module.type
 	// Responsive Text alignment
 	align-classes()
 
-	/* Typography resets */
+	// Typography resets
 	div
 	dl
 	dt
@@ -216,7 +222,7 @@ if $include-html-type-classes and !$module.type
 		margin 0
 		padding 0
 
-	/* Default Link Styles */
+	// Default Link Styles
 	a
 		color $anchor-font-color
 		text-decoration $anchor-text-decoration
@@ -232,7 +238,7 @@ if $include-html-type-classes and !$module.type
 		img
 			border none
 
-	/* Default paragraph styles */
+	// Default paragraph styles
 	p
 		font-family $paragraph-font-family
 		font-weight $paragraph-font-weight
@@ -250,7 +256,7 @@ if $include-html-type-classes and !$module.type
 			font-style $paragraph-aside-font-style
 
 
-	/* Default header styles */
+	// Default header styles
 	h1
 	h2
 	h3
@@ -299,7 +305,7 @@ if $include-html-type-classes and !$module.type
 		margin $hr-margin 0 ($hr-margin - $rem-calc($hr-border-width))
 		height 0
 
-	/* Helpful Typography Defaults */
+	// Helpful Typography Defaults
 	em
 	i
 		font-style italic
@@ -318,8 +324,13 @@ if $include-html-type-classes and !$module.type
 		font-family $code-font-family
 		font-weight $code-font-weight
 		color $code-color
+		background-color $code-background-color
+		border-width $code-border-size
+		border-style $code-border-style
+		border-color $code-border-color
+		padding $code-padding
 
-	/* Lists */
+	// Lists
 	ul
 	ol
 	dl
@@ -341,7 +352,7 @@ if $include-html-type-classes and !$module.type
 					margin-bottom 0
 					list-style none
 
-	/* Unordered Lists */
+	// Unordered Lists
 	ul
 		li
 			ul
@@ -370,7 +381,7 @@ if $include-html-type-classes and !$module.type
 		&.no-bullet
 			list-style none
 
-	/* Ordered Lists */
+	// Ordered Lists
 	ol
 		margin-{$default-float} $list-ordered-side-margin
 		li
@@ -379,7 +390,7 @@ if $include-html-type-classes and !$module.type
 				margin-{$default-float} $list-nested-margin
 				margin-bottom 0
 
-	/* Definition Lists */
+	// Definition Lists
 	dl
 		dt
 			margin-bottom $definition-list-header-margin-bottom
@@ -388,7 +399,7 @@ if $include-html-type-classes and !$module.type
 		dd
 			margin-bottom $definition-list-margin-bottom
 
-	/* Abbreviations */
+	// Abbreviations
 	abbr
 	acronym
 		text-transform uppercase
@@ -400,7 +411,7 @@ if $include-html-type-classes and !$module.type
 	abbr
 		text-transform none
 
-	/* Blockquotes */
+	// Blockquotes
 	blockquote
 		margin 0 0 $paragraph-margin-bottom
 		padding $blockquote-padding
@@ -423,7 +434,7 @@ if $include-html-type-classes and !$module.type
 		line-height $paragraph-line-height
 		color $blockquote-font-color
 
-	/* Microformats */
+	// Microformats
 	.vcard
 		display inline-block
 		margin $microformat-margin
@@ -486,7 +497,7 @@ if $include-html-type-classes and !$module.type
 		@media print
 			*
 				background transparent !important
-				color #000 !important/* Black prints faster: h5bp.com/s */
+				color #000 !important// Black prints faster: h5bp.com/s
 				box-shadow none !important
 				text-shadow none !important
 
@@ -512,7 +523,7 @@ if $include-html-type-classes and !$module.type
 				page-break-inside avoid
 
 			thead
-				display table-header-group /* h5bp.com/t */
+				display table-header-group // h5bp.com/t
 
 			tr
 			img

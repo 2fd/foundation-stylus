@@ -37,16 +37,23 @@ $button-function-factor ?= -20%
 // We use these to control button border styles.
 $button-border-width ?= 0px
 $button-border-style ?= solid
-$button-bg ?= $primary-color
-$button-border-color ?= lighten($button-bg, $button-function-factor)
-$button-hover-color ?= lighten($button-bg, $button-function-factor)
+$button-bg-color ?= $primary-color
+$button-bg-hover ?= lighten($button-bg-color, $button-function-factor)
+$button-border-color ?= $button-bg-hover
+$secondary-button-bg-hover ?= lighten($secondary-color, $button-function-factor)
+$secondary-button-border-color ?= $secondary-button-bg-hover
+$success-button-bg-hover ?= lighten($success-color, $button-function-factor)
+$success-button-border-color ?= $success-button-bg-hover
+$alert-button-bg-hover ?= lighten($alert-color, $button-function-factor)
+$alert-button-border-color ?= $alert-button-bg-hover
 
 // We use this to set the default radius used throughout the core.
 $button-radius ?= $global-radius
 $button-round ?= $global-rounded
 
-// We use this to set default opacity for disabled buttons.
+// We use this to set default opacity and cursor for disabled buttons.
 $button-disabled-opacity ?= 0.7
+$button-disabled-cursor ?= $cursor-default-value
 
 //
 // @Mixins
@@ -120,46 +127,47 @@ button-size($padding=$button-med, $full-width=false)
 		padding-left 0
 		width 100%
 
+// We use this mixin to create the button hover and border colors
+//
 // We use this mixin to add button color styles
 //
 // $bg - Primary color set in settings file. Default: $button-bg.
-// $bc - Button Border Color. Default: $button-border-color
-// $bh - Button Hover Color. Default: $button-hover-color
 // $radius - If true, set to button radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default: true
 // $disabled - We can set $disabled:true to create a disabled transparent button. Default: false
-button-style($bg=$button-bg, $radius=false, $disabled=false, $bc=$button-border-color, $bh=$button-hover-color)
+// $bg-hover - Button Hover Background Color. Default: $button-bg-hover
+// $border-color - Button Border Color. Default: $button-border-color
+button-style($bg=$button-bg-color, $radius=false, $disabled=false, $bg-hover=null, $border-color=null)
 
 	// We control which background styles are used,
 	// these can be removed by setting $bg:false
 	if $bg
+		if $bg-hover is null
+			$bg-hover = $bg is $button-bg-color ? $button-bg-hover : lighten($bg, $button-function-factor)
+
+		if $border-color is null
+			$border-color = $bg is $button-bg-color ? $button-border-color : lighten($bg, $button-function-factor)
+
 		// This find the lightness percentage of the background color.
 		$bg-lightness = lightness($bg)
+		$bg-hover-lightness = lightness($bg-hover);
 
 		background-color $bg
-		border-color $bc
+		border-color $border-color
 
 		&:hover
 		&:focus
-			background-color $bh
+			background-color $bg-hover
 
 		// We control the text color for you based on the background color.
-		if $bg-lightness > 70%
-			color $button-font-color-alt
+		color ($bg-lightness > 70% ? $button-font-color-alt : $button-font-color)
 
-			&:hover
-			&:focus
-				color $button-font-color-alt
-
-		else
-			color $button-font-color
-
-			&:hover
-			&:focus
-				color $button-font-color
+		&:hover
+		&:focus
+			color ($bg-hover-lightness > 70% ? $button-font-color-alt : $button-font-color)
 
 	// We can set $disabled:true to create a disabled transparent button.
 	if $disabled
-		cursor $cursor-default-value
+		cursor $button-disabled-cursor
 		opacity $button-disabled-opacity
 		box-shadow none
 
@@ -186,6 +194,34 @@ button($padding=$button-med, $bg=$button-bg, $radius=false, $full-width=false, $
 	button-size($padding, $full-width)
 	button-style($bg, $radius, $disabled)
 
+// @MIXIN
+//
+// We use this to quickly create buttons with a single mixin. As @jaredhardy puts it, "the kitchen sink mixin"
+//
+// $padding - Used to build padding for buttons Default: $button-med ||= rem-calc(12)
+// $bg - Primary color set in settings file. Default: $button-bg.
+// $radius - If true, set to button radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default:false.
+// $full-width - We can set $full-width:true to remove side padding extend width. Default:false.
+// $disabled - We can set $disabled:true to create a disabled transparent button. Default:false.
+// $bg-hover - Button Hover Color - Default null - see button-style mixin
+// $border-color - Button Border Color - Default null - see button-style mixin
+// $transition - We can control whether or not to include the background-color transition property - Default:true.
+button(
+	$padding=$button-med,
+	$bg=$button-bg-color,
+	$radius=false,
+	$full-width=false,
+	$disabled=false,
+	$bg-hover=null,
+	$border-color=null,
+	$transition= true
+)
+	button-base()
+	button-size($padding, $full-width);
+	button-style($bg, $radius, $disabled, $bg-hover, $border-color)
+
+	if $transition
+		transition background-color
 
 //
 // @Block
@@ -205,13 +241,13 @@ if $include-html-button-classes and !$module.buttons
 		transition background-color
 
 		&.secondary
-			button-style($bg:$secondary-color)
+			button-style($bg:$secondary-color, $bg-hover:$secondary-button-bg-hover, $border-color:$secondary-button-border-color)
 
 		&.success
-			button-style($bg:$success-color)
+			button-style($bg:$success-color, $bg-hover:$success-button-bg-hover, $border-color:$success-button-border-color)
 
 		&.alert
-			button-style($bg:$alert-color)
+			button-style($bg:$alert-color, $bg-hover:$alert-button-bg-hover, $border-color:$alert-button-border-color)
 
 
 		&.large
@@ -243,16 +279,16 @@ if $include-html-button-classes and !$module.buttons
 
 		&.disabled
 		&[disabled]
-			button-style($bg:$button-bg, $disabled:true)
+			button-style($bg:$button-bg-color, $disabled:true, $bg-hover:$button-bg-hover, $border-color:$button-border-color)
 
 			&.secondary
-				button-style($bg:$secondary-color, $disabled:true)
+				button-style($bg:$secondary-color, $disabled:true, $bg-hover:$secondary-button-bg-hover, $border-color:$secondary-button-border-color)
 
 			&.success
-				button-style($bg:$success-color, $disabled:true)
+				button-style($bg:$success-color, $disabled:true, $bg-hover:$success-button-bg-hover, $border-color:$success-button-border-color)
 
 			&.alert
-				button-style($bg:$alert-color, $disabled:true)
+				button-style($bg:$alert-color, $disabled:true, $bg-hover:$alert-button-bg-hover, $border-color:$alert-button-border-color)
 
 	//firefox 2px fix
 	button::-moz-focus-inner

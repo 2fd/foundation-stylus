@@ -5,6 +5,7 @@
     "css/foundation.css",
     "js/foundation.js"
   ],
+  "ignore": [],
   "dependencies": {
     "jquery": ">= 2.1.0",
     "modernizr": ">= 2.7.2",
@@ -16,6 +17,5 @@
   "devDependencies": {
     "jquery.autocomplete": "devbridge/jQuery-Autocomplete#1.2.9",
     "lodash": "~2.4.1"
-  },
-  "private": true
+  }
 }

@@ -1,0 +1,31 @@
+{
+  "js": {
+    "vendor": [
+      "vendor/jquery-placeholder/jquery.placeholder.js",
+      "vendor/fastclick/lib/fastclick.js",
+      "vendor/jquery.cookie/jquery.cookie.js",
+      "vendor/jquery/dist/jquery.js",
+      "vendor/modernizr/modernizr.js"
+    ],
+    "foundation": ["js/foundation/foundation.*.js"],
+    "orig": ["js/foundation/foundation.js"],
+    "dest": "dist/assets/js"
+  },
+  "css": {
+    "styl": "styl/foundation.styl",
+    "vendor": [
+      "vendor/normalize.css/normalize.css"
+    ],
+    "dest": "dist/assets/css"
+  },
+  "styl": {
+    "orig": ["styl/**/*.styl"],
+    "dest": "dist/assets/styl"
+  },
+  "pack": {
+    "vendor": "dist/assets",
+    "orig": "dist/assets/**/*",
+    "dest": "dist",
+    "name": "assets-v{version}"
+  }
+}

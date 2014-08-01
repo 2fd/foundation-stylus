@@ -1,51 +1,38 @@
 {
-  "name": "foundation-stylus",
-  "version": "5.3.1",
-  "main": "styl/foundation",
-  "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-compress": "~0.7.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-connect": "~0.7.1",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-jasmine": "~0.6.3",
-    "grunt-contrib-uglify": "~0.4.0",
-    "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-contrib-stylus": "~0.18.0",
-    "grunt-karma": "~0.6.2",
-    "grunt-newer": "~0.7.0",
-    "grunt-rsync": "~0.5.0",
-    "handlebars-helper-rel": "~0.1.2",
-    "handlebars-helper-slugify": "~0.2.0",
-    "jasmine-jquery": "~1.3.3",
-    "karma": "~0.10.4",
-    "karma-browserstack-launcher": "0.0.4",
-    "karma-chrome-launcher": "~0.1.0",
-    "karma-firefox-launcher": "~0.1.0",
-    "karma-html2js-preprocessor": "~0.1.0",
-    "karma-ie-launcher": "~0.1.1",
-    "karma-jasmine": "~0.1.3",
-    "karma-phantomjs-launcher": "~0.1.0",
-    "karma-safari-launcher": "~0.1.1",
-    "karma-script-launcher": "~0.1.0",
-    "grunt-karma": "~0.6.2",
-    "grunt-rsync": "~0.2.1",
-    "jasmine-jquery": "~1.3.3"
-  },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/2fd/foundation-stylus.git"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/zurb/foundation/blob/master/LICENSE"
-    }
-  ],
-  "keywords": [
-    "foundation",
-    "stylus"
-  ]
+    "name": "foundation-stylus",
+    "version": "5.3.1",
+    "main": "styl/foundation",
+    "devDependencies": {
+        "delete": "^0.1.4",
+        "gulp": "^3.8.6",
+        "gulp-clean": "^0.3.1",
+        "gulp-concat": "^2.3.4",
+        "gulp-gzip": "0.0.8",
+        "gulp-jasmine": "^0.2.0",
+        "gulp-karma": "^0.0.4",
+        "gulp-minify-css": "^0.3.7",
+        "gulp-newer": "^0.3.0",
+        "gulp-rename": "^1.2.0",
+        "gulp-size": "^0.4.0",
+        "gulp-stylus": "^1.3.0",
+        "gulp-tar": "^0.5.0",
+        "gulp-uglify": "^0.3.1",
+        "gulp-util": "^3.0.0",
+        "gulp-watch": "^0.6.9",
+        "gulp-zip": "^0.4.0",
+        "nib": "^1.0.3",
+        "stylus": "^0.47.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/2fd/foundation-stylus.git"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "https://github.com/zurb/foundation/blob/master/LICENSE"
+    }],
+    "keywords": [
+        "foundation",
+        "stylus"
+    ]
 }

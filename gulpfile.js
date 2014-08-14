@@ -93,15 +93,13 @@ gulp
     return gulp.src(assets.pack.src)
       .pipe(tar(assets.pack.name.replace('{version}', bower.version) + '.tar'))
       .pipe(gzip())
-      .pipe(gulp.dest(assets.pack.dest))
-      .pipe(size({title:'tar.gz: ', showFiles:true}));
+      .pipe(gulp.dest(assets.pack.dest));
   })
 
   .task('pack:zip', function(){
     return gulp.src(assets.pack.src)
       .pipe(zip(assets.pack.name.replace('{version}', bower.version) + '.zip'))
-      .pipe(gulp.dest(assets.pack.dest))
-      .pipe(size({title:'zip: ', showFiles:true}));
+      .pipe(gulp.dest(assets.pack.dest));
   })
 
   // Watch

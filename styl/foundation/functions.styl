@@ -12,13 +12,13 @@ $module ?= {}
 
 // RANGES
 // We use these functions to define ranges for various things, like media queries.
-$lower-bound($range)
+$lower-bound ?= @($range)
 	if length($range) is 0
 		return 0
 
 	return $range[0]
 
-$upper-bound($range)
+$upper-bound ?= @($range)
 	if length($range) < 2
 		return 999999999999
 
@@ -26,21 +26,17 @@ $upper-bound($range)
 
 // STRIP UNIT
 // It strips the unit of measure and returns it
-$strip-unit($num)
+$strip-unit ?= @($num)
 	return unit($num, '')
 
 // CONVERT TO REM
-$convert-to-rem($value, $base-value = $rem-base)
+$convert-to-rem ?= @($value, $base-value = $rem-base)
 	$value = $strip-unit($value) / $strip-unit($base-value)
 
 	if $value is 0
 		return $value
 
 	return unit($value, 'rem')
-
-
-data($attr)
-	return s('[data-%s]', $attr)
 
 
 // REM CALC
@@ -61,9 +57,14 @@ data($attr)
 //
 //   $rem-calc((16px, 32px, 48), 8px);
 
-$rem-calc($values, $base-value = $rem-base)
+$rem-calc ?= @($values, $base-value = $rem-base)
 
 	for $value, $i in $values
 		$values[$i] = $convert-to-rem($value, $base-value)
 
 	return $values
+
+
+// data
+data($attr)
+	return s('[data-%s]', $attr)

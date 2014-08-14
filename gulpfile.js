@@ -2,21 +2,25 @@ var gulp = require('gulp')
 
   // Pulgins
   , del = require('delete')
-  , nib = require('nib')
   , concat = require('gulp-concat')
   , rename = require('gulp-rename')
   , uglify = require('gulp-uglify')
   , minifyCSS = require('gulp-minify-css')
-  , watch = require('gulp-watch')
   , stylus = require('gulp-stylus')
+  , nib = require('nib')
   , zip = require('gulp-zip')
   , tar = require('gulp-tar')
   , gzip = require('gulp-gzip')
   , size = require('gulp-size')
+  , gulpif = require('gulp-if')
 
   // Config
   , assets = require('./assets.json')
   , bower = require('./bower.json')
+
+  , isVendorJS = function(file){
+    return !/foundation(\.\w+)?\.js$/i.test(file.path);
+  }
 ;
 
 gulp
@@ -43,56 +47,35 @@ gulp
     del.sync(assets.pack.dest);
   })
 
-  // Scripts
-  .task('scripts', ['js'])
-  .task('js', ['clean:js', 'js:foundation', 'js:vendor'], function(){
-    return gulp.src(assets.js.orig)
+  .task('js',function(){
+    return gulp.src(assets.js.src)
+      .pipe(gulpif(isVendorJS, rename({dirname:'vendor'})))
       .pipe(gulp.dest(assets.js.dest))
       .pipe(uglify())
       .pipe(rename({extname:'.min.js'}))
       .pipe(gulp.dest(assets.js.dest))
-      .pipe(size({showFiles:true}));
+      .pipe(size({title:'Scripts: ', showFiles:true}));
   })
 
-  .task('js:foundation', function(){
-    return gulp.src(assets.js.foundation)
-      .pipe(rename({dirname:'foundation'}))
-      .pipe(gulp.dest(assets.js.dest))
-      .pipe(uglify())
-      .pipe(rename({extname:'.min.js'}))
-      .pipe(gulp.dest(assets.js.dest))
-      .pipe(size({showFiles:true}));
-  })
-
-  .task('js:vendor', function(){
-    return gulp.src(assets.js.vendor)
-      .pipe(rename({dirname:'vendor'}))
-      .pipe(gulp.dest(assets.js.dest))
-      .pipe(uglify())
-      .pipe(rename({extname:'.min.js'}))
-      .pipe(gulp.dest(assets.js.dest))
-      .pipe(size({showFiles:true}));
-  })
 
   // Copy stylus files
   .task('stylus', ['styl'])
   .task('styl', ['clean:styl'], function(){
-    return gulp.src(assets.styl.orig)
+    return gulp.src(assets.styl.src)
       .pipe(gulp.dest(assets.styl.dest))
-      .pipe(size({showFiles:true}));
+      .pipe(size({title:'Stylesheets: ',showFiles:true}));
   })
 
   // Parse and minify CSS
   .task('stylesheets', ['css'])
   .task('css', function(){
-    return gulp.src(assets.css.styl)
-      .pipe(stylus({ use: nib() }))
-      .pipe(gulp.src(assets.css.vendor))
+    return gulp.src(assets.css.src)
+      .pipe(gulpif('*.styl', stylus({ use: nib() }))      )
       .pipe(gulp.dest(assets.css.dest))
       .pipe(minifyCSS())
       .pipe(rename({extname:'.min.css'}))
-      .pipe(size({title:'Stylesheets: ', showFiles:true}))
-      .pipe(gulp.dest(assets.css.dest));
+      .pipe(gulp.dest(assets.css.dest))
+      .pipe(size({title:'Stylesheets: ', showFiles:true}));
   })
 
   // Copy bower file
@@ -107,23 +90,25 @@ gulp
   })
 
   .task('pack:tar.gz', function(){
-    return gulp.src(assets.pack.orig)
+    return gulp.src(assets.pack.src)
       .pipe(tar(assets.pack.name.replace('{version}', bower.version) + '.tar'))
       .pipe(gzip())
-      .pipe(gulp.dest(assets.pack.dest));
+      .pipe(gulp.dest(assets.pack.dest))
+      .pipe(size({title:'tar.gz: ', showFiles:true}));
   })
 
   .task('pack:zip', function(){
-    return gulp.src(assets.pack.orig)
+    return gulp.src(assets.pack.src)
       .pipe(zip(assets.pack.name.replace('{version}', bower.version) + '.zip'))
-      .pipe(gulp.dest(assets.pack.dest));
+      .pipe(gulp.dest(assets.pack.dest))
+      .pipe(size({title:'zip: ', showFiles:true}));
   })
 
   // Watch
   .task('watch', function(){
     gulp.watch(assets.js.foundation, ['js']);
     gulp.watch(assets.js.vendor, ['js']);
-    gulp.watch(assets.styl.orig, ['styl','css']);
+    gulp.watch(assets.styl.src, ['styl','css']);
     gulp.watch(assets.css.vendor, ['css']);
     gulp.watch('bower.json', ['bower']);
   })

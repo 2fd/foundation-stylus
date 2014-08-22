@@ -45,10 +45,14 @@ radius($radius=$global-radius)
 side-radius($side, $radius=$global-radius)
 
   if $side is left or $side is right
+    -webkit-border-bottom-{$side}-radius $radius
+    -webkit-border-top-{$side}-radius $radius
     border-bottom-{$side}-radius $radius
     border-top-{$side}-radius $radius
 
   else
+    -webkit-border-{$side}-left-radius $radius
+    -webkit-border-{$side}-right-radius $radius
     border-{$side}-left-radius $radius
     border-{$side}-right-radius $radius
 
@@ -209,6 +213,34 @@ element-invisible-off()
   overflow visible
   clip auto
 
+// We use these as default colors throughout
+$primary-color    ?= #008CBA   // bondi-blue
+$secondary-color  ?= #e7e7e7 // white-lilac
+$alert-color      ?= #f04124     // cinnabar
+$success-color    ?= #43AC6A   // sea-green
+$warning-color    ?= #f08a24   // carrot
+$info-color       ?= #a0d3e8      // cornflower
+
+$white         ?= #FFFFFF
+$ghost         ?= #FAFAFA
+$snow          ?= #F9F9F9
+$vapor         ?= #F6F6F6
+$white-smoke   ?= #F5F5F5
+$silver        ?= #EFEFEF
+$smoke         ?= #EEEEEE
+$gainsboro     ?= #DDDDDD
+$iron          ?= #CCCCCC
+$base          ?= #AAAAAA
+$aluminum      ?= #999999
+$jumbo         ?= #888888
+$monsoon       ?= #777777
+$steel         ?= #666666
+$charcoal      ?= #555555
+$tuatara       ?= #444444
+$oil           ?= #333333
+$jet           ?= #222222
+$black         ?= #000000
+
 // We use these to define default font weights
 $font-weight-normal ?= normal
 $font-weight-bold ?= bold
@@ -234,14 +266,6 @@ if $text-direction is ltr
 else
   $default-float = right
   $opposite-direction = left
-
-// We use these as default colors throughout
-$primary-color ?= #008CBA
-$secondary-color ?= #e7e7e7
-$alert-color ?= #f04124
-$success-color ?= #43AC6A
-$warning-color ?= #f08a24
-$info-color ?= #a0d3e8
 
 // We use these to make sure border radius matches unless we want it different.
 $global-radius ?= 3px
@@ -312,7 +336,7 @@ if !$module.global
   // Forward slash placed around everything to convince PhantomJS to read the value.
 
   meta.foundation-version
-    font-family '/5.3.3/'
+    font-family '/5.4/'
 
   meta.foundation-mq-small
     font-family "/" + unquote($small-up) + "/"

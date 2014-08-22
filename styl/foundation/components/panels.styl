@@ -11,7 +11,7 @@
 $include-html-panel-classes ?= $include-html-classes
 
 // We use these to control the background and border styles
-$panel-bg ?= lighten(#fff, -5%)
+$panel-bg ?= lighten($white, -5%)
 $panel-border-style ?= solid
 $panel-border-size ?= 1px
 
@@ -24,8 +24,8 @@ $panel-margin-bottom ?= $rem-calc(20)
 $panel-padding ?= $rem-calc(20)
 
 // We use these to set default font colors
-$panel-font-color ?= #333
-$panel-font-color-alt ?= #fff
+$panel-font-color ?= $oil
+$panel-font-color-alt ?= $white
 
 $panel-header-adjust ?= true
 $callout-panel-link-color ?= $primary-color
@@ -38,7 +38,7 @@ $callout-panel-link-color ?= $primary-color
 // @mixins
 //
 // We use this mixin to create panels.
-// $bg - Sets the panel background color. Default: $panel-pg || lighten(#fff, -5%) !default
+// $bg - Sets the panel background color. Default: $panel-pg || lighten($white, -5%) !default
 // $padding - Sets the panel padding amount. Default: $panel-padding || $rem-calc(20)
 // $adjust - Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust || true
 panel($bg=$panel-bg, $padding=$panel-padding, $adjust=$panel-header-adjust)
@@ -99,4 +99,3 @@ if $include-html-panel-classes and !$module.panels
 
     &.radius
       radius()
-

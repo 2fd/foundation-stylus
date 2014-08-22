@@ -12,8 +12,8 @@
 $include-html-button-classes ?=  $include-html-classes
 
 // We use these to set the color of the pip in dropdown buttons
-$dropdown-button-pip-color ?=  #fff
-$dropdown-button-pip-color-alt ?=  #333
+$dropdown-button-pip-color ?=  $white
+$dropdown-button-pip-color-alt ?=  $oil
 
 $button-pip-tny ?=  $rem-calc(6)
 $button-pip-sml ?=  $rem-calc(7)
@@ -54,10 +54,10 @@ $dropdown-button-pip-top-lrg ?=  -($button-pip-lrg/2) + $rem-calc(3)
 // We use this mixin to build off of the button mixin and add dropdown button styles
 //
 // $padding - Determines the size of button you're working with. Default: medium. Options [tiny, small, medium, large]
-// $pip-color - Color of the little triangle that points to the dropdown. Default: #fff.
+// $pip-color - Color of the little triangle that points to the dropdown. Default: $white.
 // $base-style - Add in base-styles. This can be set to false. Default:true
 
-dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
+dropdown-button($padding=medium, $pip-color=$white, $base-style=true)
 
 	// We add in base styles, but they can be negated by setting to 'false'.
 	if $base-style
@@ -133,7 +133,7 @@ dropdown-button($padding=medium, $pip-color=#fff, $base-style=true)
 
 if $include-html-button-classes and !$module.dropdown-button
 	$module.dropdown-button = true
-	
+
 	.dropdown.button
 	button.dropdown
 		dropdown-button()

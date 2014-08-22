@@ -36,7 +36,7 @@ button-group-container($styles=true, $float=false)
       overflow hidden
 
 // We use this to control styles for button groups
-button-group-style($radius=false, $even=false, $float=$default-float)
+button-group-style($radius=false, $even=false, $float=false, $orientation=horizontal)
 
   if $radius is true
     $use-radius = $button-radius
@@ -58,13 +58,36 @@ button-group-style($radius=false, $even=false, $float=$default-float)
   if $float
     margin 0
     float $float
+    display list-item
 
     // Make sure the first child doesn't get the negative margin.
     &:first-child
       margin-{$default-float} 0
 
+  else
+    margin 0 -2px
+    float none
+    display inline-block
+
+  if $orientation == vertical
+    display block
+    margin 0
+
+    > button
+    .button
+      border-top $button-group-border-width solid
+      border-color rgba(255, 255, 255, 0.5)
+      border-left-width  0px
+      margin 0
+      display block
+
+    &:first-child
+      button
+      .button
+        border-top 0
+
   // We use these to control left and right radius on first/last buttons in the group.
-  if $radius
+  if $radius is true
     &
     & > a
     & > button
@@ -75,13 +98,52 @@ button-group-style($radius=false, $even=false, $float=$default-float)
     &:first-child > a
     &:first-child > button
     &:first-child > .button
-      side-radius($default-float, $use-radius)
+
+      if $orientation == vertical
+        side-radius(top, $button-radius)
+
+      else
+        side-radius($default-float, $button-radius)
 
     &:last-child
     &:last-child > a
     &:last-child > button
     &:last-child > .button
-      side-radius($opposite-direction, $use-radius)
+
+      if $orientation == vertical
+        side-radius(bottom, $button-radius)
+
+      else
+        side-radius($opposite-direction, $button-radius)
+
+  else if $radius
+    &
+    & > a
+    & > button
+    & > .button
+      radius(0)
+
+    &:first-child
+    &:first-child > a
+    &:first-child > button
+    &:first-child > .button
+
+      if $orientation == vertical
+        side-radius(top, $radius)
+
+      else
+        side-radius($default-float, $radius)
+
+    &:last-child
+    &:last-child > a
+    &:last-child > button
+    &:last-child > .button
+
+      if $orientation == vertical
+        side-radius(bottom, $radius)
+
+      else
+        side-radius($opposite-direction, $radius)
 
   // We use this to make the buttons even width across their container
   if $even
@@ -104,11 +166,42 @@ if $include-html-button-classes and !$module.button-group
     & > li
       button-group-style()
 
+    &.stack
+      & > li
+        button-group-style($orientation:vertical)
+
+    &.stack-for-small
+      & > li
+        button-group-style($orientation:horizontal)
+
+        @media $small-only
+          button-group-style($orientation:vertical)
+
     &.radius > *
       button-group-style($radius:$button-radius, $float:null)
 
+    &.radius.stack > *
+      button-group-style($radius:$button-radius, $float:null, $orientation:vertical)
+
+    &.radius.stack-for-small > *
+      @media $medium-up
+        button-group-style($radius:$button-radius, $orientation:horizontal)
+
+      @media $small-only
+        button-group-style($radius:$button-radius, $orientation:vertical)
+
     &.round > *
       button-group-style($radius:$button-round, $float:null)
+
+    &.round.stack > *
+      button-group-style($radius:$button-med, $float:null, $orientation:vertical)
+
+    &.round.stack-for-small > *
+      @media $medium-up
+        button-group-style($radius:$button-round, $orientation:horizontal)
+
+      @media $small-only
+        button-group-style($radius:$button-med, $orientation:vertical)
 
     for $i in (2..8)
       &.even-{$i} li

@@ -16,10 +16,11 @@ $range-slider-bar-height ?= $rem-calc(16)
 
 $range-slider-bar-border-width ?= 1px
 $range-slider-bar-border-style ?= solid
-$range-slider-bar-border-color ?= #ddd
+$range-slider-bar-border-color ?= $gainsboro
 $range-slider-radius ?= $global-radius
 $range-slider-round ?= $global-rounded
-$range-slider-bar-bg-color ?= #fafafa
+$range-slider-bar-bg-color ?= $ghost
+$range-slider-active-segment-bg-color ?= lighten($secondary-color, -1%)
 
 // Vertical bar styles
 $range-slider-vertical-bar-width ?= $rem-calc(16)
@@ -100,6 +101,10 @@ range-slider-handle-base()
   border $range-slider-handle-border-width $range-slider-handle-border-style $range-slider-handle-border-color
   cursor $range-slider-handle-cursor
 
+  // This removes the 300ms touch delay on Windows 8
+  -ms-touch-action manipulation
+  touch-action manipulation
+
 // @mixins
 range-slider-handle-style(
   $bg=true,
@@ -178,7 +183,7 @@ if $include-html-range-slider-classes and !$module.range-slider
     display inline-block
     position absolute
     height ($range-slider-bar-height - $rem-calc(($strip-unit($range-slider-bar-border-width) * 2)))
-    background lighten($secondary-color, -1%)
+    background $range-slider-active-segment-bg-color
 
   .range-slider-handle
     range-slider-handle-base()

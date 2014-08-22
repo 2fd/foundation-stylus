@@ -13,7 +13,7 @@ $include-html-orbit-classes ?= $include-html-classes
 // We use these to control the caption styles
 $orbit-container-bg ?= none
 $orbit-caption-bg ?= rgba(51,51,51, 0.8)
-$orbit-caption-font-color ?= #fff
+$orbit-caption-font-color ?= $white
 $orbit-caption-font-size ?= $rem-calc(14)
 $orbit-caption-padding ?= $rem-calc(10 14)
 $orbit-caption-height ?= auto
@@ -23,21 +23,21 @@ $orbit-caption-position ?= bottom
 // We use these to control the left/right nav styles
 $orbit-nav-bg ?= transparent
 $orbit-nav-bg-hover ?= rgba(0,0,0,0.3)
-$orbit-nav-arrow-color ?= #fff
-$orbit-nav-arrow-color-hover ?= #fff
+$orbit-nav-arrow-color ?= $white
+$orbit-nav-arrow-color-hover ?= $white
 
 // We use these to control the timer styles
 $orbit-timer-bg ?= rgba(255,255,255,0.3)
 $orbit-timer-show-progress-bar ?= true
 
 // We use these to control the bullet nav styles
-$orbit-bullet-nav-color ?= #ccc
-$orbit-bullet-nav-color-active ?= #999
+$orbit-bullet-nav-color ?= $iron
+$orbit-bullet-nav-color-active ?= $aluminum
 $orbit-bullet-radius ?= $rem-calc(9)
 
 // We use these to controls the style of slide numbers
 $orbit-slide-number-bg ?= rgba(0,0,0,0)
-$orbit-slide-number-font-color ?= #fff
+$orbit-slide-number-font-color ?= $white
 $orbit-slide-number-padding ?= $rem-calc(5)
 
 // Graceful Loading Wrapper and preloader
@@ -106,7 +106,7 @@ if $include-html-orbit-classes and !$module.orbit
       margin-top -20px
       margin-left -20px
       border solid 3px
-      border-color #555 #fff
+      border-color $charcoal $white
       radius(1000px)
       animation-name rotate
       animation-duration 1.5s
@@ -203,7 +203,7 @@ if $include-html-orbit-classes and !$module.orbit
         {$opposite-direction} 0
         width 11px
         height 14px
-        border solid 4px #fff
+        border solid 4px $white
         border-top none
         border-bottom none
 
@@ -217,9 +217,9 @@ if $include-html-orbit-classes and !$module.orbit
           border inset 8px
           border-left-style solid
           border-color transparent
-          border-left-color #fff
+          border-left-color $white
           &.dark
-            border-left-color #333
+            border-left-color $oil
 
     &:hover .orbit-timer > span
       display block
@@ -348,4 +348,3 @@ if $include-html-orbit-classes and !$module.orbit
     if $orbit-bullet-hide-for-small
       .orbit-bullets
         display none
-

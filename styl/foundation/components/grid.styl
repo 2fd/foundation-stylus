@@ -241,7 +241,7 @@ if $include-html-grid-classes and !$module.grid
     grid-column($columns:$total-columns)
 
   [class*="column"] + [class*="column"]:last-child
-    float $opposite-direction
+    float $last-child-float
 
   [class*="column"] + [class*="column"].end
     float $default-float

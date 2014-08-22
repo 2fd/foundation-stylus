@@ -11,11 +11,11 @@
 $include-html-icon-bar-classes ?= $include-html-classes
 
 // We use these to style the icon-bar and items
-$icon-bar-bg ?= #333
-$icon-bar-font-color ?= #fff
+$icon-bar-bg ?= $oil
+$icon-bar-font-color ?= $white
 $icon-bar-font-size ?= 1rem
 $icon-bar-hover-color ?= $primary-color
-$icon-bar-icon-color ?= #fff
+$icon-bar-icon-color ?= $white
 $icon-bar-icon-size ?= 1.875rem
 $icon-bar-image-width ?= 1.875rem
 $icon-bar-image-height ?= 1.875rem
@@ -27,10 +27,7 @@ $icon-bar-item-padding ?= 1.25rem
 // Icon Bar Mixins
 //
 
-// We use this mixin to create the base styles for our switch element.
-//
-// $transition-speed - Time in ms for switch to toggle. Default: $switch-paddle-transition-speed.
-// $transition-ease - Easing function to use for animation (i.e. ease-out). Default: $switch-paddle-transition-ease.
+// We use this mixin to create the base styles for our icon bar element.
 icon-bar-base()
   width 100%
   font-size 0
@@ -77,6 +74,7 @@ icon-bar-base()
     text-align left
 
   &.vertical
+  &.small-vertical
     height 100%
     width auto
 
@@ -85,10 +83,28 @@ icon-bar-base()
       margin auto
       float none
 
+  &.medium-vertical
+    @media $medium-up
+      height 100%
+      width auto
+
+      .item
+        width auto
+        margin auto
+        margin auto
+
+  &.large-vertical
+    @media $large-up
+      height 100%
+      width auto
+
+      .item
+        width auto
+        margin auto
+        float none
+
+
 // We use this mixin to create the size styles for icon bars.
-//
-// $height - Height (in px) of the switch. Default: $switch-height-med.
-// $font-size - Font size of text in switch. Default: $switch-font-size-med.
 icon-bar-size(
   $padding=$icon-bar-item-padding,
   $font-size=$icon-bar-font-size,
@@ -98,27 +114,21 @@ icon-bar-size(
 )
 
   & > *
-    font-size $icon-bar-font-size
-    padding $icon-bar-item-padding
+    font-size $font-size
+    padding $padding
 
     i, img
       & + label
         margin-top .0625rem
 
     i
-      font-size $icon-bar-icon-size
+      font-size $icon-size
 
     img
-      width $icon-bar-image-width
-      height $icon-bar-image-height
+      width $image-width
+      height $image-height
 
 // We use this mixin to add color and other fanciness to the switches.
-//
-// $paddle-bg - Background of switch paddle. Default: $switch-paddle-bg.
-// $active-color - Background color of positive side of switch. Default: $switch-positive-color.
-// $negative-color - Background color of negative side of switch. Default: $switch-negative-color.
-// $radius - Radius to apply to switch. Default: false.
-// $base-style - Apply base styles? Default: true.
 icon-bar-style(
   $bar-bg=$icon-bar-bg,
   $bar-font-color=$icon-bar-font-color,
@@ -188,32 +198,77 @@ if $include-html-icon-bar-classes and ! $module.icon-bar
         width 50%
 
       &.vertical .item
+      &.small-vertical .item
         width auto
+
+      &.medium-vertical .item
+        @media $medium-up
+          width auto
+
+      &.large-vertical .item
+        @media $large-up
+          width auto
 
     &.three-up
       .item
         width 33.3333%
 
       &.vertical .item
+      &.small-vertical .item
         width auto
+
+      &.medium-vertical .item
+        @media $medium-up
+          width auto
+
+      &.large-vertical .item
+        @media $large-up
+          width auto
 
     &.four-up
       .item
         width 25%
 
       &.vertical .item
+      &.small-vertical .item
         width auto
+
+      &.medium-vertical .item
+        @media $medium-up
+          width auto
+
+      &.large-vertical .item
+        @media $large-up
+          width auto
 
     &.five-up
       .item
         width 20%
 
       &.vertical .item
+      &.small-vertical .item
         width auto
+
+      &.medium-vertical .item
+        @media $medium-up
+          width auto
+
+      &.large-vertical .item
+        @media $large-up
+          width auto
 
     &.six-up
       .item
         width 16.66667%
 
       &.vertical .item
+      &.small-vertical .item
         width auto
+
+      &.medium-vertical .item
+        @media $medium-up
+          width auto
+
+      &.large-vertical .item
+        @media $large-up
+          width auto

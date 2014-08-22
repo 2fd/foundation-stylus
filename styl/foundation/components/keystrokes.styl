@@ -13,15 +13,15 @@ $include-html-keystroke-classes ?= $include-html-classes
 // We use these to control text styles.
 $keystroke-font ?= "Consolas", "Menlo", "Courier", monospace
 $keystroke-font-size ?= inherit
-$keystroke-font-color ?= #222
-$keystroke-font-color-alt ?= #fff
+$keystroke-font-color ?= $jet
+$keystroke-font-color-alt ?= $white
 $keystroke-function-factor ?= -7%
 
 // We use this to control keystroke padding.
 $keystroke-padding ?= $rem-calc(2 4 0)
 
 // We use these to control background and border styles.
-$keystroke-bg ?= lighten(#fff, $keystroke-function-factor)
+$keystroke-bg ?= lighten($white, $keystroke-function-factor)
 $keystroke-border-style ?= solid
 $keystroke-border-width ?= 1px
 $keystroke-border-color ?= lighten($keystroke-bg, $keystroke-function-factor)
@@ -33,7 +33,7 @@ $keystroke-radius ?= $global-radius
 //
 
 // We use this mixin to create keystroke styles.
-// $bg - Default ?= $keystroke-bg || scale-color(#fff, $lightness: $keystroke-function-factor)
+// $bg - Default ?= $keystroke-bg || scale-color($white, $lightness: $keystroke-function-factor)
 keystroke($bg=$keystroke-bg)
 	// This find the lightness percentage of the background color.
 	$bg-lightness = lightness($bg)

@@ -13,11 +13,11 @@
 // Off Canvas Tab Bar Variables
 $include-html-off-canvas-classes ?= $include-html-classes
 
-$tabbar-bg ?= #333
+$tabbar-bg ?= $oil
 $tabbar-height ?= $rem-calc(45)
 $tabbar-icon-width ?= $tabbar-height
 $tabbar-line-height ?= $tabbar-height
-$tabbar-color ?= #fff
+$tabbar-color ?= $white
 $tabbar-middle-padding ?= 0 $rem-calc(10)
 
 // Off Canvas Divider Styles
@@ -26,31 +26,31 @@ $tabbar-right-section-border ?= $tabbar-left-section-border
 
 
 // Off Canvas Tab Bar Headers
-$tabbar-header-color ?= #fff
+$tabbar-header-color ?= $white
 $tabbar-header-weight ?= $font-weight-bold
 $tabbar-header-line-height ?= $tabbar-height
 $tabbar-header-margin ?= 0
 
 // Off Canvas Menu Variables
 $off-canvas-width ?= $rem-calc(250)
-$off-canvas-bg ?= #333
+$off-canvas-bg ?= $oil
 
 // Off Canvas Menu List Variables
 $off-canvas-label-padding ?= 0.3rem $rem-calc(15)
-$off-canvas-label-color ?= #999
+$off-canvas-label-color ?= $aluminum
 $off-canvas-label-text-transform ?= uppercase
 $off-canvas-label-font-size ?= $rem-calc(12)
 $off-canvas-label-font-weight ?= $font-weight-bold
-$off-canvas-label-bg ?= #444
+$off-canvas-label-bg ?= $tuatara
 $off-canvas-label-border-top ?= 1px solid lighten($off-canvas-label-bg, 14%)
 $off-canvas-label-border-bottom ?= none
 $off-canvas-label-margin ?= 0
 $off-canvas-link-padding ?= $rem-calc(10, 15)
-$off-canvas-link-color ?= rgba(#FFF, 0.7)
+$off-canvas-link-color ?= rgba($white, 0.7)
 $off-canvas-link-border-bottom ?= 1px solid lighten($off-canvas-bg, -25%)
 
 // Off Canvas Menu Icon Variables
-$tabbar-menu-icon-color ?= #FFF
+$tabbar-menu-icon-color ?= $white
 $tabbar-menu-icon-hover ?= lighten($tabbar-menu-icon-color, -30%)
 
 $tabbar-menu-icon-text-indent ?= $rem-calc(35)
@@ -67,9 +67,9 @@ $tabbar-hamburger-icon-gap ?= 6px
 // Off Canvas Back-Link Overlay
 $off-canvas-overlay-transition ?= background 300ms ease
 $off-canvas-overlay-cursor ?= pointer
-$off-canvas-overlay-box-shadow ?= -4px 0 4px rgba(#000, 0.5), 4px 0 4px rgba(#000, 0.5)
-$off-canvas-overlay-background ?= rgba(#FFF, 0.2)
-$off-canvas-overlay-background-hover ?= rgba(#FFF, 0.05)
+$off-canvas-overlay-box-shadow ?= -4px 0 4px rgba($black, 0.5), 4px 0 4px rgba($black, 0.5)
+$off-canvas-overlay-background ?= rgba($white, 0.2)
+$off-canvas-overlay-background-hover ?= rgba($white, 0.05)
 
 // Transition Variables
 $menu-slide ?= transform 500ms ease
@@ -193,7 +193,9 @@ tab-bar-section()
   top 0
 
   @media $medium-up
-    text-align left
+    &.left
+    &.right
+      text-align left
 
   // still need to make these non-presentational
   &.left
@@ -352,6 +354,22 @@ if $include-html-off-canvas-classes and !$module.offcanvas
     .exit-off-canvas
       back-link()
 
+  .offcanvas-overlap-left
+    .right-off-canvas-menu
+      transform none
+      z-index 1003
+
+    .exit-off-canvas
+      back-link()
+
+  .offcanvas-overlap-right
+    .left-off-canvas-menu
+      transform none
+      z-index 1003
+
+    .exit-off-canvas
+      back-link()
+
   // Older browsers
   .no-csstransforms
     .left-off-canvas-menu
@@ -365,3 +383,123 @@ if $include-html-off-canvas-classes and !$module.offcanvas
 
     .move-right > .inner-wrap
       left $off-canvas-width
+
+//
+// @Mixins
+// Off-Canvas Submenu Classes
+//
+off-canvas-submenu($position)
+  kill-flicker()
+
+  *
+    kill-flicker()
+
+  width $off-canvas-width
+  top 0
+  bottom 0
+  position absolute
+  margin 0
+  overflow-y auto
+  background $off-canvas-bg
+  z-index 1002
+  box-sizing content-box
+  -webkit-overflow-scrolling touch
+
+  if $position is left
+    transform translate3d(-100%,0,0)
+    left 0
+
+  else if $position is right
+    transform translate3d(100%,0,0)
+    right 0
+
+  transition $menu-slide
+
+  //back button style like label
+  .back > a
+    padding $off-canvas-label-padding
+    color $off-canvas-label-color
+    text-transform $off-canvas-label-text-transform
+    font-weight $off-canvas-label-font-weight
+    background $off-canvas-back-bg
+    border-top $off-canvas-back-border-top
+    border-bottom $off-canvas-back-border-bottom
+
+    &:hover
+      background $off-canvas-back-hover-bg
+      border-top $off-canvas-back-hover-border-top
+      border-bottom $off-canvas-back-hover-border-bottom
+
+    margin $off-canvas-label-margin
+
+    if $position is right
+      if $text-direction is rtl
+        &:before
+          icon-double-arrows($position: left)
+
+      else
+        &:after
+          icon-double-arrows($position: right)
+
+    else if $position is left
+      if $text-direction is rtl
+        &:after
+          icon-double-arrows($position: right)
+
+      else
+        &:before
+          icon-double-arrows($position: left)
+
+//Left double angle quote or Right double angle quote chars
+icon-double-arrows($position)
+  if $position is left
+    content "\AB"
+
+    if $text-direction is rtl
+      margin-left 0.5rem
+
+    else
+      margin-left 0.5rem
+
+  else if $position is right
+    content "\BB"
+
+    if $text-direction is rtl
+      margin-right 0.5rem
+
+    else
+      margin-left 0.5rem
+
+   display inline
+
+
+//
+// @Block
+// Off-Canvas Submenu Classes
+//
+if $include-html-off-canvas-classes
+  .left-submenu
+    off-canvas-submenu($position: left)
+
+    &.move-right
+      transform translate3d(0%,0,0)
+
+  .right-submenu
+    off-canvas-submenu($position: right)
+
+    &.move-left
+      transform translate3d(0%,0,0)
+
+  if $text-direction is rtl
+    .left-off-canvas-menu ul.off-canvas-list li.has-submenu > a:before
+      icon-double-arrows($position: left)
+
+    .right-off-canvas-menu ul.off-canvas-list li.has-submenu > a:after
+      icon-double-arrows($position: right)
+
+  else
+    .left-off-canvas-menu ul.off-canvas-list li.has-submenu > a:after
+      icon-double-arrows($position: right)
+
+    .right-off-canvas-menu ul.off-canvas-list li.has-submenu > a:before
+      icon-double-arrows($position: left)

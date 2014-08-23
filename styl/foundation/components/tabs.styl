@@ -14,10 +14,10 @@
 $include-html-tabs-classes ?= $include-html-classes
 
 $tabs-navigation-padding ?= $rem-calc(16)
-$tabs-navigation-bg-color ?= #efefef
-$tabs-navigation-active-bg-color ?= #fff
+$tabs-navigation-bg-color ?= $silver
+$tabs-navigation-active-bg-color ?= $white
 $tabs-navigation-hover-bg-color ?= lighten($tabs-navigation-bg-color,-6%)
-$tabs-navigation-font-color ?= #222
+$tabs-navigation-font-color ?= $jet
 $tabs-navigation-active-font-color ?= $tabs-navigation-font-color
 $tabs-navigation-font-size ?= $rem-calc(16)
 $tabs-navigation-font-family ?= $body-font-family
@@ -49,7 +49,7 @@ if $include-html-tabs-classes and !$module.tabs
 
 			> a
 				display block
-				background $tabs-navigation-bg-color
+				background-color $tabs-navigation-bg-color
 				color $tabs-navigation-font-color
 				padding $tabs-navigation-padding $tabs-navigation-padding * 2
 				font-family $tabs-navigation-font-family
@@ -59,8 +59,8 @@ if $include-html-tabs-classes and !$module.tabs
 					background $tabs-navigation-hover-bg-color
 
 			&.active a
-				background $tabs-navigation-active-bg-color
-				color:$tabs-navigation-active-font-color
+				background-color $tabs-navigation-active-bg-color
+				color $tabs-navigation-active-font-color
 
 		&.radius
 			dd:first-child

@@ -40,7 +40,7 @@ $side-nav-heading-text-transform ?= uppercase
 // We use these to control border styles
 $side-nav-divider-size ?= 1px
 $side-nav-divider-style ?= solid
-$side-nav-divider-color ?= lighten(#fff, 10%)
+$side-nav-divider-color ?= lighten($white, 10%)
 
 //
 // @Mixins
@@ -110,4 +110,3 @@ if $include-html-nav-classes and !$module.side-nav
 
   .side-nav
     side-nav()
-

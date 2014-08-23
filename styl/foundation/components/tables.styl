@@ -12,18 +12,18 @@
 $include-html-table-classes ?= $include-html-classes
 
 // These control the background color for the table and even rows
-$table-bg ?= #fff
-$table-even-row-bg ?= #f9f9f9
+$table-bg ?= $white
+$table-even-row-bg ?= $snow
 
 // These control the table cell border style
 $table-border-style ?= solid
 $table-border-size ?= 1px
-$table-border-color ?= #ddd
+$table-border-color ?= $gainsboro
 
 // These control the table head styles
-$table-head-bg ?= #f5f5f5
+$table-head-bg ?= $white-smoke
 $table-head-font-size ?= $rem-calc(14)
-$table-head-font-color ?= #222
+$table-head-font-color ?= $jet
 $table-head-font-weight ?= $font-weight-bold
 $table-head-padding ?= $rem-calc(8 10 10)
 
@@ -43,7 +43,7 @@ $table-caption-font-weight ?= bold
 // These control the row padding and font styles
 $table-row-padding ?= $rem-calc(9 10)
 $table-row-font-size ?= $rem-calc(14)
-$table-row-font-color ?= #222
+$table-row-font-color ?= $jet
 $table-line-height ?= $rem-calc(18)
 
 // These are for controlling the display and margin of tables
@@ -59,6 +59,8 @@ table()
   background $table-bg
   margin-bottom $table-margin-bottom
   border $table-border-style $table-border-size $table-border-color
+  table-layout fixed
+  width 100%
 
   caption
     background $table-caption-bg
@@ -119,7 +121,6 @@ table()
 
 if $include-html-table-classes and !$module.tables
   $module.tables = true
-  
+
   table
     table()
-

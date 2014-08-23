@@ -17,7 +17,7 @@ $sub-nav-list-padding-top ?= $rem-calc(4)
 // We use this to control the definition
 $sub-nav-font-family ?= $body-font-family
 $sub-nav-font-size ?= $rem-calc(14)
-$sub-nav-font-color ?= #999
+$sub-nav-font-color ?= $aluminum
 $sub-nav-font-weight ?= $font-weight-normal
 $sub-nav-text-decoration ?= none
 $sub-nav-padding ?= $rem-calc(3 16)
@@ -30,7 +30,7 @@ $sub-nav-font-color-hover ?= lighten($sub-nav-font-color,-25%)
 $sub-nav-active-font-weight ?= $font-weight-normal
 $sub-nav-active-bg ?= $primary-color
 $sub-nav-active-bg-hover ?= lighten($sub-nav-active-bg,-14%)
-$sub-nav-active-color ?= #fff
+$sub-nav-active-color ?= $white
 $sub-nav-active-padding ?= $sub-nav-padding
 $sub-nav-active-cursor ?= default
 
@@ -115,6 +115,6 @@ sub-nav(
 
 if $include-html-nav-classes and !$module.sub-nav
 	$module.sub-nav = true
-	
+
 	.sub-nav
 		sub-nav()

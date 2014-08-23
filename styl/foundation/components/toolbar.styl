@@ -17,7 +17,7 @@ if $include-html-toolbar-classes and !$module.toolbar
   $module.toolbar = true
 
   .toolbar
-    background #333
+    background $oil
     width 100%
     font-size 0
     display inline-block
@@ -57,20 +57,20 @@ if $include-html-toolbar-classes and !$module.toolbar
       float left
 
       &:hover
-        background rgba(#fff, 0.1)
+        background rgba($white, 0.1)
 
   .toolbar .tab-content
     font-size 16px
     text-align center
 
     label
-      color #ccc
+      color $iron
 
     i
       font-size 30px
       display block
       margin 0 auto
-      color #ccc
+      color $iron
       vertical-align middle
 
     img

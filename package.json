@@ -1,6 +1,6 @@
 {
   "name": "foundation-stylus",
-  "version": "5.4.0",
+  "version": "5.4.3",
   "main": "styl/foundation",
   "devDependencies": {
     "delete": "^0.1.4",
@@ -10,6 +10,7 @@
     "gulp-if": "^1.2.4",
     "gulp-minify-css": "^0.3.7",
     "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.4.0",
     "gulp-size": "^0.4.1",
     "gulp-stylus": "^1.3.0",
     "gulp-tar": "^0.5.1",

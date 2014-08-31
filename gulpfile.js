@@ -13,6 +13,7 @@ var gulp = require('gulp')
   , gzip = require('gulp-gzip')
   , size = require('gulp-size')
   , gulpif = require('gulp-if')
+  , replace = require('gulp-replace')
 
   // Config
   , assets = require('./assets.json')
@@ -28,17 +29,14 @@ gulp
   // Clen
   .task('clean', ['clean:js', 'clean:styl', 'clean:css', 'clean:pack'])
 
-  .task('clean:scripts', ['clean:js'])
   .task('clean:js', function(){
     del.sync(assets.js.dest);
   })
 
-  .task('clean:stylus', ['clean:styl'])
   .task('clean:styl', function(){
     del.sync(assets.styl.dest);
   })
 
-  .task('clean:stylesheets', ['clean:css'])
   .task('clean:css', function(){
     del.sync(assets.css.dest);
   })
@@ -47,8 +45,9 @@ gulp
     del.sync(assets.pack.dest);
   })
 
-  .task('js',function(){
+  .task('js', ['clean:js'],function(){
     return gulp.src(assets.js.src)
+      .pipe(replace('{{VERSION}}', bower.version))
       .pipe(gulpif(isVendorJS, rename({dirname:'vendor'})))
       .pipe(gulp.dest(assets.js.dest))
       .pipe(uglify())
@@ -59,7 +58,6 @@ gulp
 
 
   // Copy stylus files
-  .task('stylus', ['styl'])
   .task('styl', ['clean:styl'], function(){
     return gulp.src(assets.styl.src)
       .pipe(gulp.dest(assets.styl.dest))
@@ -67,8 +65,7 @@ gulp
   })
 
   // Parse and minify CSS
-  .task('stylesheets', ['css'])
-  .task('css', function(){
+  .task('css', ['clean:css'],function(){
     return gulp.src(assets.css.src)
       .pipe(gulpif('*.styl', stylus({ use: nib() }))      )
       .pipe(gulp.dest(assets.css.dest))

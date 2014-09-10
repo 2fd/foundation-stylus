@@ -34,6 +34,7 @@ $tabbar-header-margin ?= 0
 // Off Canvas Menu Variables
 $off-canvas-width ?= $rem-calc(250)
 $off-canvas-bg ?= $oil
+$off-canvas-bg-hover ?= lighten($tabbar-bg, -30%)
 
 // Off Canvas Menu List Variables
 $off-canvas-label-padding ?= 0.3rem $rem-calc(15)
@@ -245,7 +246,7 @@ off-canvas-list()
       border-bottom $off-canvas-link-border-bottom
 
       &:hover
-        background lighten($tabbar-bg, -30%)
+        background $off-canvas-bg-hover
 
       transition background 300ms ease
 

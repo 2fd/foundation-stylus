@@ -3,7 +3,8 @@
   "version": "5.4.3",
   "main": [
     "css/foundation.css",
-    "js/foundation.js"
+    "js/foundation.js",
+    "js"
   ],
   "ignore": [],
   "dependencies": {

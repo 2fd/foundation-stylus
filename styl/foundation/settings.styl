@@ -88,22 +88,6 @@
 // $font-weight-normal ?= normal
 // $font-weight-bold ?= bold
 
-// We use these to control various global styles
-// $body-bg ?= $white
-// $body-font-color ?= $jet
-// $body-font-family ?= "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
-// $body-font-weight ?= $font-weight-normal
-// $body-font-style ?= normal
-
-// We use this to control font-smoothing
-// $font-smoothing ?= antialiased
-
-// We use these to control text direction settings
-// $text-direction ?= ltr
-// $opposite-direction ?= right
-// $default-float ?= left
-// $last-child-float ?= $opposite-direction
-
 // We use these as default colors throughout
 // $primary-color ?= #008CBA
 // $secondary-color ?= #e7e7e7
@@ -131,6 +115,22 @@
 // $oil         ?= #333333
 // $jet         ?= #222222
 // $black       ?= #000000
+
+// We use these to control various global styles
+// $body-bg ?= $white
+// $body-font-color ?= $jet
+// $body-font-family ?= "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif
+// $body-font-weight ?= $font-weight-normal
+// $body-font-style ?= normal
+
+// We use this to control font-smoothing
+// $font-smoothing ?= antialiased
+
+// We use these to control text direction settings
+// $text-direction ?= ltr
+// $opposite-direction ?= right
+// $default-float ?= left
+// $last-child-float ?= $opposite-direction
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius ?= 3px
@@ -374,7 +374,6 @@
 // $block-grid-default-spacing ?= $rem-calc(20)
 // $align-block-grid-to-grid ?= false
 
-
 // Enables media queries for block-grid classes. Set to false if writing semantic HTML.
 // $block-grid-media-queries ?= true
 
@@ -544,6 +543,9 @@
 
 // We use this to control the styles for when the dropdown has custom content.
 // $f-dropdown-content-padding ?= $rem-calc(20)
+
+// Default radius for dropdown.
+// $f-dropdown-radius ?= $global-radius
 
 // 09. Dropdown Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -719,7 +721,7 @@
 // $joyride-tip-radius ?= 4px
 // $joyride-tip-position-offset ?= 22px
 
-// Here, we're setting the tip dont styles
+// Here, we're setting the tip font styles
 // $joyride-tip-font-color ?= $white
 // $joyride-tip-font-size ?= $rem-calc(14)
 // $joyride-tip-header-weight ?= $font-weight-bold
@@ -811,6 +813,7 @@
 // Off Canvas Menu Variables
 // $off-canvas-width ?= $rem-calc(250)
 // $off-canvas-bg ?= $oil
+// $off-canvas-bg-hover ?= lighten($tabbar-bg, -30%)
 
 // Off Canvas Menu List Variables
 // $off-canvas-label-padding ?= 0.3rem $rem-calc(15)
@@ -986,7 +989,6 @@
 // $price-money-size ?= $rem-calc(32)
 // $price-money-font-family ?= $body-font-family
 
-
 // We use these to control the description styles
 // $price-bg ?= $white
 // $price-desc-color ?= $monsoon
@@ -1040,7 +1042,7 @@
 
 // $include-html-range-slider-classes ?= $include-html-classes;
 
-// These variabels define the slider bar styles
+// These variables define the slider bar styles
 // $range-slider-bar-width ?= 100%;
 // $range-slider-bar-height ?= $rem-calc(16);
 
@@ -1055,7 +1057,7 @@
 // $range-slider-vertical-bar-width ?= $rem-calc(16);
 // $range-slider-vertical-bar-height ?= $rem-calc(200);
 
-// These variabels define the slider handle styles
+// These variables define the slider handle styles
 // $range-slider-handle-width ?= $rem-calc(32);
 // $range-slider-handle-height ?= $rem-calc(22);
 // $range-slider-handle-position-top ?= $rem-calc(-5);
@@ -1275,9 +1277,10 @@
 // $table-row-font-color ?= $jet
 // $table-line-height ?= $rem-calc(18)
 
-// These are for controlling the display and margin of tables
+// These are for controlling the layout, display and margin of tables
 // $table-display ?= table-cell
 // $table-margin-bottom ?= $rem-calc(20)
+// $table-layout ?= auto
 
 // 31. Tabs
 // - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -46,6 +46,10 @@ $success-button-bg-hover ?= lighten($success-color, $button-function-factor)
 $success-button-border-color ?= $success-button-bg-hover
 $alert-button-bg-hover ?= lighten($alert-color, $button-function-factor)
 $alert-button-border-color ?= $alert-button-bg-hover
+$warning-button-bg-hover ?= lighten($warning-color, $button-function-factor)
+$warning-button-border-color ?= $warning-button-bg-hover
+$info-button-bg-hover ?= lighten($info-color, $button-function-factor)
+$info-button-border-color ?= $info-button-bg-hover
 
 // We use this to set the default radius used throughout the core.
 $button-radius ?= $global-radius
@@ -249,6 +253,12 @@ if $include-html-button-classes and !$module.buttons
 		&.alert
 			button-style($bg:$alert-color, $bg-hover:$alert-button-bg-hover, $border-color:$alert-button-border-color)
 
+		&.warning
+			button-style($bg:$warning-color, $bg-hover:$warning-button-bg-hover, $border-color:$warning-button-border-color)
+
+		&.info
+			button-style($bg:$info-color, $bg-hover:$info-button-bg-hover, $border-color:$info-button-border-color)
+
 
 		&.large
 			button-size($padding:$button-lrg)
@@ -289,6 +299,12 @@ if $include-html-button-classes and !$module.buttons
 
 			&.alert
 				button-style($bg:$alert-color, $disabled:true, $bg-hover:$alert-button-bg-hover, $border-color:$alert-button-border-color)
+
+			&.warning
+				button-style($bg:$warning-color, $disabled:true, $bg-hover:$warning-button-bg-hover, $border-color:$warning-button-border-color)
+
+			&.info
+				button-style($bg:$info-color, $disabled:true, $bg-hover:$info-button-bg-hover, $border-color:$info-button-border-color)
 
 	//firefox 2px fix
 	button::-moz-focus-inner

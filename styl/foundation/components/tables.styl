@@ -46,7 +46,8 @@ $table-row-font-size ?= $rem-calc(14)
 $table-row-font-color ?= $jet
 $table-line-height ?= $rem-calc(18)
 
-// These are for controlling the display and margin of tables
+// These are for controlling the layout, display and margin of tables
+$table-layout ?= auto
 $table-display ?= table-cell
 $table-margin-bottom ?= $rem-calc(20)
 
@@ -59,8 +60,7 @@ table()
   background $table-bg
   margin-bottom $table-margin-bottom
   border $table-border-style $table-border-size $table-border-color
-  table-layout fixed
-  width 100%
+  table-layout $table-layout
 
   caption
     background $table-caption-bg

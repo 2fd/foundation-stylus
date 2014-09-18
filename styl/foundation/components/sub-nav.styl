@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -113,8 +113,6 @@ sub-nav(
 // Sub Nav Block
 //
 
-if $include-html-nav-classes and !$module.sub-nav
-	$module.sub-nav = true
-
+if $include-html-nav-classes
 	.sub-nav
 		sub-nav()

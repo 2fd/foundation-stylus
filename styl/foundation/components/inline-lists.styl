@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -56,8 +56,6 @@ inline-list()
 // Inline Lists Block
 //
 
-if $include-html-inline-list-classes and !$module.inline-list
-	$module.inline-list = true
-	
+if $include-html-inline-list-classes
 	.inline-list
 		inline-list()

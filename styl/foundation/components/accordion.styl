@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -120,9 +120,7 @@ accordion-content($bg= $accordion-content-active-bg-color, $padding= $accordion-
 // Accordion Block
 //
 
-if $include-html-accordion-classes and !$module.accordion
-	$module.accordion = true
-
+if $include-html-accordion-classes
 	.accordion
 		accordion-container()
 

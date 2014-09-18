@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -232,9 +232,7 @@ button(
 // Buttons Block
 //
 
-if $include-html-button-classes and !$module.buttons
-	$module.buttons = true
-
+if $include-html-button-classes
 	// Default styles applied outside of media query
 	button
 	.button

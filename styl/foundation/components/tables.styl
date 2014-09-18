@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -119,8 +119,6 @@ table()
 // Tables Block
 //
 
-if $include-html-table-classes and !$module.tables
-  $module.tables = true
-
+if $include-html-table-classes
   table
     table()

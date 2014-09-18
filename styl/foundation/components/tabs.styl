@@ -2,9 +2,9 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
-@import "grid"
-@import "type"
+@require "global"
+@require "grid"
+@require "type"
 
 //
 // @Variables
@@ -32,9 +32,7 @@ $tabs-vertical-navigation-margin-bottom ?= 1.25rem
 // Progress Bars Block
 //
 
-if $include-html-tabs-classes and !$module.tabs
-	$module.tabs = true
-
+if $include-html-tabs-classes
 	.tabs
 		clearfix()
 		margin-bottom 0 !important

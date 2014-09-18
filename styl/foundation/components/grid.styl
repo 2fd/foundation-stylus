@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -217,9 +217,7 @@ grid-html-classes($size)
 // Grid Block
 //
 
-if $include-html-grid-classes and !$module.grid
-  $module.grid = true
-
+if $include-html-grid-classes
   .row
     grid-row()
 

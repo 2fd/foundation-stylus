@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -118,9 +118,7 @@ crumbs()
 // Breadcrumb Block
 //
 
-if $include-html-nav-classes and !$module.breadcrumbs
-    $module.breadcrumbs = true
-
+if $include-html-nav-classes
     .breadcrumbs
         crumb-container()
         radius($crumb-radius)

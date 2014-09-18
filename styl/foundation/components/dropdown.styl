@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -219,9 +219,7 @@ dropdown-style()
 // Dropdown Block
 //
 
-if $include-html-dropdown-classes and !$module.dropdown
-	$module.dropdown = true
-
+if $include-html-dropdown-classes
 	// Foundation Dropdowns
 	.f-dropdown
 		dropdown-container(list, bottom)

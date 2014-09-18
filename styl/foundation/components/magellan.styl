@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -18,9 +18,7 @@ $magellan-padding ?= 0 !important
 // Magellan Block
 //
 
-if $include-html-magellan-classes and !$module.magellan
-  $module.magellan = true
-
+if $include-html-magellan-classes
   {data(magellan-expedition)},
   {data(magellan-expedition-clone)}
     background $magellan-bg

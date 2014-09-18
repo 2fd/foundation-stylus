@@ -2,8 +2,8 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
-@import "buttons"
+@require "global"
+@require "buttons"
 
 //
 // @Variables
@@ -157,9 +157,7 @@ button-group-style($radius=false, $even=false, $float=false, $orientation=horizo
 // @Block
 // Button Group Block
 //
-if $include-html-button-classes and !$module.button-group
-  $module.button-group = true
-
+if $include-html-button-classes
   .button-group
     button-group-container()
 

@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -41,9 +41,7 @@ $clearing-carousel-thumb-active-border ?= 1px solid rgb(255,255,255)
 // Clearing Block
 //
 
-if $include-html-clearing-classes and !$module.clearing
-	$module.clearing = true
-
+if $include-html-clearing-classes
 	// We decided to not create a mixin for Clearing because it relies
 	// on predefined classes and structure to work properly.
 	// The variables above should give enough control.

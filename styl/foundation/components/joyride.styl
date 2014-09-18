@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -46,9 +46,7 @@ $joyride-screenfill ?= rgba(0,0,0,0.5)
 
 // We decided not to make a mixin for this because it relies on
 // predefined classes to work properly.
-if $include-html-joyride-classes and !$module.joyride
-  $module.joyride = true
-
+if $include-html-joyride-classes
   /* Foundation Joyride */
   .joyride-list
     display none

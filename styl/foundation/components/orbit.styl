@@ -2,7 +2,7 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
+@require "global"
 
 //
 // @Variables
@@ -54,9 +54,7 @@ $orbit-timer-hide-for-small ?= true
 // Orbit Block
 //
 
-if $include-html-orbit-classes and !$module.orbit
-  $module.orbit = true
-
+if $include-html-orbit-classes
   @keyframes rotate
     from
       transform rotate(0deg)

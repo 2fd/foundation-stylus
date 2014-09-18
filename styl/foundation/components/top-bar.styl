@@ -2,9 +2,9 @@
 // foundation.zurb.com
 // Licensed under MIT Open Source
 
-@import "global"
-@import "grid"
-@import "buttons"
+@require "global"
+@require "grid"
+@require "buttons"
 
 //
 // @Variables
@@ -105,9 +105,7 @@ topbar-show-dropdown()
 // Top Bar Block
 //
 
-if $include-html-top-bar-classes and !$module.top-bar
-  $module.top-bar = true
-
+if $include-html-top-bar-classes
   // Used to provide media query values for javascript components.
   // This class is generated despite the value of $include-html-top-bar-classes
   // to ensure width calculations work correctly.

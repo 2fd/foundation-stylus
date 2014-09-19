@@ -1,21 +1,10 @@
 {
   "js": {
-    "src": [
-      "vendor/jquery-placeholder/jquery.placeholder.js",
-      "vendor/fastclick/lib/fastclick.js",
-      "vendor/jquery.cookie/jquery.cookie.js",
-      "vendor/jquery/dist/jquery.js",
-      "vendor/modernizr/modernizr.js",
-      "js/**/foundation.*.js",
-      "js/foundation/foundation.js"
-    ],
+    "src": ["js/**/foundation.*.js", "js/foundation/foundation.js"],
     "dest": "dist/assets/js"
   },
   "css": {
-    "src": [
-      "styl/foundation.styl",
-      "vendor/normalize.css/normalize.css"
-    ],
+    "src": ["styl/foundation.styl"],
     "dest": "dist/assets/css"
   },
   "styl": {

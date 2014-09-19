@@ -6,21 +6,26 @@ var gulp = require('gulp')
   , rename = require('gulp-rename')
   , uglify = require('gulp-uglify')
   , csso = require('gulp-csso')
+  , plumber = require('gulp-plumber')
   , stylus = require('gulp-stylus')
   , nib = require('nib')
   , zip = require('gulp-zip')
   , tar = require('gulp-tar')
   , gzip = require('gulp-gzip')
   , size = require('gulp-size')
-  , gulpif = require('gulp-if')
   , replace = require('gulp-replace')
 
   // Config
   , assets = require('./assets.json')
   , bower = require('./bower.json')
+  , bowerFiles = ['bower.json', '.bowerrc']
 
-  , isVendorJS = function(file){
-    return !/foundation(\.\w+)?\.js$/i.test(file.path);
+  // Pre-Build
+  , listFiles = function(title){
+    return size({title:title, showFiles:true})
+  }
+  , setVersion = function(){
+    return replace('{{VERSION}}', bower.version)
   }
 ;
 
@@ -45,15 +50,21 @@ gulp
     del.sync(assets.pack.dest);
   })
 
+  // Copy js files
   .task('js', ['clean:js'],function(){
     return gulp.src(assets.js.src)
-      .pipe(replace('{{VERSION}}', bower.version))
-      .pipe(gulpif(isVendorJS, rename({dirname:'vendor'})))
+
+      // Save uncompressed
+      .pipe(setVersion())
       .pipe(gulp.dest(assets.js.dest))
+
+      // Save compressed
       .pipe(uglify())
       .pipe(rename({extname:'.min.js'}))
       .pipe(gulp.dest(assets.js.dest))
-      .pipe(size({title:'Scripts: ', showFiles:true}));
+
+      // Log
+      .pipe(listFiles('Scripts: '));
   })
 
 
@@ -61,23 +72,34 @@ gulp
   .task('styl', ['clean:styl'], function(){
     return gulp.src(assets.styl.src)
       .pipe(gulp.dest(assets.styl.dest))
-      .pipe(size({title:'Stylesheets: ',showFiles:true}));
+      .pipe(listFiles('Stylus: '));
   })
 
   // Parse and minify CSS
   .task('css', ['clean:css'],function(){
     return gulp.src(assets.css.src)
-      .pipe(gulpif('*.styl', stylus({ use: nib() }))      )
+
+      // Parse
+      .pipe(plumber())
+      .pipe(stylus({ use: nib() }))
+      .pipe(plumber.stop())
+
+      // Save uncompressed
+      .pipe(setVersion())
       .pipe(gulp.dest(assets.css.dest))
+
+      // Save compressed
       .pipe(csso())
       .pipe(rename({extname:'.min.css'}))
       .pipe(gulp.dest(assets.css.dest))
-      .pipe(size({title:'Stylesheets: ', showFiles:true}));
+
+      // Log
+      .pipe(listFiles('Stylesheets: '));
   })
 
   // Copy bower file
   .task('bower', function(){
-    return gulp.src('bower.json')
+    return gulp.src(bowerFiles)
       .pipe(gulp.dest(assets.pack.vendor));
   })
 
@@ -86,6 +108,7 @@ gulp
     return gulp.start(['pack:zip', 'pack:tar.gz']);
   })
 
+  // Generate .tar.gz
   .task('pack:tar.gz', function(){
     return gulp.src(assets.pack.src)
       .pipe(tar(assets.pack.name.replace('{version}', bower.version) + '.tar'))
@@ -93,6 +116,7 @@ gulp
       .pipe(gulp.dest(assets.pack.dest));
   })
 
+  // Generate .zip
   .task('pack:zip', function(){
     return gulp.src(assets.pack.src)
       .pipe(zip(assets.pack.name.replace('{version}', bower.version) + '.zip'))
@@ -101,11 +125,7 @@ gulp
 
   // Watch
   .task('watch', function(){
-    gulp.watch(assets.js.foundation, ['js']);
-    gulp.watch(assets.js.vendor, ['js']);
-    gulp.watch(assets.styl.src, ['styl','css']);
-    gulp.watch(assets.css.vendor, ['css']);
-    gulp.watch('bower.json', ['bower']);
+    gulp.watch(assets.styl.src, ['css']);
   })
 
   //

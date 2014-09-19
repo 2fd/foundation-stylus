@@ -58,7 +58,7 @@ reveal-bg($include-z-index-value=true)
   // Autoprefixer should be used to avoid such variables needed when Foundation for Sites can do so in the near future.
   background $reveal-overlay-bg-old
   background $reveal-overlay-bg
-  z-index ($include-z-index-value ? 1004 : null)
+  z-index ($include-z-index-value ? 1004 : auto)
   display none
   {$default-float} 0
 
@@ -229,7 +229,7 @@ if $include-html-reveal-classes
     &[open]
       display block
 
-  // Reveal Print Styles: It should be invislbe, adds no value being printed.
+  // Reveal Print Styles: It should be invisible, adds no value being printed.
   @media print
     dialog
     .{$reveal-modal-class}

@@ -66,7 +66,7 @@ button-group-style($radius=false, $even=false, $float=false, $orientation=horizo
 
   else
     margin 0 -2px
-    float none
+    float $default-float
     display inline-block
 
   if $orientation == vertical
@@ -167,6 +167,7 @@ if $include-html-button-classes
     &.stack
       & > li
         button-group-style($orientation:vertical)
+        float none
 
     &.stack-for-small
       & > li

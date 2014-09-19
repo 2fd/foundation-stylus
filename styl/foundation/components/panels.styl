@@ -51,8 +51,13 @@ panel($bg=$panel-bg, $padding=$panel-padding, $adjust=$panel-header-adjust)
     border-color lighten($bg, $panel-function-factor)
     margin-bottom $panel-margin-bottom
     padding $padding
-
     background $bg
+
+    if $bg-lightness >= 50%
+      color $panel-font-color
+
+    else
+      color $panel-font-color-alt
 
     // Respect the padding, fool.
     &>:first-child

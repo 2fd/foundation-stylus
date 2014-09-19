@@ -1,6 +1,6 @@
 {
   "name": "foundation-stylus",
-  "version": "5.4.3",
+  "version": "5.4.4",
   "main": "styl/foundation",
   "devDependencies": {
     "delete": "^0.1.4",
